@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/es" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/docs">Documentación</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/mailer/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/mailer/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/es/docs/reference/mailer/" hreflang="es" aria-current="true">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Oscuro" aria-label="Oscuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;">Documentación</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introducción</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeros pasos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construyendo un blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalación</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI y generadores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuración</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Modelos</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controladores y enrutamiento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware y sesiones</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Vistas</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generadores y CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;" class="active" aria-current="page">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitectura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitectura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificaciones de diseño</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Mailer</h1>
+    <blockquote>
+<p><strong>Especificación de diseño:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/08-mailer.md"><code>docs/08-mailer.md</code></a>.
+Esta guía documenta la API tal como está implementada en <code>doido-mailer</code>.</p>
+</blockquote>
+<p><strong>Análogo en Rails: Action Mailer.</strong> Un mailer construye un <code>Mail</code> y lo entrega de forma
+síncrona (<code>deliver_now</code>) o en segundo plano (<code>deliver_later</code>, que encola en la cola
+<code>mailers</code>). El transporte es conectable detrás del trait <code>Deliverer</code>, y las plantillas
+renderizan mediante el mismo <a href="https://doido-rs.github.io/es/docs/reference/views/">engine Tera</a> que las vistas.</p>
+<h2 id="vistazo-general">Vistazo general</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::mailer::{mailer, Mail, Deliverer, SmtpDeliverer, LogDeliverer, TestDeliverer};
+</span></code></pre>
+<h2 id="definir-un-mailer">Definir un mailer</h2>
+<p><code>#[mailer]</code> deriva un nombre snake_case usado para la resolución de plantillas
+(<code>UserMailer</code> → <code>mailers/user_mailer/&lt;action&gt;</code>). Las actions construyen y devuelven un
+<code>Mail</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::mailer::{mailer, Mail};
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">mailer</span><span>]
+</span><span style="color:#b48ead;">struct </span><span>UserMailer;
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>UserMailer {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">welcome</span><span>(</span><span style="color:#bf616a;">user</span><span>: &amp;User) -&gt; Mail {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> html = doido::view::render(
+</span><span>            &quot;</span><span style="color:#a3be8c;">mailers/user_mailer/welcome</span><span>&quot;,
+</span><span>            &amp;serde_json::json!({ &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;: user.name }),
+</span><span>        ).</span><span style="color:#96b5b4;">unwrap_or_default</span><span>();
+</span><span>
+</span><span>        Mail::new()
+</span><span>            .</span><span style="color:#96b5b4;">from</span><span>(&quot;</span><span style="color:#a3be8c;">noreply@example.com</span><span>&quot;)
+</span><span>            .</span><span style="color:#96b5b4;">to</span><span>(&amp;user.email)
+</span><span>            .</span><span style="color:#96b5b4;">subject</span><span>(&quot;</span><span style="color:#a3be8c;">Welcome!</span><span>&quot;)
+</span><span>            .</span><span style="color:#96b5b4;">body_html</span><span>(html)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="el-builder-mail">El builder <code>Mail</code></h2>
+<p><code>Mail</code> es un builder fluido: <code>from</code>, <code>to</code>, <code>subject</code>, <code>body_html</code>, <code>body_text</code>, además de
+adjuntos. Provee un cuerpo HTML y uno de texto para un mensaje multipart adecuado.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> mail = Mail::new()
+</span><span>    .</span><span style="color:#96b5b4;">from</span><span>(&quot;</span><span style="color:#a3be8c;">noreply@example.com</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">to</span><span>(&quot;</span><span style="color:#a3be8c;">alice@example.com</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">subject</span><span>(&quot;</span><span style="color:#a3be8c;">Your report</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">body_html</span><span>(&quot;</span><span style="color:#a3be8c;">&lt;h1&gt;Report&lt;/h1&gt;</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">body_text</span><span>(&quot;</span><span style="color:#a3be8c;">Report</span><span>&quot;);
+</span></code></pre>
+<h2 id="entregar-ahora-o-despues">Entregar ahora o después</h2>
+<p><code>deliver_now</code> envía de inmediato mediante un <code>Deliverer</code>; <code>deliver_later</code> serializa el
+correo en la cola <code>mailers</code> para que un <a href="https://doido-rs.github.io/es/docs/reference/jobs/">worker</a> lo envíe.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Inline (bloquea hasta enviar):
+</span><span>UserMailer::welcome(&amp;user).</span><span style="color:#96b5b4;">deliver_now</span><span>(&amp;deliverer).await?;
+</span><span>
+</span><span style="color:#65737e;">// En segundo plano (encola en la cola &quot;mailers&quot;, devuelve un JobId):
+</span><span>UserMailer::welcome(&amp;user).</span><span style="color:#96b5b4;">deliver_later</span><span>(job_queue.</span><span style="color:#96b5b4;">as_ref</span><span>()).await?;
+</span></code></pre>
+<h2 id="deliverers">Deliverers</h2>
+<p><code>Deliverer</code> es el trait conectable de transporte. Integrados: <code>SmtpDeliverer</code> (SMTP real),
+<code>SendmailDeliverer</code> (<code>sendmail</code> local), <code>LogDeliverer</code> (registra el correo) y
+<code>TestDeliverer</code> (captura el correo en memoria). Selecciónalo por entorno vía config.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span style="color:#b48ead;">use </span><span>doido::mailer::{Deliverer, SmtpDeliverer, LogDeliverer};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> deliverer: Arc&lt;dyn Deliverer&gt; = </span><span style="color:#b48ead;">if</span><span> production {
+</span><span>    Arc::new(SmtpDeliverer::new(&quot;</span><span style="color:#a3be8c;">smtp://localhost:25</span><span>&quot;))
+</span><span>} </span><span style="color:#b48ead;">else </span><span>{
+</span><span>    Arc::new(LogDeliverer) </span><span style="color:#65737e;">// solo registra el mensaje en desarrollo
+</span><span>};
+</span></code></pre>
+<h2 id="adjuntos">Adjuntos</h2>
+<p>Adjunta archivos, o incrusta contenido inline (p. ej. imágenes referenciadas por <code>cid</code>).</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> mail = Mail::new()
+</span><span>    .</span><span style="color:#96b5b4;">to</span><span>(&quot;</span><span style="color:#a3be8c;">alice@example.com</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">subject</span><span>(&quot;</span><span style="color:#a3be8c;">Invoice</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">attach</span><span>(&quot;</span><span style="color:#a3be8c;">invoice.pdf</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">application/pdf</span><span>&quot;, pdf_bytes)
+</span><span>    .</span><span style="color:#96b5b4;">attach_inline</span><span>(&quot;</span><span style="color:#a3be8c;">logo.png</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">image/png</span><span>&quot;, logo_bytes);
+</span></code></pre>
+<h2 id="plantillas">Plantillas</h2>
+<p>Las plantillas viven en <code>app/views/mailers/&lt;mailer_name&gt;/&lt;action&gt;</code> y renderizan mediante
+<code>doido-view</code>, así que obtienes layouts, partials y helpers. Provee variantes <code>.html</code> y
+<code>.text</code> para correo multipart.</p>
+<h2 id="interceptors-y-previews">Interceptors y previews</h2>
+<p>Envuelve cualquier deliverer con <code>InterceptingDeliverer</code> para reescribir u observar cada
+mensaje (p. ej. redirigir todo el correo a un catch-all en staging), y registra
+<code>MailerPreviews</code> para renderizar el correo en el navegador sin enviarlo.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::mailer::interceptors::InterceptingDeliverer;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> deliverer = InterceptingDeliverer::new(LogDeliverer)
+</span><span>    .</span><span style="color:#96b5b4;">intercept</span><span>(|</span><span style="color:#bf616a;">mail</span><span>| { </span><span style="color:#65737e;">/* reescribe destinatarios, etc. */ </span><span>})
+</span><span>    .</span><span style="color:#96b5b4;">observe</span><span>(|</span><span style="color:#bf616a;">mail</span><span>| { </span><span style="color:#65737e;">/* métricas / logging */ </span><span>});
+</span></code></pre>
+<h2 id="pruebas">Pruebas</h2>
+<p><code>TestDeliverer</code> captura el correo entregado para que las pruebas puedan verificar
+destinatarios, asuntos y cuerpos.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::mailer::TestDeliverer;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> deliverer = TestDeliverer::new();
+</span><span>UserMailer::welcome(&amp;user).</span><span style="color:#96b5b4;">deliver_now</span><span>(&amp;deliverer).await?;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> sent = deliverer.</span><span style="color:#96b5b4;">sent</span><span>().await;
+</span><span>assert_eq!(sent.</span><span style="color:#96b5b4;">len</span><span>(), </span><span style="color:#d08770;">1</span><span>);
+</span><span>assert_eq!(sent[</span><span style="color:#d08770;">0</span><span>].subject, &quot;</span><span style="color:#a3be8c;">Welcome!</span><span>&quot;);
+</span></code></pre>
+<h2 id="especificacion-vs-implementacion">Especificación vs. implementación</h2>
+<blockquote>
+<p><code>#[mailer]</code> es deliberadamente mínimo — genera el nombre y la clave de plantilla; tú
+construyes el <code>Mail</code> en la action. <code>deliver_later</code> encola un <code>Mail</code> serializado en la cola
+<code>mailers</code> (no hay una struct de job de entrega separada que definir).</p>
+</blockquote>
+<h2 id="vease-tambien">Véase también</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/es/docs/reference/jobs/">Jobs</a> — la cola <code>mailers</code> y el worker detrás de <code>deliver_later</code>.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/views/">Vistas</a> — el engine que renderiza las plantillas de correo.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/generators/">Generadores y CLI</a> — <code>cargo doido generate mailer</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">← Jobs</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificaciones</a>
+      <a href="https://doido-rs.github.io/es/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

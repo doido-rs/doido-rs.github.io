@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/docs/tutorials/building-a-blog/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/tutorials/building-a-blog/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/tutorials/building-a-blog/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;">Documentation</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introduction</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Getting started</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;" class="active" aria-current="page">Building a blog</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Installation</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; generators</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Modules</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; routing</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessions</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Architecture</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Architecture</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Design specifications</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Building a blog</h1>
+    <p>This tutorial builds a small but complete blog on top of the <a href="https://doido-rs.github.io/docs/tutorials/getting-started/">Getting
+started</a> foundation. By the end you’ll have:</p>
+<ul>
+<li>a <strong>public</strong> front page that lists published posts and a page for reading one,</li>
+<li><strong>comments</strong> that any reader can leave on a post,</li>
+<li><strong>login-guarded authoring</strong> — writing and publishing posts is protected by
+<a href="https://doido-rs.github.io/docs/reference/auth/"><code>doido-auth</code></a>, and each post is owned by its author.</li>
+</ul>
+<p>It’s a plain HTML app (no API). We lean on <strong>generators</strong>: <code>scaffold</code> builds the whole Post
+resource in one command, and <code>generate controller</code> gives us the comments endpoint. You only
+hand-edit the <em>customizations</em> — the generators write (and wire up) the skeletons.</p>
+<blockquote>
+<p>Every command and code block below is executed by Doido’s own release e2e
+(<code>doido-generators/tests/e2e/scenarios/blog_tutorial.rs</code>), so the tutorial stays runnable.
+See the <a href="https://doido-rs.github.io/docs/reference/generators/">tutorial standard</a>.</p>
+</blockquote>
+<p>Here is the route map we’re heading toward:</p>
+<table><thead><tr><th>Method</th><th>Path</th><th>Who</th><th>Purpose</th></tr></thead><tbody>
+<tr><td>GET</td><td><code>/</code></td><td>everyone</td><td>list published posts</td></tr>
+<tr><td>GET</td><td><code>/posts/{id}</code></td><td>everyone</td><td>read a post + its comments</td></tr>
+<tr><td>POST</td><td><code>/posts/{post_id}/comments</code></td><td>everyone</td><td>leave a comment</td></tr>
+<tr><td>GET/POST/…</td><td><code>/posts/new</code>, <code>/posts</code>, <code>/posts/{id}/edit</code>…</td><td>signed-in author</td><td>manage posts</td></tr>
+<tr><td>GET/POST</td><td><code>/users/sign_in</code>, <code>/users/sign_up</code></td><td>author</td><td>auth (generated by <code>--auth</code>)</td></tr>
+</tbody></table>
+<h2 id="create-the-app">Create the app</h2>
+<p>Scaffold a new application with authentication baked in, then set up the database:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># --auth adds doido-auth and runs auth:install (User model, sign-in/up controllers + routes)
+</span><span style="color:#bf616a;">doido</span><span> new blog</span><span style="color:#bf616a;"> --database</span><span>=sqlite</span><span style="color:#bf616a;"> --auth
+</span><span style="color:#96b5b4;">cd</span><span> blog
+</span><span>
+</span><span style="color:#bf616a;">cargo</span><span> doido db create
+</span><span style="color:#bf616a;">cargo</span><span> doido db migrate      </span><span style="color:#65737e;"># creates the users table
+</span><span>
+</span><span style="color:#bf616a;">cargo</span><span> doido server          </span><span style="color:#65737e;"># http://0.0.0.0:3000 — sign-in/up already work
+</span></code></pre>
+<p><code>--auth</code> gives you a <code>User</code> model and sign-in / sign-up / sign-out routes under <code>/users</code>,
+served by doido-auth’s <strong>built-in</strong> controllers and views — nothing is copied into your app.
+We’ll lean on those to guard authoring. Run <code>cargo doido generate auth:controllers</code> when you
+want to customize them (it ejects the controllers + views). See the
+<a href="https://doido-rs.github.io/docs/reference/auth/">Auth reference</a> for the full picture.</p>
+<h2 id="scaffold-the-post-resource">Scaffold the Post resource</h2>
+<p>A post has a title, a body, a published flag, and an author (the signed-in <code>User</code>). Rather than
+writing the model, controller, views, and route by hand, <strong>scaffold the whole resource</strong> in one
+command:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido generate scaffold Post \
+</span><span>  title:string:not_null \
+</span><span>  body:text:not_null \
+</span><span>  published:boolean:not_null \
+</span><span>  user:references
+</span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span></code></pre>
+<p>That single command wrote:</p>
+<ul>
+<li><code>app/models/post.rs</code> — a <a href="https://doido-rs.github.io/docs/reference/models/">sea-orm</a> entity (with an <code>i64</code>
+<code>user_id</code> foreign key from <code>user:references</code>),</li>
+<li>a migration for the <code>posts</code> table,</li>
+<li><code>app/controllers/posts_controller.rs</code> — a full CRUD controller,</li>
+<li><code>app/views/posts/{index,show,new,edit,_form}.html.tera</code>,</li>
+<li>and it <strong>injected the route</strong> <code>resources!(posts, PostsController);</code> into <code>config/routes.rs</code>.</li>
+</ul>
+<p>Because the generator injects the route <em>with</em> the controller, the route never points at a
+controller that doesn’t exist yet. Now make it a blog by customizing what the scaffold produced.</p>
+<h3 id="customize-the-model">Customize the model</h3>
+<p>Open <code>app/models/post.rs</code> and add a small validation so blank posts are rejected. Doido’s
+<a href="https://doido-rs.github.io/docs/reference/models/"><code>Validate</code></a> trait collects errors into an accumulator — the rest of
+the file is exactly what the scaffold generated:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// app/models/post.rs
+</span><span>#![</span><span style="color:#bf616a;">allow</span><span>(dead_code, unused_imports)]
+</span><span>
+</span><span style="color:#b48ead;">use </span><span>doido::model::validation::{Errors, Validate};
+</span><span>
+</span><span style="color:#b48ead;">pub use super</span><span>::_entities::posts::*;
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Validate </span><span style="color:#b48ead;">for </span><span>Model {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">validate</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; Errors {
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> e = Errors::new();
+</span><span>        e.</span><span style="color:#96b5b4;">presence</span><span>(&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;, &amp;</span><span style="color:#bf616a;">self</span><span>.title);
+</span><span>        e.</span><span style="color:#96b5b4;">length</span><span>(&quot;</span><span style="color:#a3be8c;">body</span><span>&quot;, &amp;</span><span style="color:#bf616a;">self</span><span>.body, Some(</span><span style="color:#d08770;">10</span><span>), None); </span><span style="color:#65737e;">// at least 10 characters
+</span><span>        e
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>We keep <code>Relation</code> empty and query comments with an explicit filter below, which sidesteps the
+<code>i32</code> primary key / <code>i64</code> foreign key mismatch a naïve <code>has_many</code> would hit.</p>
+<h3 id="add-the-comment-model">Add the Comment model</h3>
+<p>A comment belongs to a post and carries the reader’s name and message. No login is required to
+comment, so we just store a free-text name. A comment has no CRUD screens of its own, so a plain
+<code>model</code> generator is enough:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido generate model Comment \
+</span><span>  post:references \
+</span><span>  author_name:string:not_null \
+</span><span>  body:text:not_null
+</span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span></code></pre>
+<p>The generated <code>app/models/comment.rs</code> (an <code>i64</code> <code>post_id</code>, <code>author_name</code>, <code>body</code>, and an empty
+<code>Relation</code>) needs no changes — the post controller’s <code>show</code> action below loads a post’s comments
+with an explicit <code>comment::Column::PostId</code> filter.</p>
+<h3 id="customize-the-controller">Customize the controller</h3>
+<p>The scaffold’s controller exposes all seven REST actions. Rewrite
+<code>app/controllers/posts_controller.rs</code> so that reading is public, authoring is login-guarded, and
+every new post is owned by the signed-in author:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// app/controllers/posts_controller.rs
+</span><span style="color:#b48ead;">use crate</span><span>::helpers::PostsHelper;
+</span><span style="color:#b48ead;">use crate</span><span>::models::{comment, post};
+</span><span style="color:#b48ead;">use </span><span>doido::controller::{controller, Context, Response};
+</span><span style="color:#b48ead;">use </span><span>doido::model::sea_orm::{entity::prelude::*, Set};
+</span><span style="color:#b48ead;">use </span><span>doido::model::serialization::as_json;
+</span><span style="color:#b48ead;">use </span><span>serde::Deserialize;
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span style="color:#65737e;">/// Strong params for creating/updating a post. The author (`user_id`) comes
+</span><span style="color:#65737e;">/// from the session, never the form.
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Deserialize)]
+</span><span style="color:#b48ead;">pub struct </span><span>PostForm {
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">title</span><span>: String,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">body</span><span>: String,
+</span><span>    #[</span><span style="color:#bf616a;">serde</span><span>(default)]
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">published</span><span>: </span><span style="color:#b48ead;">bool</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">pub struct </span><span>PostsController;
+</span><span>
+</span><span style="color:#65737e;">/// Halts and redirects to sign-in unless someone is signed in. Sign-in stores
+</span><span style="color:#65737e;">/// the user&#39;s id in the session under &quot;user_id&quot; (see doido-auth).
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">require_login</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: &amp;</span><span style="color:#b48ead;">mut</span><span> Context) -&gt; Result&lt;(), Response&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> ctx.</span><span style="color:#96b5b4;">session</span><span>().get::&lt;</span><span style="color:#b48ead;">i64</span><span>&gt;(&quot;</span><span style="color:#a3be8c;">user_id</span><span>&quot;).</span><span style="color:#96b5b4;">is_none</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">return </span><span>Err(ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(&quot;</span><span style="color:#a3be8c;">/users/sign_in</span><span>&quot;));
+</span><span>    }
+</span><span>    Ok(())
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>PostsController {
+</span><span>    </span><span style="color:#65737e;">/// GET /posts — published posts for everyone; a signed-in author also sees
+</span><span>    </span><span style="color:#65737e;">/// their unpublished drafts. Passes `signed_in` so the template can show an
+</span><span>    </span><span style="color:#65737e;">/// edit link (and a draft marker) per post.
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> signed_in = ctx.</span><span style="color:#96b5b4;">session</span><span>().get::&lt;</span><span style="color:#b48ead;">i64</span><span>&gt;(&quot;</span><span style="color:#a3be8c;">user_id</span><span>&quot;).</span><span style="color:#96b5b4;">is_some</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> query = post::Entity::find();
+</span><span>        </span><span style="color:#b48ead;">if </span><span>!signed_in {
+</span><span>            query = query.</span><span style="color:#96b5b4;">filter</span><span>(post::Column::Published.</span><span style="color:#96b5b4;">eq</span><span>(</span><span style="color:#d08770;">true</span><span>));
+</span><span>        }
+</span><span>        </span><span style="color:#b48ead;">let</span><span> posts = query.</span><span style="color:#96b5b4;">all</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">render</span><span>(
+</span><span>            &quot;</span><span style="color:#a3be8c;">posts/index</span><span>&quot;,
+</span><span>            json!({
+</span><span>                &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;: </span><span style="color:#96b5b4;">as_json</span><span>(&amp;posts),
+</span><span>                &quot;</span><span style="color:#a3be8c;">summary</span><span>&quot;: PostsHelper::index_count(posts.</span><span style="color:#96b5b4;">len</span><span>()),
+</span><span>                &quot;</span><span style="color:#a3be8c;">signed_in</span><span>&quot;: signed_in,
+</span><span>            }),
+</span><span>        ))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// GET /posts/{id} — public: the post and its comments.
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">show</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> id = </span><span style="color:#96b5b4;">parse_id</span><span>(&amp;ctx);
+</span><span>        </span><span style="color:#b48ead;">let </span><span>Some(post) = post::Entity::find_by_id(id).</span><span style="color:#96b5b4;">one</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await? </span><span style="color:#b48ead;">else </span><span>{
+</span><span>            </span><span style="color:#b48ead;">return </span><span>Ok(ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">404</span><span>));
+</span><span>        };
+</span><span>        </span><span style="color:#b48ead;">let</span><span> comments = comment::Entity::find()
+</span><span>            .</span><span style="color:#96b5b4;">filter</span><span>(comment::Column::PostId.</span><span style="color:#96b5b4;">eq</span><span>(</span><span style="color:#b48ead;">i64</span><span>::from(post.id)))
+</span><span>            .</span><span style="color:#96b5b4;">all</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>())
+</span><span>            .await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">render</span><span>(
+</span><span>            &quot;</span><span style="color:#a3be8c;">posts/show</span><span>&quot;,
+</span><span>            json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: </span><span style="color:#96b5b4;">as_json</span><span>(&amp;post), &quot;</span><span style="color:#a3be8c;">comments</span><span>&quot;: </span><span style="color:#96b5b4;">as_json</span><span>(&amp;comments) }),
+</span><span>        ))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// GET /posts/new — authoring is login-guarded.
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_login)]
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">new</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>        ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/new</span><span>&quot;, json!({}))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// POST /posts — creates a post owned by the signed-in author.
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_login)]
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">create</span><span>(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> author_id = ctx.</span><span style="color:#96b5b4;">session</span><span>().get::&lt;</span><span style="color:#b48ead;">i64</span><span>&gt;(&quot;</span><span style="color:#a3be8c;">user_id</span><span>&quot;).</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> form: PostForm = ctx.</span><span style="color:#96b5b4;">form</span><span>().await?;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> record = post::ActiveModel {
+</span><span>            title: Set(form.title),
+</span><span>            body: Set(form.body),
+</span><span>            published: Set(form.published),
+</span><span>            user_id: Set(author_id),
+</span><span>            ..Default::default()
+</span><span>        };
+</span><span>        record.</span><span style="color:#96b5b4;">insert</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(&quot;</span><span style="color:#a3be8c;">/posts</span><span>&quot;))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// GET /posts/{id}/edit — login-guarded.
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_login)]
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">edit</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> id = </span><span style="color:#96b5b4;">parse_id</span><span>(&amp;ctx);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> post = post::Entity::find_by_id(id).</span><span style="color:#96b5b4;">one</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/edit</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: </span><span style="color:#96b5b4;">as_json</span><span>(&amp;post) })))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// PATCH/PUT /posts/{id} — login-guarded.
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_login)]
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">update</span><span>(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> id = </span><span style="color:#96b5b4;">parse_id</span><span>(&amp;ctx);
+</span><span>        </span><span style="color:#b48ead;">let</span><span> form: PostForm = ctx.</span><span style="color:#96b5b4;">form</span><span>().await?;
+</span><span>        </span><span style="color:#b48ead;">if let </span><span>Some(existing) = post::Entity::find_by_id(id).</span><span style="color:#96b5b4;">one</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await? {
+</span><span>            </span><span style="color:#b48ead;">let mut</span><span> record: post::ActiveModel = existing.</span><span style="color:#96b5b4;">into</span><span>();
+</span><span>            record.title = Set(form.title);
+</span><span>            record.body = Set(form.body);
+</span><span>            record.published = Set(form.published);
+</span><span>            record.</span><span style="color:#96b5b4;">update</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        }
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(&quot;</span><span style="color:#a3be8c;">/posts</span><span>&quot;))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// DELETE /posts/{id} — login-guarded.
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_login)]
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">destroy</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> id = </span><span style="color:#96b5b4;">parse_id</span><span>(&amp;ctx);
+</span><span>        post::Entity::delete_by_id(id).</span><span style="color:#96b5b4;">exec</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(&quot;</span><span style="color:#a3be8c;">/posts</span><span>&quot;))
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">parse_id</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: &amp;Context) -&gt; </span><span style="color:#b48ead;">i32 </span><span>{
+</span><span>    ctx.</span><span style="color:#96b5b4;">param</span><span>(&quot;</span><span style="color:#a3be8c;">id</span><span>&quot;).</span><span style="color:#96b5b4;">and_then</span><span>(|</span><span style="color:#bf616a;">v</span><span>| v.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">ok</span><span>()).</span><span style="color:#96b5b4;">unwrap_or_default</span><span>()
+</span><span>}
+</span></code></pre>
+<p><code>#[before_action(require_login)]</code> runs the guard before the action; returning <code>Err(response)</code>
+halts the request. <code>PostsHelper</code> is the helper the scaffold generated alongside the controller.
+Note how <code>index</code> only filters by <code>published</code> when nobody is signed in — a signed-in author sees
+their unpublished drafts too, while the public sees only published posts.</p>
+<h3 id="customize-the-views">Customize the views</h3>
+<p>The scaffold’s views <a href="https://doido-rs.github.io/docs/reference/views/">extend</a> the generated
+<code>app/views/layouts/application.html.tera</code>, which yields with <code>{% block content %}{% endblock %}</code>.
+The JSON you pass to <code>ctx.render</code> becomes the template context. Replace the index and show
+templates with blog-shaped markup (leave <code>new</code>, <code>edit</code>, and <code>_form</code> as the scaffold wrote them).
+The index tags any unpublished post with <code>(draft)</code> and gates a per-post <strong>Edit</strong> link behind
+<code>{% if signed_in %}</code> — the flag the <code>index</code> action passes — so only signed-in authors see the link
+(and, thanks to the action’s query, the drafts themselves):</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/posts/index.html.tera #}
+</span><span>{% extends &quot;layouts/application.html.tera&quot; %}
+</span><span>{% block content %}
+</span><span>&lt;</span><span style="color:#bf616a;">h1</span><span>&gt;Blog&lt;/</span><span style="color:#bf616a;">h1</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">p</span><span>&gt;{{ summary }}&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;
+</span><span>{% for post in posts %}
+</span><span>  &lt;</span><span style="color:#bf616a;">article</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">h2</span><span>&gt;&lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/posts/{{ post.id }}</span><span>&quot;&gt;{{ post.title }}&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;&lt;/</span><span style="color:#bf616a;">h2</span><span>&gt;
+</span><span>    {% if not post.published %}&lt;</span><span style="color:#bf616a;">em</span><span>&gt;(draft)&lt;/</span><span style="color:#bf616a;">em</span><span>&gt;{% endif %}
+</span><span>    {% if signed_in %}&lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/posts/{{ post.id }}/edit</span><span>&quot;&gt;Edit&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;{% endif %}
+</span><span>  &lt;/</span><span style="color:#bf616a;">article</span><span>&gt;
+</span><span>{% endfor %}
+</span><span>{% endblock %}
+</span></code></pre>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/posts/show.html.tera #}
+</span><span>{% extends &quot;layouts/application.html.tera&quot; %}
+</span><span>{% block content %}
+</span><span>&lt;</span><span style="color:#bf616a;">article</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">h1</span><span>&gt;{{ post.title }}&lt;/</span><span style="color:#bf616a;">h1</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">p</span><span>&gt;{{ post.body }}&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">article</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">section</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">h2</span><span>&gt;Comments&lt;/</span><span style="color:#bf616a;">h2</span><span>&gt;
+</span><span>  {% for comment in comments %}
+</span><span>    &lt;</span><span style="color:#bf616a;">p</span><span>&gt;&lt;</span><span style="color:#bf616a;">strong</span><span>&gt;{{ comment.author_name }}&lt;/</span><span style="color:#bf616a;">strong</span><span>&gt;: {{ comment.body }}&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;
+</span><span>  {% endfor %}
+</span><span>  &lt;</span><span style="color:#bf616a;">form </span><span style="color:#d08770;">method</span><span>=&quot;</span><span style="color:#a3be8c;">post</span><span>&quot; </span><span style="color:#d08770;">action</span><span>=&quot;</span><span style="color:#a3be8c;">/posts/{{ post.id }}/comments</span><span>&quot;&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">p</span><span>&gt;&lt;</span><span style="color:#bf616a;">label</span><span>&gt;Name&lt;/</span><span style="color:#bf616a;">label</span><span>&gt; &lt;</span><span style="color:#bf616a;">input </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">text</span><span>&quot; </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">author_name</span><span>&quot; </span><span style="color:#d08770;">required</span><span>&gt;&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">p</span><span>&gt;&lt;</span><span style="color:#bf616a;">label</span><span>&gt;Comment&lt;/</span><span style="color:#bf616a;">label</span><span>&gt; &lt;</span><span style="color:#bf616a;">textarea </span><span style="color:#d08770;">name</span><span>=&quot;</span><span style="color:#a3be8c;">body</span><span>&quot; </span><span style="color:#d08770;">required</span><span>&gt;&lt;/</span><span style="color:#bf616a;">textarea</span><span>&gt;&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#bf616a;">button </span><span style="color:#d08770;">type</span><span>=&quot;</span><span style="color:#a3be8c;">submit</span><span>&quot;&gt;Post comment&lt;/</span><span style="color:#bf616a;">button</span><span>&gt;
+</span><span>  &lt;/</span><span style="color:#bf616a;">form</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">section</span><span>&gt;
+</span><span>{% endblock %}
+</span></code></pre>
+<h3 id="add-a-navigation-partial">Add a navigation partial</h3>
+<p>Every page needs the same handful of links — browse posts, start a new one, sign in, up, or out.
+Rather than repeat them in each template, pull them into a <strong>partial</strong> and render it from the
+layout so every page picks it up. Partials live under <code>app/views/</code>, are named with a leading
+underscore, and are included by their path:</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/shared/_nav.html.tera #}
+</span><span>&lt;</span><span style="color:#bf616a;">nav</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/</span><span>&quot;&gt;Posts&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/posts/new</span><span>&quot;&gt;New post&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/users/sign_in</span><span>&quot;&gt;Sign in&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/users/sign_up</span><span>&quot;&gt;Sign up&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;
+</span><span>  &lt;</span><span style="color:#bf616a;">a </span><span style="color:#d08770;">href</span><span>=&quot;</span><span style="color:#a3be8c;">/users/sign_out</span><span>&quot;
+</span><span>     </span><span style="color:#d08770;">onclick</span><span>=&quot;</span><span style="color:#bf616a;">event</span><span>.</span><span style="color:#bf616a;">preventDefault</span><span>(); </span><span style="color:#bf616a;">fetch</span><span>(&#39;</span><span style="color:#a3be8c;">/users/sign_out</span><span>&#39;, { method: &#39;</span><span style="color:#a3be8c;">DELETE</span><span>&#39; }).</span><span style="color:#bf616a;">then</span><span>(</span><span style="color:#b48ead;">function </span><span>() { </span><span style="color:#bf616a;">location</span><span>.href = &#39;</span><span style="color:#a3be8c;">/</span><span>&#39;; })&quot;&gt;Sign out&lt;/</span><span style="color:#bf616a;">a</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">nav</span><span>&gt;
+</span></code></pre>
+<p>Sign-out is a <code>DELETE /users/sign_out</code> route — like the scaffold’s generated Delete button — so the
+link issues it with a small <code>fetch</code> and then returns home; a plain <code>&lt;a&gt;</code> would only send a GET.</p>
+<p>Render it from the generated layout, just inside <code>&lt;body&gt;</code>, so it wraps every page’s content:</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/layouts/application.html.tera #}
+</span><span>&lt;!</span><span style="color:#b48ead;">DOCTYPE </span><span style="color:#d08770;">html</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">html</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">head</span><span>&gt;&lt;</span><span style="color:#bf616a;">title</span><span>&gt;blog&lt;/</span><span style="color:#bf616a;">title</span><span>&gt;&lt;/</span><span style="color:#bf616a;">head</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>{% include &quot;shared/_nav.html.tera&quot; %}
+</span><span>{% block content %}{% endblock %}
+</span><span>&lt;/</span><span style="color:#bf616a;">body</span><span>&gt;
+</span><span>&lt;/</span><span style="color:#bf616a;">html</span><span>&gt;
+</span></code></pre>
+<p>Now the blog index, each post page, and the generated sign-in / sign-up screens all carry the
+same navigation.</p>
+<h2 id="the-comments-controller">The comments controller</h2>
+<p>Comments need a single action — create — so reach for the <strong>controller generator</strong>:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido generate controller Comments
+</span></code></pre>
+<p>This wrote <code>app/controllers/comments_controller.rs</code> (an <code>index</code> stub wired to <code>CommentsHelper</code>)
+and injected <code>get!("/comments", CommentsController::index);</code> into the routes. Add a <code>create</code>
+action that reads the form and inserts a comment for the post in the URL:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// app/controllers/comments_controller.rs
+</span><span style="color:#b48ead;">use crate</span><span>::helpers::CommentsHelper;
+</span><span style="color:#b48ead;">use crate</span><span>::models::comment;
+</span><span style="color:#b48ead;">use </span><span>doido::controller::{controller, Response};
+</span><span style="color:#b48ead;">use </span><span>doido::model::sea_orm::{entity::prelude::*, Set};
+</span><span style="color:#b48ead;">use </span><span>serde::Deserialize;
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Deserialize)]
+</span><span style="color:#b48ead;">pub struct </span><span>CommentForm {
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">author_name</span><span>: String,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">body</span><span>: String,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">pub struct </span><span>CommentsController;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>CommentsController {
+</span><span>    </span><span style="color:#65737e;">/// GET /comments — the generator&#39;s stub, kept so `CommentsHelper` stays wired.
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: doido::controller::Context) -&gt; Response {
+</span><span>        ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">comments</span><span>&quot;: CommentsHelper::index_count(</span><span style="color:#d08770;">0</span><span>) }))
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#65737e;">/// POST /posts/{post_id}/comments — no login required to comment.
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">create</span><span>(</span><span style="color:#b48ead;">mut </span><span style="color:#bf616a;">ctx</span><span>: doido::controller::Context) -&gt; doido::Result&lt;Response&gt; {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> post_id: </span><span style="color:#b48ead;">i64 </span><span>= ctx
+</span><span>            .</span><span style="color:#96b5b4;">param</span><span>(&quot;</span><span style="color:#a3be8c;">post_id</span><span>&quot;)
+</span><span>            .</span><span style="color:#96b5b4;">and_then</span><span>(|</span><span style="color:#bf616a;">v</span><span>| v.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">ok</span><span>())
+</span><span>            .</span><span style="color:#96b5b4;">unwrap_or_default</span><span>();
+</span><span>        </span><span style="color:#b48ead;">let</span><span> form: CommentForm = ctx.</span><span style="color:#96b5b4;">form</span><span>().await?;
+</span><span>        </span><span style="color:#b48ead;">let</span><span> record = comment::ActiveModel {
+</span><span>            post_id: Set(post_id),
+</span><span>            author_name: Set(form.author_name),
+</span><span>            body: Set(form.body),
+</span><span>            ..Default::default()
+</span><span>        };
+</span><span>        record.</span><span style="color:#96b5b4;">insert</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await?;
+</span><span>        Ok(ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(format!(&quot;</span><span style="color:#a3be8c;">/posts/</span><span style="color:#d08770;">{post_id}</span><span>&quot;)))
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="routing">Routing</h2>
+<p>Because the generators injected a route with each controller, <code>config/routes.rs</code> already knows
+about <code>PostsController</code> and <code>CommentsController</code> — no route ever names a controller that isn’t
+there. Two edits finish the wiring: point the homepage at the blog (moving Doido’s demo endpoint
+aside), and add the nested comment route next to the stub the controller generator left:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// config/routes.rs
+</span><span style="color:#b48ead;">use crate</span><span>::controllers::CommentsController;
+</span><span style="color:#b48ead;">use crate</span><span>::controllers::HelloController;
+</span><span style="color:#b48ead;">use crate</span><span>::controllers::PostsController;
+</span><span style="color:#b48ead;">use </span><span>doido::controller::{axum, routes};
+</span><span>
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">router</span><span>() -&gt; axum::Router {
+</span><span>    routes! {
+</span><span>        root!(PostsController::index);                              </span><span style="color:#65737e;">// GET / — the blog
+</span><span>        get!(&quot;</span><span style="color:#a3be8c;">/hello</span><span>&quot;, HelloController::index);                    </span><span style="color:#65737e;">// Doido&#39;s demo, moved aside
+</span><span>
+</span><span>        resources!(posts, PostsController);                        </span><span style="color:#65737e;">// /posts CRUD (from the scaffold)
+</span><span>        get!(&quot;</span><span style="color:#a3be8c;">/comments</span><span>&quot;, CommentsController::index);              </span><span style="color:#65737e;">// stub from `generate controller`
+</span><span>        post!(&quot;</span><span style="color:#a3be8c;">/posts/{post_id}/comments</span><span>&quot;, CommentsController::create);
+</span><span>
+</span><span>        </span><span style="color:#65737e;">// sign-in / sign-up / sign-out under /users were injected by --auth — leave them.
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Note the axum-style path parameter <code>{post_id}</code> — read it back in the action with
+<code>ctx.param("post_id")</code>. See <a href="https://doido-rs.github.io/docs/reference/controllers/">Controllers &amp; routing</a> for the full
+DSL.</p>
+<h2 id="run-it">Run it</h2>
+<p>Because the app was generated with <code>--auth</code>, its <code>db/seed</code> crate seeds an initial user whenever the
+<code>users</code> table is empty. Seed it, then boot the server:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido db seed    </span><span style="color:#65737e;"># creates the first user: admin@example.com / password
+</span><span style="color:#bf616a;">cargo</span><span> doido server
+</span></code></pre>
+<p><code>cargo doido db seed</code> runs <code>db/seed/src/main.rs</code>, which inserts <code>admin@example.com</code> (password
+<code>password</code>) so a fresh project has a login out of the box — edit that file to change the
+credentials or add more fixture data.</p>
+<p>Now walk the whole flow:</p>
+<ol>
+<li>Sign in at <code>/users/sign_in</code> as <code>admin@example.com</code> / <code>password</code> (or register your own account at
+<code>/users/sign_up</code>).</li>
+<li>Go to <code>/posts/new</code>, write a post, and publish it.</li>
+<li>Open <code>/</code> — the published post appears. Click through to <code>/posts/{id}</code>.</li>
+<li>Leave a comment; it shows up under the post.</li>
+</ol>
+<p>Signing out (<code>DELETE /users/sign_out</code>) and revisiting <code>/posts/new</code> bounces you back to the
+sign-in page — that’s <code>require_login</code> doing its job.</p>
+<h2 id="testing">Testing</h2>
+<p>The generators leave test stubs (<code>tests/post_model_test.rs</code>, <code>tests/posts_controller_test.rs</code>);
+run them with <code>cargo test</code>. Validations are pure logic, so they need no database:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// tests/post_validation_test.rs
+</span><span>#[</span><span style="color:#bf616a;">path </span><span>= &quot;</span><span style="color:#a3be8c;">../app/models/mod.rs</span><span>&quot;]
+</span><span style="color:#b48ead;">mod </span><span>models;
+</span><span>
+</span><span style="color:#b48ead;">use </span><span>doido::model::validation::Validate;
+</span><span style="color:#b48ead;">use </span><span>models::post::Model;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">test</span><span>]
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">rejects_a_blank_post</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> post = Model {
+</span><span>        id: </span><span style="color:#d08770;">0</span><span>,
+</span><span>        title: String::new(),      </span><span style="color:#65737e;">// missing
+</span><span>        body: &quot;</span><span style="color:#a3be8c;">too short</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(),  </span><span style="color:#65737e;">// &lt; 10 chars
+</span><span>        published: </span><span style="color:#d08770;">false</span><span>,
+</span><span>        user_id: </span><span style="color:#d08770;">1</span><span>,
+</span><span>    };
+</span><span>
+</span><span>    assert!(!post.</span><span style="color:#96b5b4;">is_valid</span><span>());
+</span><span>    </span><span style="color:#65737e;">// post.validate().full_messages() lists the human-readable errors.
+</span><span>}
+</span></code></pre>
+<p>For request- and auth-level tests (mounting the real router, driving a signed-in session), see
+the <a href="https://doido-rs.github.io/docs/reference/auth/#testing">Testing reference</a>. The full flow above — the exact
+generator commands plus these customizations — also runs as a release e2e
+(<code>blog_tutorial</code>), so this tutorial can’t silently rot.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><strong><a href="https://doido-rs.github.io/docs/reference/generators/">Generators &amp; CLI</a></strong> — every generator, including <code>scaffold</code>
+and <code>resource</code>, and the tutorial standard these steps follow.</li>
+<li><strong><a href="https://doido-rs.github.io/docs/reference/models/">Models</a></strong> — associations, migrations, validations, and factories.</li>
+<li><strong><a href="https://doido-rs.github.io/docs/reference/controllers/">Controllers &amp; routing</a></strong> — filters, strong parameters, and the <code>routes!</code> DSL.</li>
+<li><strong><a href="https://doido-rs.github.io/docs/reference/views/">Views</a></strong> — layouts, partials, and view helpers.</li>
+<li><strong><a href="https://doido-rs.github.io/docs/reference/auth/">Auth</a></strong> — sessions, JWT, OAuth, 2FA, and the extractors.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">← Getting started</a>
+      </span>
+      <span>
+        
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/es" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/docs">Documentación</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/auth/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/auth/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/es/docs/reference/auth/" hreflang="es" aria-current="true">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Oscuro" aria-label="Oscuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;">Documentación</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introducción</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeros pasos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construyendo un blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalación</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI y generadores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuración</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Modelos</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controladores y enrutamiento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware y sesiones</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;" class="active" aria-current="page">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Vistas</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generadores y CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitectura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitectura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificaciones de diseño</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Auth</h1>
+    <blockquote>
+<p><strong>Especificación de diseño:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/16-auth.md"><code>docs/16-auth.md</code></a>.
+Esta guía documenta la API tal como está implementada en <code>doido-auth</code>.</p>
+</blockquote>
+<p><strong>Análogo en Rails: Devise + OmniAuth + JWT.</strong> <code>doido-auth</code> ofrece la trait
+genérica <code>AuthUser</code> ligada a tu modelo SeaORM, <strong>estrategias</strong> enchufables (sesión
+por cookie, JWT bearer, OAuth2), <strong>2FA</strong> opcional (TOTP), <strong>extractors</strong> axum y
+<strong>generadores</strong> que generan controladores de sesión, registro, contraseña y OAuth.
+El hash de contraseña reutiliza <code>doido_model::password::HasSecurePassword</code>.</p>
+<h2 id="controladores-integrados-y-modulos">Controladores integrados y módulos</h2>
+<p><code>doido new --auth</code> / <code>auth:install</code> generan un modelo <code>User</code>, una migración, un bloque de
+config <code>auth:</code> y un <code>auth_routes!(User)</code> simple — pero <strong>no se copia ningún controlador ni
+vista en tu app</strong>. La autenticación corre sobre los controladores <strong>integrados</strong> de
+doido-auth y renderiza HTML desde vistas provistas por el framework y sobreescribibles. Para
+personalizarlos, <em>extráelos</em> (el análogo de <code>devise:controllers</code> + <code>devise:views</code>):</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido generate auth:controllers          </span><span style="color:#65737e;"># controladores + vistas (+ --api / --views-only)
+</span></code></pre>
+<p>Los <strong>módulos estilo Devise</strong> seleccionan qué funciones están activas, en <code>config/&lt;env&gt;.yml</code>:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">auth</span><span>:
+</span><span>  </span><span style="color:#bf616a;">modules</span><span>: [</span><span style="color:#a3be8c;">database_authenticatable</span><span>, </span><span style="color:#a3be8c;">registerable</span><span>, </span><span style="color:#a3be8c;">recoverable</span><span>, </span><span style="color:#a3be8c;">rememberable</span><span>, </span><span style="color:#a3be8c;">validatable</span><span>]
+</span></code></pre>
+<p><code>auth:install --modules=a,b,c</code> emite las columnas de migración de cada módulo y restringe las
+rutas a los grupos seleccionados. Disponibles: <code>database_authenticatable</code>, <code>registerable</code>,
+<code>recoverable</code>, <code>rememberable</code>, <code>trackable</code>, <code>timeoutable</code>, <code>validatable</code>, <code>confirmable</code>,
+<code>lockable</code>, <code>omniauthable</code>, <code>two_factor_authenticatable</code>.</p>
+<h2 id="de-un-vistazo">De un vistazo</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::{
+</span><span>    init, auth_layer, AuthUser, CurrentUser, MaybeUser, RequireAuth, AuthToken,
+</span><span>    mount, JwtStrategy, register_strategy,
+</span><span>};
+</span></code></pre>
+<p>Activa el crate mediante el meta crate <code>doido</code>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span>[dependencies]
+</span><span style="color:#bf616a;">doido </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">auth</span><span>&quot;] }
+</span></code></pre>
+<h2 id="primeros-pasos">Primeros pasos</h2>
+<p>La vía más rápida es una app nueva con auth incluido:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">doido</span><span> new blog</span><span style="color:#bf616a;"> --database</span><span>=sqlite</span><span style="color:#bf616a;"> --auth
+</span><span style="color:#96b5b4;">cd</span><span> blog
+</span><span style="color:#bf616a;">cargo</span><span> doido db create &amp;&amp; </span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span><span style="color:#bf616a;">cargo</span><span> doido server
+</span></code></pre>
+<p>En una app existente, añade la dependencia e instala:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> add doido</span><span style="color:#bf616a;"> --features</span><span> auth   </span><span style="color:#65737e;"># o añade doido-auth directamente
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:install
+</span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span></code></pre>
+<p><code>auth:install</code> genera la migración y modelo User, controladores de auth, vistas HTML
+(o solo JSON con <code>--api</code>), un bloque <code>auth:</code> en la config e inyecta rutas de sign-in,
+sign-up, contraseña y OAuth en <code>config/routes.rs</code>. <strong>No</strong> modifica <code>Cargo.toml</code> — la
+dependencia debe estar ya presente.</p>
+<h2 id="la-trait-authuser">La trait <code>AuthUser</code></h2>
+<p>Tu modelo User SeaORM implementa <code>AuthUser</code> — el contrato genérico del sujeto
+autenticado:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::AuthUser;
+</span><span style="color:#b48ead;">use </span><span>doido::model::sea_orm::prelude::*;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Clone, Debug, PartialEq, DeriveEntityModel)]
+</span><span>#[</span><span style="color:#bf616a;">sea_orm</span><span>(table_name = &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;)]
+</span><span style="color:#b48ead;">pub struct </span><span>Model {
+</span><span>    #[</span><span style="color:#bf616a;">sea_orm</span><span>(primary_key)]
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#b48ead;">i64</span><span>,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">email</span><span>: String,
+</span><span>    #[</span><span style="color:#bf616a;">sea_orm</span><span>(column_name = &quot;</span><span style="color:#a3be8c;">password_digest</span><span>&quot;)]
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">password_digest</span><span>: String,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">two_factor_secret</span><span>: Option&lt;String&gt;,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">two_factor_enabled</span><span>: </span><span style="color:#b48ead;">bool</span><span>,
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>AuthUser </span><span style="color:#b48ead;">for </span><span>Model {
+</span><span>    </span><span style="color:#b48ead;">type </span><span>Id = </span><span style="color:#b48ead;">i64</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">id</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; </span><span style="color:#b48ead;">Self::</span><span>Id { </span><span style="color:#bf616a;">self</span><span>.id }
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">email</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">str </span><span>{ &amp;</span><span style="color:#bf616a;">self</span><span>.email }
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">password_digest</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; Option&lt;&amp;</span><span style="color:#b48ead;">str</span><span>&gt; { Some(&amp;</span><span style="color:#bf616a;">self</span><span>.password_digest) }
+</span><span>
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">find_by_email</span><span>(</span><span style="color:#bf616a;">db</span><span>: &amp;DatabaseConnection, </span><span style="color:#bf616a;">email</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; doido::Result&lt;Option&lt;</span><span style="color:#b48ead;">Self</span><span>&gt;&gt; {
+</span><span>        Entity::find().</span><span style="color:#96b5b4;">filter</span><span>(Column::Email.</span><span style="color:#96b5b4;">eq</span><span>(email)).</span><span style="color:#96b5b4;">one</span><span>(db).await
+</span><span>    }
+</span><span>
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">find_by_id</span><span>(</span><span style="color:#bf616a;">db</span><span>: &amp;DatabaseConnection, </span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#b48ead;">Self::</span><span>Id) -&gt; doido::Result&lt;Option&lt;</span><span style="color:#b48ead;">Self</span><span>&gt;&gt; {
+</span><span>        Entity::find_by_id(id).</span><span style="color:#96b5b4;">one</span><span>(db).await
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Combínalo con <code>HasSecurePassword</code> para verificar credenciales. La v1 requiere impl
+manual; un derive <code>#[auth_user]</code> está planificado para una release futura.</p>
+<h2 id="configuracion">Configuración</h2>
+<p>La sección <code>auth</code> de <code>config/&lt;env&gt;.yml</code> controla estrategias, JWT, proveedores OAuth,
+2FA y rutas al estilo Devise:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">auth</span><span>:
+</span><span>  </span><span style="color:#bf616a;">user_model</span><span>: </span><span style="color:#a3be8c;">User
+</span><span>  </span><span style="color:#bf616a;">strategies</span><span>:
+</span><span>    - </span><span style="color:#a3be8c;">cookie                    </span><span style="color:#65737e;"># cookie de sesión (predeterminado)
+</span><span>    - </span><span style="color:#a3be8c;">jwt                       </span><span style="color:#65737e;"># Authorization: Bearer &lt;token&gt;
+</span><span>  </span><span style="color:#bf616a;">jwt</span><span>:
+</span><span>    </span><span style="color:#bf616a;">secret</span><span>: &quot;</span><span style="color:#a3be8c;">${JWT_SECRET}</span><span>&quot;
+</span><span>    </span><span style="color:#bf616a;">access_ttl</span><span>: </span><span style="color:#d08770;">900              </span><span style="color:#65737e;"># 15 minutos
+</span><span>    </span><span style="color:#bf616a;">refresh_ttl</span><span>: </span><span style="color:#d08770;">604800          </span><span style="color:#65737e;"># 7 días
+</span><span>    </span><span style="color:#bf616a;">issuer</span><span>: </span><span style="color:#a3be8c;">myapp
+</span><span>  </span><span style="color:#bf616a;">oauth</span><span>:
+</span><span>    </span><span style="color:#bf616a;">idp</span><span>:
+</span><span>      </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">oauth2
+</span><span>      </span><span style="color:#bf616a;">client_id</span><span>: &quot;</span><span style="color:#a3be8c;">${OAUTH_CLIENT_ID}</span><span>&quot;
+</span><span>      </span><span style="color:#bf616a;">client_secret</span><span>: &quot;</span><span style="color:#a3be8c;">${OAUTH_CLIENT_SECRET}</span><span>&quot;
+</span><span>      </span><span style="color:#bf616a;">redirect_uri</span><span>: &quot;</span><span style="color:#a3be8c;">/auth/idp/callback</span><span>&quot;
+</span><span>      </span><span style="color:#bf616a;">authorize_url</span><span>: &quot;</span><span style="color:#a3be8c;">https://idp.example.com/oauth/authorize</span><span>&quot;
+</span><span>      </span><span style="color:#bf616a;">token_url</span><span>: &quot;</span><span style="color:#a3be8c;">https://idp.example.com/oauth/token</span><span>&quot;
+</span><span>      </span><span style="color:#bf616a;">scopes</span><span>: [</span><span style="color:#a3be8c;">openid</span><span>, </span><span style="color:#a3be8c;">email</span><span>, </span><span style="color:#a3be8c;">profile</span><span>]
+</span><span>  </span><span style="color:#bf616a;">two_factor</span><span>:
+</span><span>    </span><span style="color:#bf616a;">enabled</span><span>: </span><span style="color:#d08770;">false               </span><span style="color:#65737e;"># requiere feature auth-2fa
+</span><span>    </span><span style="color:#bf616a;">issuer</span><span>: </span><span style="color:#a3be8c;">MyApp
+</span><span>  </span><span style="color:#bf616a;">routes</span><span>:
+</span><span>    </span><span style="color:#bf616a;">prefix</span><span>: </span><span style="color:#a3be8c;">/users
+</span><span>    </span><span style="color:#bf616a;">sign_in</span><span>: </span><span style="color:#a3be8c;">sign_in
+</span><span>    </span><span style="color:#bf616a;">sign_out</span><span>: </span><span style="color:#a3be8c;">sign_out
+</span><span>    </span><span style="color:#bf616a;">sign_up</span><span>: </span><span style="color:#a3be8c;">sign_up
+</span><span>    </span><span style="color:#bf616a;">password_reset</span><span>: </span><span style="color:#a3be8c;">password
+</span></code></pre>
+<p>Los secretos vienen de <code>config/credentials.yml.enc</code> o variables de entorno. Activa JWT
+en <code>strategies</code> solo cuando <code>auth.jwt.secret</code> esté definido.</p>
+<h2 id="secuencia-de-arranque">Secuencia de arranque</h2>
+<p>Inicializa auth tras el pool de base de datos y antes de servir peticiones:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::{init, auth_layer};
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">tokio</span><span>::</span><span style="color:#bf616a;">main</span><span>]
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> config = </span><span style="color:#65737e;">/* carga config */</span><span>;
+</span><span>    </span><span style="color:#b48ead;">let</span><span> db = </span><span style="color:#65737e;">/* conecta pool */</span><span>;
+</span><span>
+</span><span>    </span><span style="color:#96b5b4;">init</span><span>(db.</span><span style="color:#96b5b4;">clone</span><span>(), &amp;config.auth).await.</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">auth init</span><span>&quot;);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">let</span><span> app = config::routes::router()
+</span><span>        .</span><span style="color:#96b5b4;">layer</span><span>(axum::middleware::from_fn(auth_layer));
+</span><span>    </span><span style="color:#65737e;">// …serve…
+</span><span>}
+</span></code></pre>
+<p><code>init</code> registra estrategias habilitadas, carga configs OAuth y almacena el
+<code>AuthState</code> global. <code>auth_layer</code> consulta estrategias en el orden de la config y
+guarda la primera <code>AuthIdentity</code> resuelta en las extensiones de la petición.</p>
+<h2 id="estrategias">Estrategias</h2>
+<table><thead><tr><th>Estrategia</th><th>Nombre en config</th><th>Cómo se resuelve la identidad</th></tr></thead><tbody>
+<tr><td>Cookie / sesión</td><td><code>cookie</code></td><td>Cookie de sesión cifrada con <code>user_id</code></td></tr>
+<tr><td>JWT bearer</td><td><code>jwt</code></td><td>Cabecera <code>Authorization: Bearer</code></td></tr>
+<tr><td>Personalizada</td><td>cualquier nombre registrado</td><td>Tu impl de <code>AuthStrategy</code></td></tr>
+</tbody></table>
+<p>La sesión por cookie se integra con <code>doido_controller::session</code>. JWT emite pares
+access + refresh mediante <code>JwtStrategy::issue_tokens</code>. Usa ambos para clientes HTML
+(sesión) y API (bearer):</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::{JwtStrategy, TokenPair};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> jwt = JwtStrategy::new(config.jwt.</span><span style="color:#96b5b4;">clone</span><span>())?;
+</span><span style="color:#b48ead;">let</span><span> tokens: TokenPair = jwt.</span><span style="color:#96b5b4;">issue_tokens</span><span>(&amp;serde_json::json!(user.</span><span style="color:#96b5b4;">id</span><span>()))?;
+</span></code></pre>
+<p>Los extractors consultan estrategias en el orden de la config; gana la primera coincidencia.</p>
+<h2 id="extractors-axum">Extractors axum</h2>
+<table><thead><tr><th>Extractor</th><th>Comportamiento</th><th>Estado HTTP al fallar</th></tr></thead><tbody>
+<tr><td><code>CurrentUser&lt;U&gt;</code></td><td>Exige usuario autenticado, cargado del DB</td><td><code>401 Unauthorized</code></td></tr>
+<tr><td><code>MaybeUser&lt;U&gt;</code></td><td><code>Option&lt;U&gt;</code> — nunca falla</td><td>—</td></tr>
+<tr><td><code>RequireAuth</code></td><td>Garantiza identidad sin cargar el modelo completo</td><td><code>401 Unauthorized</code></td></tr>
+<tr><td><code>AuthToken</code></td><td>Cadena cruda del bearer token</td><td><code>401</code> si falta</td></tr>
+</tbody></table>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::extractors::{CurrentUser, MaybeUser};
+</span><span style="color:#b48ead;">use </span><span>doido::controller::axum::Json;
+</span><span>
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">profile</span><span>(CurrentUser(</span><span style="color:#bf616a;">user</span><span>): CurrentUser&lt;User&gt;) -&gt; Json&lt;serde_json::Value&gt; {
+</span><span>    Json(serde_json::json!({ &quot;</span><span style="color:#a3be8c;">email</span><span>&quot;: user.</span><span style="color:#96b5b4;">email</span><span>() }))
+</span><span>}
+</span><span>
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">home</span><span>(MaybeUser(</span><span style="color:#bf616a;">user</span><span>): MaybeUser&lt;User&gt;) -&gt; String {
+</span><span>    </span><span style="color:#b48ead;">match</span><span> user.</span><span style="color:#d08770;">0 </span><span>{
+</span><span>        Some(u) =&gt; format!(&quot;</span><span style="color:#a3be8c;">Bienvenido de nuevo, </span><span style="color:#d08770;">{}</span><span>&quot;, u.</span><span style="color:#96b5b4;">email</span><span>()),
+</span><span>        None =&gt; &quot;</span><span style="color:#a3be8c;">Invitado</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(),
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Dentro de acciones <code>#[controller]</code>, llama a
+<code>doido::auth::current_user::&lt;User&gt;(&amp;ctx.parts())</code> o usa los extractors como
+parámetros del handler.</p>
+<h2 id="rutas-predefinidas">Rutas predefinidas</h2>
+<p><code>auth:install</code> inyecta rutas explícitas en <code>config/routes.rs</code>:</p>
+<table><thead><tr><th>Método</th><th>Ruta</th><th>Acción del controlador</th></tr></thead><tbody>
+<tr><td>GET</td><td><code>/users/sign_in</code></td><td><code>SessionsController::new</code> (HTML)</td></tr>
+<tr><td>POST</td><td><code>/users/sign_in</code></td><td><code>SessionsController::create</code></td></tr>
+<tr><td>DELETE</td><td><code>/users/sign_out</code></td><td><code>SessionsController::destroy</code></td></tr>
+<tr><td>GET</td><td><code>/users/sign_up</code></td><td><code>RegistrationsController::new</code> (HTML)</td></tr>
+<tr><td>POST</td><td><code>/users/sign_up</code></td><td><code>RegistrationsController::create</code></td></tr>
+<tr><td>POST</td><td><code>/users/password</code></td><td><code>PasswordsController::create</code></td></tr>
+<tr><td>PATCH</td><td><code>/users/password</code></td><td><code>PasswordsController::update</code></td></tr>
+<tr><td>GET</td><td><code>/auth/{provider}</code></td><td><code>OauthController::authorize</code></td></tr>
+<tr><td>GET</td><td><code>/auth/{provider}/callback</code></td><td><code>OauthController::callback</code></td></tr>
+</tbody></table>
+<p>Para montaje programático sin controladores generados, usa <code>mount</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::mount;
+</span><span>
+</span><span style="color:#65737e;">// `create` persiste un usuario recién registrado (email + contraseña en texto):
+</span><span style="color:#b48ead;">let</span><span> auth_router = mount::&lt;User, _&gt;(|</span><span style="color:#bf616a;">db</span><span>, </span><span style="color:#bf616a;">email</span><span>, </span><span style="color:#bf616a;">password</span><span>| {
+</span><span>    Box::pin(async </span><span style="color:#b48ead;">move </span><span>{
+</span><span>        User::create(&amp;db, email, password).await </span><span style="color:#65737e;">// helper específico de tu app
+</span><span>    })
+</span><span>});
+</span></code></pre>
+<p>Las rutas respetan <code>auth.routes</code> en la config (<code>prefix</code>, <code>sign_in</code>, etc.).</p>
+<h2 id="oauth">OAuth</h2>
+<p>Los proveedores implementan la trait <code>OAuthProvider</code>. Las entradas con
+<code>type: oauth2</code> en la config se convierten en instancias de <code>OAuth2Provider</code> en el
+boot; los proveedores personalizados se registran en runtime:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::oauth::{OAuthProvider, OAuthTokenResponse, register_provider, get_provider};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>CustomProvider { </span><span style="color:#65737e;">/* … */ </span><span>}
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>OAuthProvider </span><span style="color:#b48ead;">for </span><span>CustomProvider {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">name</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">str </span><span>{ &quot;</span><span style="color:#a3be8c;">custom</span><span>&quot; }
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">authorize_url</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">state</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; Result&lt;String, AuthError&gt; { </span><span style="color:#65737e;">/* … */ </span><span>}
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">exchange_code</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">code</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; Result&lt;OAuthTokenResponse, AuthError&gt; { </span><span style="color:#65737e;">/* … */ </span><span>}
+</span><span>}
+</span><span>
+</span><span style="color:#96b5b4;">register_provider</span><span>(Arc::new(CustomProvider { </span><span style="color:#65737e;">/* … */ </span><span>}));
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> provider = </span><span style="color:#96b5b4;">get_provider</span><span>(&quot;</span><span style="color:#a3be8c;">idp</span><span>&quot;).</span><span style="color:#96b5b4;">expect</span><span>(&quot;</span><span style="color:#a3be8c;">idp configurado</span><span>&quot;);
+</span><span style="color:#b48ead;">let</span><span> url = provider.</span><span style="color:#96b5b4;">authorize_url</span><span>(&quot;</span><span style="color:#a3be8c;">random-state</span><span>&quot;)?;
+</span><span style="color:#b48ead;">let</span><span> tokens = provider.</span><span style="color:#96b5b4;">exchange_code</span><span>(&quot;</span><span style="color:#a3be8c;">auth-code</span><span>&quot;)?;
+</span></code></pre>
+<p>Las rutas de callback forman parte del <code>OauthController</code> generado. Las entradas
+OAuth 1.0a en la config se reconocen, pero requieren una impl personalizada de
+<code>OAuthProvider</code>.</p>
+<h2 id="autenticacion-de-dos-factores-feature-auth-2fa">Autenticación de dos factores (feature <code>auth-2fa</code>)</h2>
+<p>Activa la feature y define <code>auth.two_factor.enabled: true</code>:</p>
+<pre data-lang="toml" style="background-color:#2b303b;color:#c0c5ce;" class="language-toml "><code class="language-toml" data-lang="toml"><span style="color:#bf616a;">doido </span><span>= { </span><span style="color:#bf616a;">version </span><span>= &quot;</span><span style="color:#a3be8c;">0.0.9</span><span>&quot;, </span><span style="color:#bf616a;">features </span><span>= [&quot;</span><span style="color:#a3be8c;">auth</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">auth-2fa</span><span>&quot;] }
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::{enroll_two_factor, verify_two_factor_code, TwoFactorEnrollment};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> TwoFactorEnrollment { secret, otpauth_uri } = </span><span style="color:#96b5b4;">enroll_two_factor</span><span>(&quot;</span><span style="color:#a3be8c;">user@example.com</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">MyApp</span><span>&quot;)?;
+</span><span style="color:#b48ead;">let</span><span> ok = </span><span style="color:#96b5b4;">verify_two_factor_code</span><span>(&amp;secret, &quot;</span><span style="color:#a3be8c;">123456</span><span>&quot;)?;
+</span></code></pre>
+<p><code>auth:install --two-factor</code> añade columnas <code>two_factor_secret</code> y
+<code>two_factor_enabled</code> más controlador/vistas de 2FA. El almacenamiento de códigos de
+respaldo está planificado para una release futura.</p>
+<h2 id="generadores">Generadores</h2>
+<p>Los generadores de auth viven dentro de <code>doido-auth</code> y aparecen en <code>cargo doido generate</code>
+<strong>solo cuando</strong> <code>doido-auth</code> está en el <code>Cargo.toml</code> del proyecto:</p>
+<table><thead><tr><th>Generador</th><th>Genera</th></tr></thead><tbody>
+<tr><td><code>auth:install</code></td><td>Migración + modelo User, controladores de auth, vistas, config, rutas</td></tr>
+<tr><td><code>auth:controller &lt;Name&gt; actions…</code></td><td>Controlador con <code>CurrentUser</code> / guards de auth</td></tr>
+<tr><td><code>auth:scaffold &lt;Name&gt; fields…</code></td><td>Scaffold con auth y ownership por <code>user_id</code></td></tr>
+</tbody></table>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido generate auth:install
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:install</span><span style="color:#bf616a;"> --api          </span><span style="color:#65737e;"># respuestas JSON, sin vistas HTML
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:install</span><span style="color:#bf616a;"> --two-factor     </span><span style="color:#65737e;"># columnas 2FA + controladores
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:controller Dashboard index show
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:scaffold Post title:string body:text
+</span></code></pre>
+<p>Sin <code>doido-auth</code> en <code>Cargo.toml</code>, los generadores de auth no aparecen en la lista y el
+dispatch devuelve error apuntando a <code>doido new --auth</code> o <code>cargo add</code>.</p>
+<h2 id="estrategias-personalizadas">Estrategias personalizadas</h2>
+<p>Backends de terceros (LDAP, SAML, magic link) implementan <code>AuthStrategy</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::auth::{AuthStrategy, AuthIdentity, register_strategy};
+</span><span style="color:#b48ead;">use </span><span>async_trait::async_trait;
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>LdapStrategy { </span><span style="color:#65737e;">/* … */ </span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">async_trait</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>AuthStrategy </span><span style="color:#b48ead;">for </span><span>LdapStrategy {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">name</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; &amp;</span><span style="color:#b48ead;">str </span><span>{ &quot;</span><span style="color:#a3be8c;">ldap</span><span>&quot; }
+</span><span>
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">authenticate</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">parts</span><span>: &amp;http::request::Parts, </span><span style="color:#bf616a;">db</span><span>: &amp;DatabaseConnection)
+</span><span>        -&gt; Result&lt;Option&lt;AuthIdentity&gt;, doido::auth::AuthError&gt;
+</span><span>    {
+</span><span>        Ok(None)
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#96b5b4;">register_strategy</span><span>(&quot;</span><span style="color:#a3be8c;">ldap</span><span>&quot;, Arc::new(LdapStrategy { </span><span style="color:#65737e;">/* … */ </span><span>}));
+</span></code></pre>
+<p>Activa en config: <code>strategies: [cookie, ldap]</code>.</p>
+<h2 id="pruebas">Pruebas</h2>
+<p><code>doido_auth::testing</code> proporciona fakes en memoria y helpers que serializan el estado
+global de auth entre pruebas:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido_auth::testing::{AuthTestGuard, TestUser, seed_user, sign_in_request};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> _guard = AuthTestGuard::new();
+</span><span style="color:#96b5b4;">seed_user</span><span>(&amp;db, &quot;</span><span style="color:#a3be8c;">alice@example.com</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">secret</span><span>&quot;).await?;
+</span><span style="color:#b48ead;">let</span><span> response = </span><span style="color:#96b5b4;">sign_in_request</span><span>(&amp;app, &quot;</span><span style="color:#a3be8c;">alice@example.com</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">secret</span><span>&quot;).await?;
+</span><span>assert_eq!(response.</span><span style="color:#96b5b4;">status</span><span>(), StatusCode::</span><span style="color:#d08770;">OK</span><span>);
+</span></code></pre>
+<h2 id="spec-vs-implementacion">Spec vs. implementación</h2>
+<blockquote>
+<p>La spec describe la macro <code>auth_routes!(User)</code> con opciones <code>only:</code>/<code>skip:</code> al
+estilo Devise. <strong>La v1 usa rutas explícitas</strong> inyectadas por <code>auth:install</code> (o
+<code>routes::mount</code> para apps programáticas). Tablas de rotación de refresh token,
+intercambio OAuth 1.0a y el derive <code>#[auth_user]</code> están aplazados.</p>
+</blockquote>
+<h2 id="ver-tambien">Ver también</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/docs/reference/middleware/">Middleware &amp; sesiones</a> — el session store sobre el que auth se apoya.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/models/">Models</a> — <code>HasSecurePassword</code> para digests de contraseña.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/generators/">Generadores &amp; CLI</a> — generadores de auth y <code>doido new --auth</code>.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/cable/">Cable</a> — autorizar conexiones WebSocket.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">← Storage</a>
+      </span>
+      <span>
+        
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificaciones</a>
+      <a href="https://doido-rs.github.io/es/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

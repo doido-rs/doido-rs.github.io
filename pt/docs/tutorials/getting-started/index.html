@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/pt" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/docs">Documentação</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/tutorials/getting-started/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/pt/docs/tutorials/getting-started/" hreflang="pt" aria-current="true">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/tutorials/getting-started/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Escuro" aria-label="Escuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;">Documentação</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introdução</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;" class="active" aria-current="page">Primeiros passos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construindo um blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalação</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; geradores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuração</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; roteamento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessões</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Geradores &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitetura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitetura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificações de design</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Primeiros passos</h1>
+    <p>O Doido segue convenções no estilo Rails: o CLI global <code>doido</code> cria novas
+aplicações; dentro do projeto, <code>cargo doido</code> roda o servidor, gerencia o banco
+de dados e executa os geradores de código.</p>
+<h2 id="crie-uma-aplicacao">Crie uma aplicação</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Cria uma nova aplicação (sqlite por padrão; --database=postgres|mysql)
+</span><span style="color:#bf616a;">doido</span><span> new blog
+</span><span style="color:#96b5b4;">cd</span><span> blog
+</span><span>
+</span><span style="color:#65737e;"># Ou crie com autenticação (sessões + registro no estilo Devise)
+</span><span style="color:#bf616a;">doido</span><span> new blog</span><span style="color:#bf616a;"> --database</span><span>=sqlite</span><span style="color:#bf616a;"> --auth
+</span><span style="color:#96b5b4;">cd</span><span> blog
+</span><span>
+</span><span style="color:#65737e;"># Configura o banco e roda as migrations pendentes
+</span><span style="color:#bf616a;">cargo</span><span> doido db create
+</span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span><span>
+</span><span style="color:#65737e;"># Opcional: insere dados de fixture (edite db/seeds.rs antes)
+</span><span style="color:#65737e;"># cargo doido db seed
+</span><span>
+</span><span style="color:#65737e;"># Sobe o servidor HTTP em http://0.0.0.0:3000
+</span><span style="color:#bf616a;">cargo</span><span> doido server
+</span></code></pre>
+<p>Com <code>--auth</code>, a app inclui <code>doido-auth</code>, model User, rotas de sign-in/sign-up e
+controllers de auth. Veja a <a href="/pt/docs/reference/auth/">referência de Auth</a> para JWT,
+OAuth, 2FA e extractors.</p>
+<p><code>GET /</code> responde com JSON vindo do <code>HelloController</code> gerado, que delega ao
+<code>ApplicationHelper</code>:</p>
+<pre data-lang="json" style="background-color:#2b303b;color:#c0c5ce;" class="language-json "><code class="language-json" data-lang="json"><span>{ &quot;</span><span style="color:#a3be8c;">message</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Hello, world!</span><span>&quot; }
+</span></code></pre>
+<h2 id="uma-amostra-do-codigo">Uma amostra do código</h2>
+<p>Um controller é um bloco <code>impl</code> comum anotado com <code>#[controller]</code>. A action hello
+gerada importa um helper de <code>app/helpers/</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::helpers::ApplicationHelper;
+</span><span style="color:#b48ead;">use </span><span>doido::controller::{controller, Context, Response};
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span style="color:#b48ead;">pub struct </span><span>HelloController;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>HelloController {
+</span><span>    </span><span style="color:#b48ead;">pub</span><span> async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>        ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({
+</span><span>            &quot;</span><span style="color:#a3be8c;">message</span><span>&quot;: ApplicationHelper::greet(&quot;</span><span style="color:#a3be8c;">world</span><span>&quot;)
+</span><span>        }))
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Helpers são structs anotadas com <code>#[helper]</code> — funções compartilhadas que os
+controllers importam:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::helper;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">helper</span><span>]
+</span><span style="color:#b48ead;">pub struct </span><span>ApplicationHelper;
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>ApplicationHelper {
+</span><span>    </span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">greet</span><span>(</span><span style="color:#bf616a;">name</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>) -&gt; String {
+</span><span>        format!(&quot;</span><span style="color:#a3be8c;">Hello, </span><span style="color:#d08770;">{name}</span><span style="color:#a3be8c;">!</span><span>&quot;)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Gere mais helpers com <code>cargo doido generate helper Posts</code>. Veja
+<a href="https://doido-rs.github.io/pt/docs/reference/helpers/">Helpers de controller</a> para o guia completo.</p>
+<p>As rotas são declaradas com a macro <code>routes!</code> em <code>config/routes.rs</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::controllers::HelloController;
+</span><span style="color:#b48ead;">use </span><span>doido::controller::{axum, routes};
+</span><span>
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">router</span><span>() -&gt; axum::Router {
+</span><span>    routes! {
+</span><span>        get!(&quot;</span><span style="color:#a3be8c;">/</span><span>&quot;, HelloController::index);
+</span><span>        </span><span style="color:#65737e;">// resources!(PostsController);   // todas as 7 rotas REST
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="estrutura-do-projeto">Estrutura do projeto</h2>
+<p>Uma aplicação gerada segue convenções no estilo Rails:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>my-app/
+</span><span>├── Cargo.toml
+</span><span>├── src/main.rs              ← delega para doido::run(routes)
+</span><span>├── config/
+</span><span>│   ├── application.toml      ← config base
+</span><span>│   ├── development.yml       ← overrides por ambiente
+</span><span>│   ├── test.yml
+</span><span>│   ├── production.yml
+</span><span>│   ├── routes.rs            ← macro routes!
+</span><span>│   └── inflection.yaml      ← regras de pluralização customizadas
+</span><span>├── app/
+</span><span>│   ├── controllers/
+</span><span>│   ├── helpers/             ← helpers de controller (#[helper])
+</span><span>│   ├── models/
+</span><span>│   └── views/
+</span><span>├── db/
+</span><span>│   ├── migration/           ← crate de migrations do SeaORM (linkado no binário da app)
+</span><span>│   ├── seeds.rs             ← seeder no binário (usa app/models)
+</span><span>│   └── schema/
+</span><span>└── tests/
+</span></code></pre>
+<h2 id="configuracao">Configuração</h2>
+<p>A configuração é em camadas: <code>config/application.toml</code> fornece a base, depois
+<code>config/&lt;env&gt;.yml</code> (development / test / production) faz override por ambiente.
+Credenciais criptografadas e variáveis de ambiente <code>SECTION__KEY</code> fazem override
+por cima.</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/development.yml
+</span><span style="color:#bf616a;">server</span><span>:
+</span><span>  </span><span style="color:#bf616a;">bind</span><span>: </span><span style="color:#d08770;">0.0.0.0
+</span><span>  </span><span style="color:#bf616a;">port</span><span>: </span><span style="color:#d08770;">3000
+</span><span style="color:#bf616a;">database</span><span>:
+</span><span>  </span><span style="color:#bf616a;">url</span><span>: </span><span style="color:#a3be8c;">sqlite://db/development.db
+</span><span style="color:#bf616a;">logger</span><span>:
+</span><span>  </span><span style="color:#bf616a;">level</span><span>: </span><span style="color:#a3be8c;">debug
+</span><span>  </span><span style="color:#bf616a;">format</span><span>: </span><span style="color:#a3be8c;">verbose
+</span><span style="color:#bf616a;">cache</span><span>:
+</span><span>  </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">memory
+</span></code></pre>
+<h2 id="proximos-passos">Próximos passos</h2>
+<ul>
+<li><strong><a href="https://doido-rs.github.io/pt/docs/setup/installation/">Instalação</a></strong> — pré-requisitos e como instalar a CLI.</li>
+<li><strong><a href="https://doido-rs.github.io/pt/docs/reference/cli/">CLI &amp; geradores</a></strong> — todos os comandos de runtime e geradores de código.</li>
+<li><strong><a href="https://doido-rs.github.io/pt/docs/reference/controllers/">Controllers &amp; roteamento</a></strong> — o guia de requisição/resposta.</li>
+<li><strong><a href="https://doido-rs.github.io/pt/docs/reference/helpers/">Helpers de controller</a></strong> — lógica compartilhada em <code>app/helpers/</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construindo um blog →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificações</a>
+      <a href="https://doido-rs.github.io/pt/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

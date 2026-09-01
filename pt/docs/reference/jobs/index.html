@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/pt" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/docs">Documentação</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/jobs/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/pt/docs/reference/jobs/" hreflang="pt" aria-current="true">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/jobs/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Escuro" aria-label="Escuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;">Documentação</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introdução</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeiros passos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construindo um blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalação</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; geradores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuração</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; roteamento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessões</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Geradores &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;" class="active" aria-current="page">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitetura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitetura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificações de design</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Jobs</h1>
+    <blockquote>
+<p><strong>Especificação de design:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/09-jobs.md"><code>docs/09-jobs.md</code></a>.
+Este guia documenta a API como implementada em <code>doido-jobs</code>.</p>
+</blockquote>
+<p><strong>Análogo no Rails: Active Job.</strong> Jobs em background são funções async comuns anotadas com
+<code>#[job]</code>; elas são enfileiradas em uma fila plugável (em memória, banco de dados ou Redis) e
+executadas por um worker que cuida de concorrência, timeouts por job, retries com backoff,
+leasing confiável e uma dead-letter queue.</p>
+<h2 id="visao-geral">Visão geral</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::{job, JobQueue, JobPayload, MemoryQueue, Worker};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span></code></pre>
+<h2 id="definindo-um-job">Definindo um job</h2>
+<p><code>#[job]</code> grava a fila, a política de retry, o backoff, o timeout e a prioridade no job e
+gera um helper <code>&lt;name&gt;_enqueue</code>. O payload do job é seu último parâmetro tipado (padrão
+<code>serde_json::Value</code>), que precisa ser <code>Serialize</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::job;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">job</span><span>(queue = &quot;</span><span style="color:#a3be8c;">emails</span><span>&quot;, max_retries = 5, backoff = &quot;</span><span style="color:#a3be8c;">exponential</span><span>&quot;, backoff_base = 5, timeout = 30, priority = 7)]
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">send_welcome</span><span>(</span><span style="color:#bf616a;">user_id</span><span>: </span><span style="color:#b48ead;">i64</span><span>) -&gt; doido::Result&lt;()&gt; {
+</span><span>    </span><span style="color:#65737e;">// …envia o e-mail de boas-vindas…
+</span><span>    Ok(())
+</span><span>}
+</span></code></pre>
+<h2 id="enfileirando">Enfileirando</h2>
+<p>O <code>&lt;name&gt;_enqueue(queue, payload)</code> gerado serializa o payload e o enfileira, retornando um
+<code>JobId</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> queue = Arc::new(MemoryQueue::new());
+</span><span style="color:#b48ead;">let</span><span> id = </span><span style="color:#96b5b4;">send_welcome_enqueue</span><span>(queue.</span><span style="color:#96b5b4;">as_ref</span><span>(), </span><span style="color:#d08770;">42</span><span>).await?; </span><span style="color:#65737e;">// imediato
+</span></code></pre>
+<p>Para entrega <strong>adiada</strong> ou <strong>agendada</strong>, construa um <code>JobPayload</code> e use os setters fluentes
+(<code>with_wait</code>, <code>with_run_at</code>, <code>with_priority</code>, …):</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::JobPayload;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> job = JobPayload::new(&quot;</span><span style="color:#a3be8c;">emails</span><span>&quot;, serde_json::json!({ &quot;</span><span style="color:#a3be8c;">user_id</span><span>&quot;: </span><span style="color:#d08770;">42 </span><span>}), </span><span style="color:#d08770;">5</span><span>)
+</span><span>    .</span><span style="color:#96b5b4;">with_wait</span><span>(</span><span style="color:#d08770;">300</span><span>)          </span><span style="color:#65737e;">// roda em 5 minutos
+</span><span>    .</span><span style="color:#96b5b4;">with_priority</span><span>(</span><span style="color:#d08770;">9</span><span>);
+</span><span>queue.</span><span style="color:#96b5b4;">enqueue</span><span>(job).await?;
+</span><span>
+</span><span style="color:#65737e;">// …ou um horário absoluto:
+</span><span>queue.</span><span style="color:#96b5b4;">enqueue_at</span><span>(JobPayload::new(&quot;</span><span style="color:#a3be8c;">emails</span><span>&quot;, payload, </span><span style="color:#d08770;">5</span><span>), when).await?;
+</span></code></pre>
+<h2 id="escolhendo-um-backend">Escolhendo um backend</h2>
+<p><code>JobQueue</code> é o trait plugável; escolha um backend com <code>build_queue(&amp;JobsConfig)</code> (lê a seção
+<code>jobs</code> da config) ou construa um diretamente. <code>MemoryQueue</code> está sempre disponível; <code>DbQueue</code>
+(feature <code>jobs-db</code>) e <code>RedisQueue</code> (feature <code>jobs-redis</code>) adicionam durabilidade.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::{build_queue, JobsConfig};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> queue = </span><span style="color:#96b5b4;">build_queue</span><span>(&amp;JobsConfig::default()).await?; </span><span style="color:#65737e;">// Arc&lt;dyn JobQueue&gt;
+</span></code></pre>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/production.yml
+</span><span style="color:#bf616a;">jobs</span><span>:
+</span><span>  </span><span style="color:#bf616a;">backend</span><span>: </span><span style="color:#a3be8c;">redis            </span><span style="color:#65737e;"># memory | db | redis
+</span><span>  </span><span style="color:#bf616a;">queues</span><span>: [</span><span style="color:#a3be8c;">critical</span><span>, </span><span style="color:#a3be8c;">default</span><span>, </span><span style="color:#a3be8c;">emails</span><span>]
+</span><span>  </span><span style="color:#bf616a;">concurrency</span><span>: </span><span style="color:#d08770;">8
+</span><span>  </span><span style="color:#bf616a;">redis_url</span><span>: </span><span style="color:#a3be8c;">redis://127.0.0.1:6379
+</span></code></pre>
+<h2 id="rodando-o-worker">Rodando o worker</h2>
+<p>O worker reserva jobs (fazendo lease, de modo que os jobs de um worker que caiu sejam
+recuperados) e roda o seu handler. Use <code>WorkerEngine</code> para controle de multi-fila/
+concorrência, ou <code>Worker</code> para uma única fila; <code>run_once</code> drena uma vez (ótimo para
+testes), <code>run</code> roda em loop até o shutdown. O comando <code>cargo doido worker</code> o executa como
+processo.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::{Worker, WorkerEngine, EngineConfig};
+</span><span>
+</span><span style="color:#65737e;">// Fila única:
+</span><span>Worker::new(queue.</span><span style="color:#96b5b4;">clone</span><span>(), &quot;</span><span style="color:#a3be8c;">emails</span><span>&quot;)
+</span><span>    .</span><span style="color:#96b5b4;">run_once</span><span>(|</span><span style="color:#bf616a;">job</span><span>, </span><span style="color:#bf616a;">_ctx</span><span>| async </span><span style="color:#b48ead;">move </span><span>{
+</span><span>        </span><span style="color:#65737e;">// despacha por job.queue / job.payload e executa o trabalho
+</span><span>        Ok(())
+</span><span>    })
+</span><span>    .await?;
+</span><span>
+</span><span style="color:#65737e;">// Engine multi-fila com concorrência, rodando até o Ctrl-C:
+</span><span style="color:#b48ead;">let</span><span> engine = WorkerEngine::new(queue.</span><span style="color:#96b5b4;">clone</span><span>(), EngineConfig::default());
+</span><span>engine.</span><span style="color:#96b5b4;">run</span><span>(handler, tokio::signal::ctrl_c().</span><span style="color:#96b5b4;">map</span><span>(|_| ())).await?;
+</span></code></pre>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido worker            </span><span style="color:#65737e;"># processa jobs continuamente
+</span><span style="color:#bf616a;">cargo</span><span> doido worker</span><span style="color:#bf616a;"> --once     </span><span style="color:#65737e;"># drena a fila e sai
+</span></code></pre>
+<h2 id="retries-backoff">Retries &amp; backoff</h2>
+<p>Jobs que falham são retentados até <code>max_retries</code> com a <code>BackoffStrategy</code> configurada
+(<code>Exponential</code>, <code>Linear</code> ou <code>None</code>) e <code>backoff_base</code> segundos — tudo definido no <code>#[job]</code>. O
+worker dá <code>nack</code> numa falha com o <code>retry_at</code> calculado, e <code>reclaim_expired</code> reexecuta leases
+perdidos por uma queda.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>#[</span><span style="color:#bf616a;">job</span><span>(max_retries = 5, backoff = &quot;</span><span style="color:#a3be8c;">exponential</span><span>&quot;, backoff_base = 10)]
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">charge_card</span><span>(</span><span style="color:#bf616a;">order_id</span><span>: </span><span style="color:#b48ead;">i64</span><span>) -&gt; doido::Result&lt;()&gt; { Ok(()) }
+</span></code></pre>
+<h2 id="dead-letter-queue">Dead-letter queue</h2>
+<p>Jobs que esgotam seus retries são movidos para um store de dead-letter, inspecionável e
+reexecutável via CLI.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido jobs:failed            </span><span style="color:#65737e;"># lista jobs na dead-letter
+</span><span style="color:#bf616a;">cargo</span><span> doido jobs:retry &lt;job_id&gt;    </span><span style="color:#65737e;"># reenfileira um
+</span><span style="color:#bf616a;">cargo</span><span> doido jobs:discard &lt;job_id&gt;  </span><span style="color:#65737e;"># descarta um
+</span></code></pre>
+<h2 id="prioridade-agendamento">Prioridade &amp; agendamento</h2>
+<p><code>priority</code> (maior roda antes) é definido no <code>#[job]</code> ou por payload com <code>with_priority</code>;
+<code>with_wait(secs)</code> / <code>with_run_at(datetime)</code> agendam execução futura.</p>
+<h2 id="contexto-do-job">Contexto do job</h2>
+<p>Um <code>JobContext</code> carrega estado compartilhado (e uma conexão de banco com <code>jobs-db</code>) para os
+handlers; um <code>WorkerEngine</code> pode ser construído <code>with_context</code> para injetar estado da app.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::jobs::{JobContext, WorkerEngine, EngineConfig};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> engine = WorkerEngine::with_context(queue, EngineConfig::default(), JobContext::new());
+</span></code></pre>
+<h2 id="testes">Testes</h2>
+<p><code>MemoryQueue</code> mais <code>reserve</code> / <code>run_once</code> tornam os jobs determinísticos em testes —
+enfileire, depois drene e verifique.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> queue = Arc::new(MemoryQueue::new());
+</span><span style="color:#96b5b4;">send_welcome_enqueue</span><span>(queue.</span><span style="color:#96b5b4;">as_ref</span><span>(), </span><span style="color:#d08770;">1</span><span>).await?;
+</span><span style="color:#b48ead;">let</span><span> reserved = queue.</span><span style="color:#96b5b4;">reserve</span><span>(&amp;[&quot;</span><span style="color:#a3be8c;">emails</span><span>&quot;], std::time::Duration::from_millis(</span><span style="color:#d08770;">50</span><span>)).await?;
+</span><span>assert!(reserved.</span><span style="color:#96b5b4;">is_some</span><span>());
+</span></code></pre>
+<h2 id="especificacao-vs-implementacao">Especificação vs. implementação</h2>
+<blockquote>
+<p>O enqueue é uma <strong>função livre gerada</strong> (<code>send_welcome_enqueue(queue, payload)</code>), e não um
+método no struct do job; o formato <code>Job.perform_later</code> da especificação mapeia para esse
+helper mais os setters fluentes de <code>JobPayload</code>.</p>
+</blockquote>
+<h2 id="veja-tambem">Veja também</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/mailer/">Mailer</a> — <code>deliver_later</code> enfileira na fila <code>mailers</code>.</li>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/cache/">Cache</a> &amp; <a href="https://doido-rs.github.io/pt/docs/reference/models/">Models</a> — backends Redis/DB.</li>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/generators/">Geradores &amp; CLI</a> — <code>cargo doido generate job</code> e <code>cargo doido worker</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">← Geradores &amp; CLI</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificações</a>
+      <a href="https://doido-rs.github.io/pt/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

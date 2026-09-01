@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Doido - auth</title>
+    <subtitle>A Rails-inspired web framework for Rust — batteries included, async-native.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://doido-rs.github.io/tags/auth/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://doido-rs.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-08-03T00:00:00+00:00</updated>
+    <id>https://doido-rs.github.io/tags/auth/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Introducing doido-auth</title>
+        <published>2026-08-03T00:00:00+00:00</published>
+        <updated>2026-08-03T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://doido-rs.github.io/blog/doido-auth/"/>
+        <id>https://doido-rs.github.io/blog/doido-auth/</id>
+        
+        <content type="html" xml:base="https://doido-rs.github.io/blog/doido-auth/">&lt;p&gt;Doido now ships &lt;strong&gt;&lt;code&gt;doido-auth&lt;&#x2F;code&gt;&lt;&#x2F;strong&gt;, the framework’s answer to Devise, OmniAuth, and
+JWT bearer tokens — all in one crate that composes with the existing controller
+session stack.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-you-get&quot;&gt;What you get&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;AuthUser&lt;&#x2F;code&gt; trait&lt;&#x2F;strong&gt; — bind authentication to any SeaORM model; no hard-coded User
+struct in the framework.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Pluggable strategies&lt;&#x2F;strong&gt; — cookie session (default), JWT bearer, and custom
+backends via &lt;code&gt;AuthStrategy&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Axum extractors&lt;&#x2F;strong&gt; — &lt;code&gt;CurrentUser&lt;&#x2F;code&gt;, &lt;code&gt;MaybeUser&lt;&#x2F;code&gt;, &lt;code&gt;RequireAuth&lt;&#x2F;code&gt;, and &lt;code&gt;AuthToken&lt;&#x2F;code&gt;
+work in handlers and &lt;code&gt;#[controller]&lt;&#x2F;code&gt; actions.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;OAuth providers&lt;&#x2F;strong&gt; — configure any identity provider under &lt;code&gt;auth.oauth&lt;&#x2F;code&gt; via the
+&lt;code&gt;OAuthProvider&lt;&#x2F;code&gt; trait; OAuth 2.0 entries load from YAML at boot.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Optional 2FA&lt;&#x2F;strong&gt; — TOTP enrollment and verification behind the &lt;code&gt;auth-2fa&lt;&#x2F;code&gt; feature.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Generators&lt;&#x2F;strong&gt; — &lt;code&gt;auth:install&lt;&#x2F;code&gt;, &lt;code&gt;auth:controller&lt;&#x2F;code&gt;, and &lt;code&gt;auth:scaffold&lt;&#x2F;code&gt; appear in
+&lt;code&gt;cargo doido generate&lt;&#x2F;code&gt; when &lt;code&gt;doido-auth&lt;&#x2F;code&gt; is a project dependency.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;one-command-to-start&quot;&gt;One command to start&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;doido&lt;&#x2F;span&gt;&lt;span&gt; new myapp&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --database&lt;&#x2F;span&gt;&lt;span&gt;=sqlite&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --auth
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;cd&lt;&#x2F;span&gt;&lt;span&gt; myapp
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; doido db create &amp;amp;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; doido db migrate
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; doido server
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;That scaffolds a User model, sign-in&#x2F;sign-up&#x2F;password&#x2F;OAuth routes, HTML views, and
+an &lt;code&gt;auth:&lt;&#x2F;code&gt; config block — the same workflow as &lt;code&gt;rails generate devise:install&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;For an existing app, add the dependency and run the install generator:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; add doido&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --features&lt;&#x2F;span&gt;&lt;span&gt; auth
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; doido generate auth:install
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;read-the-full-guide&quot;&gt;Read the full guide&lt;&#x2F;h2&gt;
+&lt;p&gt;The &lt;a href=&quot;&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;&quot;&gt;Auth reference&lt;&#x2F;a&gt; covers configuration, boot sequence,
+extractors, custom strategies, and testing helpers. The design spec lives in
+&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;blob&#x2F;master&#x2F;docs&#x2F;16-auth.md&quot;&gt;&lt;code&gt;docs&#x2F;16-auth.md&lt;&#x2F;code&gt;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

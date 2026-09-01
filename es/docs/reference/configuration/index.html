@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/es" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/docs">Documentación</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/configuration/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/configuration/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/es/docs/reference/configuration/" hreflang="es" aria-current="true">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Oscuro" aria-label="Oscuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;">Documentación</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introducción</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeros pasos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construyendo un blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalación</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI y generadores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;" class="active" aria-current="page">Configuración</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Modelos</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controladores y enrutamiento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware y sesiones</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Vistas</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generadores y CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitectura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitectura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificaciones de diseño</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Configuración</h1>
+    <blockquote>
+<p><strong>Especificación de diseño:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/05-config.md"><code>docs/05-config.md</code></a>.
+Esta guía documenta el camino <strong>implementado</strong> (YAML por entorno). Ve la nota al final
+para lo que la especificación aplaza.</p>
+</blockquote>
+<p><strong>Análogo en Rails: <code>config/</code>.</strong> Doido lee un único archivo YAML por entorno,
+<code>config/&lt;env&gt;.yml</code>, y lo expone como ajustes fuertemente tipados. Las variables de entorno
+pueden sobrescribir cualquier valor, así que los secretos y ajustes por despliegue quedan
+fuera del archivo. El tipo de config vive en <code>doido-controller</code>.</p>
+<h2 id="vistazo-general">Vistazo general</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::{Config, YamlConfig, ServerConfig};
+</span><span style="color:#b48ead;">use </span><span>doido::controller::env_override::{apply_env_overrides, from_process_env};
+</span></code></pre>
+<h2 id="yaml-por-entorno">YAML por entorno</h2>
+<p>Cada entorno tiene su propio archivo en <code>config/</code>, seleccionado por
+<code>Environment::get_env()</code> (<code>development</code>, <code>test</code>, <code>production</code>). Las secciones de nivel
+superior reconocidas son <code>server</code>, <code>logger</code> y <code>middleware</code>; otros subsistemas (cache,
+jobs, storage, …) leen sus propias secciones del mismo archivo.</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/development.yml
+</span><span style="color:#bf616a;">server</span><span>:
+</span><span>  </span><span style="color:#bf616a;">bind</span><span>: </span><span style="color:#d08770;">0.0.0.0
+</span><span>  </span><span style="color:#bf616a;">port</span><span>: </span><span style="color:#d08770;">3000
+</span><span style="color:#bf616a;">logger</span><span>:
+</span><span>  </span><span style="color:#bf616a;">level</span><span>: </span><span style="color:#a3be8c;">debug
+</span><span>  </span><span style="color:#bf616a;">format</span><span>: </span><span style="color:#a3be8c;">verbose
+</span><span>  </span><span style="color:#bf616a;">sql</span><span>: </span><span style="color:#d08770;">true
+</span><span style="color:#bf616a;">middleware</span><span>:
+</span><span>  </span><span style="color:#bf616a;">cors</span><span>:
+</span><span>    </span><span style="color:#bf616a;">enabled</span><span>: </span><span style="color:#d08770;">true
+</span><span>    </span><span style="color:#bf616a;">allowed_origins</span><span>: [&quot;</span><span style="color:#a3be8c;">*</span><span>&quot;]
+</span><span>    </span><span style="color:#bf616a;">allowed_methods</span><span>: [&quot;</span><span style="color:#a3be8c;">GET</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">POST</span><span>&quot;]
+</span></code></pre>
+<h2 id="acceso-tipado">Acceso tipado</h2>
+<p><code>YamlConfig</code> deserializa el archivo en structs tipados. Carga el archivo del entorno
+actual con <code>load()</code> (con fallback a los valores por defecto cuando falta, vía la función
+libre <code>config::load()</code>), un entorno específico con <code>load_env()</code>, o parsea una cadena
+directamente con <code>from_yaml()</code>. Accede a las secciones mediante el trait <code>Config</code>:
+<code>server()</code>, <code>logger()</code>, <code>middleware()</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::{Config, YamlConfig};
+</span><span>
+</span><span style="color:#65737e;">// Carga config/&lt;entorno-actual&gt;.yml (p. ej. config/development.yml).
+</span><span style="color:#b48ead;">let</span><span> config = YamlConfig::load()?;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> addr = format!(&quot;</span><span style="color:#d08770;">{}</span><span style="color:#a3be8c;">:</span><span style="color:#d08770;">{}</span><span>&quot;, config.</span><span style="color:#96b5b4;">server</span><span>().bind, config.</span><span style="color:#96b5b4;">server</span><span>().port); </span><span style="color:#65737e;">// &quot;0.0.0.0:3000&quot;
+</span><span style="color:#b48ead;">let</span><span> level = &amp;config.</span><span style="color:#96b5b4;">logger</span><span>().level;                                      </span><span style="color:#65737e;">// &quot;debug&quot;
+</span><span style="color:#b48ead;">let</span><span> cors_on = config.</span><span style="color:#96b5b4;">middleware</span><span>().cors.enabled;                          </span><span style="color:#65737e;">// true
+</span><span>
+</span><span style="color:#65737e;">// O nunca falles — fallback a los valores por defecto cuando el archivo falta/es inválido:
+</span><span style="color:#b48ead;">let</span><span> config = doido::controller::config::load(); </span><span style="color:#65737e;">// Box&lt;dyn Config&gt;
+</span></code></pre>
+<p><code>ServerConfig</code> tiene por defecto <code>0.0.0.0:3000</code>; <code>LoggerConfig</code> por defecto <code>info</code> (ve
+<a href="https://doido-rs.github.io/es/docs/reference/core/">Core</a>); <code>MiddlewareConfig</code>/<code>CorsConfig</code> están desactivados a
+menos que se habiliten.</p>
+<h2 id="overrides-por-variable-de-entorno">Overrides por variable de entorno</h2>
+<p>Cualquier ajuste se puede sobrescribir con una variable de entorno llamada <code>SECTION__KEY</code>
+(doble guion bajo): <code>SERVER__PORT=4000</code> establece <code>server.port</code>. Los valores se convierten
+a bool o número cuando parsean, si no se mantienen como cadenas — y se crea una nueva
+sección si aún no existe.</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#65737e;"># Override en el arranque — ideal para secretos y valores por despliegue:
+</span><span style="color:#bf616a;">SERVER__PORT</span><span>=</span><span style="color:#a3be8c;">4000 </span><span style="color:#bf616a;">LOGGER__LEVEL</span><span>=</span><span style="color:#a3be8c;">warn </span><span style="color:#bf616a;">DATABASE__URL</span><span>=</span><span style="color:#a3be8c;">postgres://... </span><span style="color:#bf616a;">cargo</span><span> doido server
+</span></code></pre>
+<p>Los overrides se aplican al valor de config ya parseado, antes de la deserialización
+tipada:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::env_override::{apply_env_overrides, from_process_env};
+</span><span>
+</span><span style="color:#b48ead;">let mut</span><span> value: serde_json::Value = serde_json::to_value(&amp;raw_config)?;
+</span><span>
+</span><span style="color:#65737e;">// Toma las variables SECTION__KEY directamente del entorno del proceso:
+</span><span style="color:#96b5b4;">from_process_env</span><span>(&amp;</span><span style="color:#b48ead;">mut</span><span> value);
+</span><span>
+</span><span style="color:#65737e;">// …o aplica un conjunto explícito (útil en pruebas):
+</span><span style="color:#96b5b4;">apply_env_overrides</span><span>(&amp;</span><span style="color:#b48ead;">mut</span><span> value, &amp;[
+</span><span>    (&quot;</span><span style="color:#a3be8c;">SERVER__PORT</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(), &quot;</span><span style="color:#a3be8c;">4000</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>()),
+</span><span>    (&quot;</span><span style="color:#a3be8c;">LOGGER__LEVEL</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(), &quot;</span><span style="color:#a3be8c;">debug</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>()),
+</span><span>]);
+</span></code></pre>
+<h2 id="configuracion-de-los-subsistemas">Configuración de los subsistemas</h2>
+<p>Las secciones <code>server</code>/<code>logger</code>/<code>middleware</code> están tipadas por <code>YamlConfig</code>, pero cada
+subsistema conectable lee su propia sección del mismo <code>config/&lt;env&gt;.yml</code>. Consulta la guía
+correspondiente para las claves exactas:</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">cache</span><span>:   { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">memory </span><span>}                 </span><span style="color:#65737e;"># → guía de Cache
+</span><span style="color:#bf616a;">jobs</span><span>:    { </span><span style="color:#bf616a;">backend</span><span>: </span><span style="color:#a3be8c;">memory</span><span>, </span><span style="color:#bf616a;">queues</span><span>: [</span><span style="color:#a3be8c;">default</span><span>] }  </span><span style="color:#65737e;"># → guía de Jobs
+</span><span style="color:#bf616a;">storage</span><span>: { </span><span style="color:#bf616a;">service</span><span>: </span><span style="color:#a3be8c;">local </span><span>}               </span><span style="color:#65737e;"># → guía de Storage
+</span><span style="color:#bf616a;">database</span><span>: { </span><span style="color:#bf616a;">url</span><span>: </span><span style="color:#a3be8c;">sqlite://db/development.db </span><span>}     </span><span style="color:#65737e;"># → guía de Modelos
+</span></code></pre>
+<h2 id="especificacion-vs-implementacion">Especificación vs. implementación</h2>
+<blockquote>
+<p>La especificación describe <strong>TOML por capas</strong> (<code>config/doido.toml</code> + overrides por
+entorno) y <strong>credenciales cifradas con AES-256-GCM</strong> (<code>config/credentials.toml.enc</code> +
+<code>master.key</code>). Eso está <strong>aplazado</strong>. El camino implementado y probado es <strong>YAML por
+entorno</strong> más overrides <code>SECTION__KEY</code>, documentado arriba.</p>
+</blockquote>
+<h2 id="vease-tambien">Véase también</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/es/docs/reference/core/">Core</a> — la sección <code>logger</code> y el <code>Environment</code>.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/middleware/">Middleware y sesiones</a> — la sección <code>middleware.cors</code>.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/models/">Modelos</a> — la sección <code>database</code> y el pool de conexiones.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">← Core</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI y generadores →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificaciones</a>
+      <a href="https://doido-rs.github.io/es/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

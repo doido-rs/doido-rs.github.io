@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/es" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/docs">Documentación</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/blog/introducing-doido/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/blog/introducing-doido/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/es/blog/introducing-doido/" hreflang="es" aria-current="true">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Oscuro" aria-label="Oscuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+
+
+<article class="container post">
+  <header class="post-header">
+    <a class="muted back-link" href="https://doido-rs.github.io/es/blog">← Blog</a>
+    <h1>Presentando el manual de Doido</h1>
+    <div class="post-meta muted">
+      <time datetime="2026-07-28">July 28, 2026</time>
+      <span> · 2 min de lectura</span>
+    </div>
+    
+      <div class="tags">
+        
+          <a class="tag" href="https://doido-rs.github.io/tags/announcements/">#announcements</a>
+        
+          <a class="tag" href="https://doido-rs.github.io/tags/docs/">#docs</a>
+        
+      </div>
+    
+  </header>
+
+  <div class="prose">
+    <p>Doido ya tiene un hogar en la web: un único sitio que es, a la vez, el <strong>manual
+del framework</strong> y el lugar donde publicamos las <strong>novedades del proyecto</strong>. Estás
+leyendo su primera entrada.</p>
+<h2 id="por-que-un-sitio-de-manual">Por qué un sitio de manual</h2>
+<p>El diseño de Doido siempre se ha guiado por especificaciones detalladas en la
+carpeta <code>docs/</code> del repositorio. Esas especificaciones son la fuente de verdad
+para la <em>intención de diseño</em> — pero nunca se pensaron como la puerta de entrada
+para quien solo quiere instalar la CLI, generar un scaffold y publicar. Este sitio
+llena ese vacío: la <a href="/es/docs/">sección de documentación</a> es un manual curado,
+escrito a mano, que enlaza de vuelta a las especificaciones cuando quieras
+profundizar.</p>
+<h2 id="como-esta-construido">Cómo está construido</h2>
+<p>El sitio es deliberadamente aburrido de operar:</p>
+<ul>
+<li><strong><a href="https://www.getzola.org/">Zola</a></strong> — un generador de sitios estáticos escrito
+en Rust (usa el motor de markdown <code>pulldown-cmark</code>). Un binario, sin runtime.</li>
+<li><strong>Markdown de principio a fin.</strong> Cada página de doc y entrada es un archivo <code>.md</code>.</li>
+<li><strong>GitHub Actions</strong> construye el sitio y lo publica en GitHub Pages en cada push a
+<code>master</code> que toca <code>docs-blog/</code>.</li>
+<li><strong>El tema after-dark.</strong> Un tema oscuro robusto para Zola con búsqueda, portapapeles
+en bloques de código y resaltado de sintaxis.</li>
+</ul>
+<h2 id="publicar-es-un-archivo">Publicar es un archivo</h2>
+<p>Añadir una entrada es deliberadamente trivial. Coloca un archivo Markdown en
+<code>docs-blog/content/</code> con el nombre <code>AAAA-MM-DD-tu-slug.md</code>:</p>
+<pre data-lang="markdown" style="background-color:#2b303b;color:#c0c5ce;" class="language-markdown "><code class="language-markdown" data-lang="markdown"><span>+++
+</span><span>title = &quot;Título de mi entrada&quot;
+</span><span>date = 2026-08-01
+</span><span>
+</span><span>[taxonomies]
+</span><span>categories = [&quot;release&quot;]
+</span><span>tags = [&quot;release&quot;]
+</span><span>+++
+</span><span>
+</span><span>Tu contenido aquí.
+</span></code></pre>
+<p>Haz push a <code>master</code>, y GitHub Actions construye y publica. Ese es todo el flujo.</p>
+<h2 id="que-sigue">Qué sigue</h2>
+<p>Más guías de subsistemas, notas de release a medida que los crates llegan a
+crates.io, y lo que valga la pena documentar. Sigue el proyecto por el
+<a href="/es/atom.xml">feed Atom</a> o en <a href="https://github.com/doido-rs/doido">GitHub</a>.</p>
+
+  </div>
+
+  <nav class="page-nav">
+    <span>
+      
+    </span>
+    <span>
+      
+    </span>
+  </nav>
+</article>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificaciones</a>
+      <a href="https://doido-rs.github.io/es/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

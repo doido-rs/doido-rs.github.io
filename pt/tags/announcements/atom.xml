@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="pt">
+    <title>Doido - announcements</title>
+    <subtitle>Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://doido-rs.github.io/pt/tags/announcements/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://doido-rs.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-28T00:00:00+00:00</updated>
+    <id>https://doido-rs.github.io/pt/tags/announcements/atom.xml</id>
+    <entry xml:lang="pt">
+        <title>Apresentando o manual do Doido</title>
+        <published>2026-07-28T00:00:00+00:00</published>
+        <updated>2026-07-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://doido-rs.github.io/pt/blog/introducing-doido/"/>
+        <id>https://doido-rs.github.io/pt/blog/introducing-doido/</id>
+        
+        <content type="html" xml:base="https://doido-rs.github.io/pt/blog/introducing-doido/">&lt;p&gt;O Doido agora tem uma casa na web: um único site que é, ao mesmo tempo, o
+&lt;strong&gt;manual do framework&lt;&#x2F;strong&gt; e o lugar onde publicamos as &lt;strong&gt;novidades do projeto&lt;&#x2F;strong&gt;.
+Você está lendo o primeiro post dele.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;por-que-um-site-de-manual&quot;&gt;Por que um site de manual&lt;&#x2F;h2&gt;
+&lt;p&gt;O design do Doido sempre foi guiado por especificações detalhadas na pasta &lt;code&gt;docs&#x2F;&lt;&#x2F;code&gt;
+do repositório. Essas especificações são a fonte da verdade para a &lt;em&gt;intenção de
+design&lt;&#x2F;em&gt; — mas nunca foram pensadas como a porta de entrada para quem só quer
+instalar a CLI, gerar um scaffold e publicar. Este site preenche essa lacuna: a
+&lt;a href=&quot;&#x2F;pt&#x2F;docs&#x2F;&quot;&gt;seção de documentação&lt;&#x2F;a&gt; é um manual curado, escrito à mão, que aponta
+de volta para as especificações sempre que você quiser se aprofundar.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;como-ele-e-feito&quot;&gt;Como ele é feito&lt;&#x2F;h2&gt;
+&lt;p&gt;O site é propositalmente sem graça de operar:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; — um gerador de sites estáticos escrito em
+Rust (usa a engine de markdown &lt;code&gt;pulldown-cmark&lt;&#x2F;code&gt;). Um binário, sem runtime.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Markdown do começo ao fim.&lt;&#x2F;strong&gt; Cada página de doc e post é um arquivo &lt;code&gt;.md&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Actions&lt;&#x2F;strong&gt; faz o build do site e publica no GitHub Pages a cada push na
+&lt;code&gt;master&lt;&#x2F;code&gt; que toca em &lt;code&gt;docs-blog&#x2F;&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;O tema after-dark.&lt;&#x2F;strong&gt; Um tema escuro robusto para Zola com busca, clipboard
+em blocos de código e syntax highlighting.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;publicar-e-um-arquivo&quot;&gt;Publicar é um arquivo&lt;&#x2F;h2&gt;
+&lt;p&gt;Adicionar um post é deliberadamente trivial. Solte um arquivo Markdown em
+&lt;code&gt;docs-blog&#x2F;content&#x2F;&lt;&#x2F;code&gt; nomeado &lt;code&gt;AAAA-MM-DD-seu-slug.md&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;Título do meu post&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date = 2026-08-01
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[taxonomies]
+&lt;&#x2F;span&gt;&lt;span&gt;categories = [&amp;quot;release&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;tags = [&amp;quot;release&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Seu conteúdo aqui.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Faça push na &lt;code&gt;master&lt;&#x2F;code&gt;, e o GitHub Actions faz o build e publica. Esse é o fluxo
+inteiro.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;o-que-vem-a-seguir&quot;&gt;O que vem a seguir&lt;&#x2F;h2&gt;
+&lt;p&gt;Mais guias de subsistemas, notas de release conforme os crates chegam ao
+crates.io, e o que mais valer a pena registrar. Acompanhe pelo
+&lt;a href=&quot;&#x2F;pt&#x2F;atom.xml&quot;&gt;feed Atom&lt;&#x2F;a&gt; ou no &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Un framework web para Rust inspirado en Rails — con baterías incluidas y async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/es" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/docs">Documentación</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/es/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/cable/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/cable/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/es/docs/reference/cable/" hreflang="es" aria-current="true">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Oscuro" aria-label="Oscuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;">Documentación</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introducción</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeros pasos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construyendo un blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalación</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI y generadores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuración</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Modelos</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controladores y enrutamiento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware y sesiones</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Vistas</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generadores y CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;" class="active" aria-current="page">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitectura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitectura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificaciones de diseño</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Cable (WebSockets)</h1>
+    <blockquote>
+<p><strong>Especificación de diseño:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/12-cable.md"><code>docs/12-cable.md</code></a>.
+Esta guía documenta la API tal como está implementada en <code>doido-cable</code>.</p>
+</blockquote>
+<p><strong>Análogo en Rails: Action Cable.</strong> Los canales ofrecen comunicación WebSocket bidireccional
+en tiempo real hablando el protocolo de cable de ActionCable (compatible con
+<code>@rails/actioncable</code>). Las conexiones se suscriben a streams con nombre; un broadcast a un
+stream alcanza a todos los suscriptores. El Pub/Sub es conectable (en memoria, Redis o base
+de datos).</p>
+<h2 id="vistazo-general">Vistazo general</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::{channel, Channel, ChannelContext, Cable, MemoryPubSub, CableConnection};
+</span></code></pre>
+<h2 id="definir-un-canal">Definir un canal</h2>
+<p><code>#[channel]</code> deriva el nombre de registro del canal. Implementa los hooks de ciclo de vida
+del trait <code>Channel</code>: <code>subscribed</code> (al suscribirse), <code>unsubscribed</code> (al desconectar) y
+<code>received</code> (un mensaje entrante). Enruta según el payload del mensaje dentro de <code>received</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::{channel, Channel, ChannelContext};
+</span><span style="color:#b48ead;">use </span><span>doido::Result;
+</span><span style="color:#b48ead;">use </span><span>serde_json::Value;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">channel</span><span>]
+</span><span style="color:#b48ead;">struct </span><span>ChatChannel;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">async_trait</span><span>::</span><span style="color:#bf616a;">async_trait</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>Channel </span><span style="color:#b48ead;">for </span><span>ChatChannel {
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">subscribed</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">_ctx</span><span>: &amp;ChannelContext) -&gt; Result&lt;()&gt; { Ok(()) }
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">unsubscribed</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">_ctx</span><span>: &amp;ChannelContext) -&gt; Result&lt;()&gt; { Ok(()) }
+</span><span>
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">received</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">ctx</span><span>: &amp;ChannelContext, </span><span style="color:#bf616a;">data</span><span>: Value) -&gt; Result&lt;()&gt; {
+</span><span>        </span><span style="color:#65737e;">// Despacha según el payload (p. ej. un campo &quot;action&quot;, al estilo ActionCable):
+</span><span>        </span><span style="color:#b48ead;">if</span><span> data[&quot;</span><span style="color:#a3be8c;">action</span><span>&quot;] == &quot;</span><span style="color:#a3be8c;">speak</span><span>&quot; {
+</span><span>            </span><span style="color:#65737e;">// …hacer broadcast del mensaje a la sala…
+</span><span>        }
+</span><span>        Ok(())
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p><code>ChannelContext</code> transporta el <code>identifier</code> de la suscripción y el <code>stream</code> actual.</p>
+<h2 id="broadcast-a-streams">Broadcast a streams</h2>
+<p><code>Cable</code> publica en un stream con nombre desde cualquier parte de la app: <code>broadcast</code> envía
+un mensaje ActionCable estructurado (identifier + JSON), <code>broadcast_to</code> envía una cadena
+cruda. Usa <code>streams::stream_from</code> para construir nombres de stream consistentes.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::{Cable, MemoryPubSub, streams};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> cable = Cable::new(Arc::new(MemoryPubSub::new()));
+</span><span style="color:#b48ead;">let</span><span> stream = streams::stream_from(&quot;</span><span style="color:#a3be8c;">chat:room:1</span><span>&quot;);
+</span><span>
+</span><span>cable.</span><span style="color:#96b5b4;">broadcast</span><span>(&amp;stream, &quot;</span><span style="color:#a3be8c;">ChatChannel</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Hi</span><span>&quot; })).await?;
+</span><span>cable.</span><span style="color:#96b5b4;">broadcast_to</span><span>(&amp;stream, &quot;</span><span style="color:#a3be8c;">raw string</span><span>&quot;).await?;
+</span></code></pre>
+<h2 id="suscribirse-a-un-stream">Suscribirse a un stream</h2>
+<p>Suscríbete mediante el pub/sub subyacente para recibir un canal de broadcast de mensajes
+(usado internamente para retransmitir al WebSocket).</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let mut</span><span> rx = cable.</span><span style="color:#96b5b4;">pubsub</span><span>().</span><span style="color:#96b5b4;">subscribe</span><span>(&quot;</span><span style="color:#a3be8c;">chat:room:1</span><span>&quot;).await?;
+</span><span style="color:#b48ead;">let</span><span> message = rx.</span><span style="color:#96b5b4;">recv</span><span>().await?; </span><span style="color:#65737e;">// una cadena ServerMessage en JSON
+</span></code></pre>
+<h2 id="backends-de-pub-sub">Backends de Pub/Sub</h2>
+<p><code>PubSub</code> es el trait conectable (<code>subscribe</code>, <code>publish</code>). <code>MemoryPubSub</code> (en proceso) es el
+por defecto; <code>RedisPubSub</code> (feature <code>cable-redis</code>) distribuye entre procesos; <code>DbPubSub</code>
+(feature <code>cable-db</code>) hace polling de la base de datos.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::{Cable, MemoryPubSub};
+</span><span style="color:#b48ead;">let</span><span> cable = Cable::new(std::sync::Arc::new(MemoryPubSub::new()));
+</span></code></pre>
+<h2 id="identidad-y-autorizacion-de-la-conexion">Identidad y autorización de la conexión</h2>
+<p><code>CableConnection</code> modela la identidad de una conexión y si está autorizada — el análogo de
+<code>identified_by</code> / <code>reject_unauthorized_connection</code> de Rails. Resuelve la identidad cuando el
+socket conecta y rechaza las no autorizadas antes de que corra cualquier canal.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::CableConnection;
+</span><span>
+</span><span style="color:#b48ead;">let mut</span><span> conn = CableConnection::new();
+</span><span>conn.</span><span style="color:#96b5b4;">identify</span><span>(&quot;</span><span style="color:#a3be8c;">current_user</span><span>&quot;, &amp;user.id.</span><span style="color:#96b5b4;">to_string</span><span>());
+</span><span>conn.</span><span style="color:#96b5b4;">authorize</span><span>();
+</span><span>
+</span><span style="color:#b48ead;">if </span><span>!conn.</span><span style="color:#96b5b4;">is_authorized</span><span>() {
+</span><span>    </span><span style="color:#65737e;">// cierra el socket
+</span><span>}
+</span><span style="color:#b48ead;">let</span><span> uid = conn.</span><span style="color:#96b5b4;">identifier</span><span>(&quot;</span><span style="color:#a3be8c;">current_user</span><span>&quot;);
+</span></code></pre>
+<h2 id="protocolo-de-cable">Protocolo de cable</h2>
+<p>El servidor habla el protocolo ActionCable: <code>ServerFrame</code> (<code>welcome</code>, <code>ping</code>,
+<code>confirm_subscription</code>, <code>reject_subscription</code>), <code>CableFrame</code> entrante (<code>subscribe</code>,
+<code>unsubscribe</code>, <code>message</code>) y <code>ServerMessage</code> (el <code>identifier</code> + <code>message</code> de un broadcast). Un
+ping de heartbeat mantiene vivas las conexiones. Esto es compatible a nivel de cable con el
+cliente JavaScript estándar <code>@rails/actioncable</code>.</p>
+<h2 id="pruebas">Pruebas</h2>
+<p><code>MemoryPubSub</code> hace los broadcasts observables en proceso — suscríbete, haz broadcast y
+verifica el <code>ServerMessage</code> recibido.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::cable::{Cable, MemoryPubSub, ServerMessage};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> cable = Cable::new(Arc::new(MemoryPubSub::new()));
+</span><span style="color:#b48ead;">let mut</span><span> rx = cable.</span><span style="color:#96b5b4;">pubsub</span><span>().</span><span style="color:#96b5b4;">subscribe</span><span>(&quot;</span><span style="color:#a3be8c;">room:1</span><span>&quot;).await?;
+</span><span>cable.</span><span style="color:#96b5b4;">broadcast</span><span>(&quot;</span><span style="color:#a3be8c;">room:1</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">ChatChannel</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">text</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">hi</span><span>&quot; })).await?;
+</span><span style="color:#b48ead;">let</span><span> raw = rx.</span><span style="color:#96b5b4;">recv</span><span>().await?;
+</span></code></pre>
+<h2 id="especificacion-vs-implementacion">Especificación vs. implementación</h2>
+<blockquote>
+<p><code>Channel::received(ctx, data)</code> recibe el payload completo — <strong>no</strong> hay un argumento
+<code>action</code> separado, así que despachas según los datos tú mismo (p. ej. un campo <code>action</code>).
+<code>ChannelContext</code> es una struct de datos simple (<code>identifier</code>, <code>stream</code>); construye nombres
+de stream con <code>streams::stream_from</code> y haz broadcast vía <code>Cable</code>.</p>
+</blockquote>
+<h2 id="vease-tambien">Véase también</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/es/docs/reference/middleware/">Middleware y sesiones</a> — autenticar el upgrade del WebSocket.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/cache/">Cache</a> — el backend Redis se comparte con el pub/sub.</li>
+<li><a href="https://doido-rs.github.io/es/docs/reference/generators/">Generadores y CLI</a> — <code>cargo doido generate channel</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">← Cache</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;es&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificaciones</a>
+      <a href="https://doido-rs.github.io/es/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

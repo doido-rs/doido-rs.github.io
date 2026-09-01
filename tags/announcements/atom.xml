@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Doido - announcements</title>
+    <subtitle>A Rails-inspired web framework for Rust — batteries included, async-native.</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://doido-rs.github.io/tags/announcements/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://doido-rs.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-28T00:00:00+00:00</updated>
+    <id>https://doido-rs.github.io/tags/announcements/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Introducing the Doido manual</title>
+        <published>2026-07-28T00:00:00+00:00</published>
+        <updated>2026-07-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://doido-rs.github.io/blog/introducing-doido/"/>
+        <id>https://doido-rs.github.io/blog/introducing-doido/</id>
+        
+        <content type="html" xml:base="https://doido-rs.github.io/blog/introducing-doido/">&lt;p&gt;Doido now has a home on the web: a single site that is both the &lt;strong&gt;framework
+manual&lt;&#x2F;strong&gt; and the place where we publish &lt;strong&gt;project news&lt;&#x2F;strong&gt;. You are reading its
+first post.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;why-a-manual-site&quot;&gt;Why a manual site&lt;&#x2F;h2&gt;
+&lt;p&gt;Doido’s design has always been driven by detailed specs in the repository’s
+&lt;code&gt;docs&#x2F;&lt;&#x2F;code&gt; folder. Those specs are the source of truth for &lt;em&gt;design intent&lt;&#x2F;em&gt; — but
+they were never meant to be the front door for someone who just wants to install
+the CLI, generate a scaffold, and ship. This site fills that gap: the
+&lt;a href=&quot;&#x2F;docs&#x2F;&quot;&gt;documentation section&lt;&#x2F;a&gt; is a curated, hand-written manual that links back
+to the specs whenever you want to go deeper.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;how-it-is-built&quot;&gt;How it is built&lt;&#x2F;h2&gt;
+&lt;p&gt;The site is intentionally boring to operate:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt;&lt;&#x2F;strong&gt; — a static-site generator written in Rust
+(it uses the &lt;code&gt;pulldown-cmark&lt;&#x2F;code&gt; markdown engine). One binary, no runtime.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;Markdown all the way down.&lt;&#x2F;strong&gt; Every doc page and blog post is a &lt;code&gt;.md&lt;&#x2F;code&gt; file.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Actions&lt;&#x2F;strong&gt; builds the site and deploys it to GitHub Pages on every push
+to &lt;code&gt;master&lt;&#x2F;code&gt; that touches &lt;code&gt;docs-blog&#x2F;&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;strong&gt;An editorial theme.&lt;&#x2F;strong&gt; Clean layout inspired by modern product sites — serif
+headlines, card grids, and generous whitespace.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;publishing-is-one-file&quot;&gt;Publishing is one file&lt;&#x2F;h2&gt;
+&lt;p&gt;Adding a post is deliberately trivial. Drop a Markdown file into
+&lt;code&gt;docs-blog&#x2F;content&#x2F;blog&#x2F;&lt;&#x2F;code&gt; named &lt;code&gt;YYYY-MM-DD-your-slug.md&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;title = &amp;quot;My post title&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;date = 2026-08-01
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[taxonomies]
+&lt;&#x2F;span&gt;&lt;span&gt;tags = [&amp;quot;release&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;+++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Your content here.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Push to &lt;code&gt;master&lt;&#x2F;code&gt;, and GitHub Actions builds and deploys it. That is the whole
+workflow.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;what-s-next&quot;&gt;What’s next&lt;&#x2F;h2&gt;
+&lt;p&gt;More subsystem guides, release notes as the crates land on crates.io, and
+whatever else is worth writing down. Follow along via the
+&lt;a href=&quot;&#x2F;blog&#x2F;atom.xml&quot;&gt;Atom feed&lt;&#x2F;a&gt; or on &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&quot;&gt;GitHub&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

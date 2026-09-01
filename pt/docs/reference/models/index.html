@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="Um framework web para Rust inspirado no Rails — baterias inclusas, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io/pt" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/docs">Documentação</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/pt/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/docs/reference/models/" hreflang="en">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/pt/docs/reference/models/" hreflang="pt" aria-current="true">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/models/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Tema">
+        <button class="theme-option" type="button" data-theme-value="light" title="Claro" aria-label="Claro"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Escuro" aria-label="Escuro"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;">Documentação</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introdução</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Primeiros passos</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Construindo um blog</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Instalação</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; geradores</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Módulos</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuração</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;models&#x2F;" class="active" aria-current="page">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; roteamento</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessões</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Geradores &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Arquitetura</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Arquitetura</a>
+              </li>
+            
+              
+              
+              
+              
+                
+                  
+                
+                  
+                
+                  
+                    
+                    
+                  
+                
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Especificações de design</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Models</h1>
+    <blockquote>
+<p><strong>Especificação de design:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/03-model.md"><code>docs/03-model.md</code></a>.
+Este guia documenta a API como implementada em <code>doido-model</code>.</p>
+</blockquote>
+<p><strong>Análogo no Rails: Active Record.</strong> <code>doido-model</code> reexporta o <a href="https://www.sea-ql.org/SeaORM/">sea-orm</a>
+por completo — você define entidades e faz queries exatamente como o sea-orm documenta,
+sem wrapper — e adiciona a cola do framework: um pool de conexões global vindo da config,
+helpers de migration no estilo Rails, validações, callbacks, normalização, senhas seguras,
+associações, serialização, factories e um banco de dados de teste em memória.</p>
+<h2 id="visao-geral">Visão geral</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::{connect, connect_with_url, pool, TestDb};
+</span><span style="color:#b48ead;">use </span><span>doido::model::{ActiveModelTrait, EntityTrait, ColumnTrait, QueryFilter, Set};
+</span><span style="color:#b48ead;">use </span><span>doido::model::migration::{create_table, alter_table, add_index, add_foreign_key};
+</span></code></pre>
+<h2 id="definindo-um-model">Definindo um model</h2>
+<p>Models são entidades sea-orm puras. <code>doido-model</code> reexporta tudo o que o sea-orm precisa,
+então não há nada específico do Doido para aprender aqui.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::sea_orm::entity::prelude::*;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Clone, Debug, PartialEq, DeriveEntityModel)]
+</span><span>#[</span><span style="color:#bf616a;">sea_orm</span><span>(table_name = &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;)]
+</span><span style="color:#b48ead;">pub struct </span><span>Model {
+</span><span>    #[</span><span style="color:#bf616a;">sea_orm</span><span>(primary_key)]
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">id</span><span>: </span><span style="color:#b48ead;">i64</span><span>,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">title</span><span>: String,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">body</span><span>: String,
+</span><span>    </span><span style="color:#b48ead;">pub </span><span style="color:#bf616a;">published</span><span>: </span><span style="color:#b48ead;">bool</span><span>,
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Copy, Clone, Debug, EnumIter, DeriveRelation)]
+</span><span style="color:#b48ead;">pub enum </span><span>Relation {
+</span><span>    #[</span><span style="color:#bf616a;">sea_orm</span><span>(has_many = &quot;</span><span style="color:#a3be8c;">super::comment::Entity</span><span>&quot;)]
+</span><span>    Comments,
+</span><span>}
+</span></code></pre>
+<p>Faça queries direto com o sea-orm (não existe, intencionalmente, um <code>Model::find_by_id</code>):</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::{EntityTrait, ColumnTrait, QueryFilter};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> published = post::Entity::find()
+</span><span>    .</span><span style="color:#96b5b4;">filter</span><span>(post::Column::Published.</span><span style="color:#96b5b4;">eq</span><span>(</span><span style="color:#d08770;">true</span><span>))
+</span><span>    .</span><span style="color:#96b5b4;">all</span><span>(pool::pool())
+</span><span>    .await?;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> one = post::Entity::find_by_id(</span><span style="color:#d08770;">1</span><span>).</span><span style="color:#96b5b4;">one</span><span>(pool::pool()).await?;
+</span></code></pre>
+<h2 id="o-pool-de-conexoes">O pool de conexões</h2>
+<p><code>connect()</code> abre uma conexão a partir da seção <code>database</code> da config (<code>connect_with_url()</code>
+para uma URL explícita); <code>pool::set_pool()</code> a instala como o pool global do processo, lido
+de volta com <code>pool::pool()</code> (dá panic se não definido) ou <code>pool::try_pool()</code> (retorna
+<code>Option</code>). Os controllers alcançam o mesmo pool via
+<a href="https://doido-rs.github.io/pt/docs/reference/controllers/"><code>ctx.db()</code></a>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// No boot:
+</span><span style="color:#b48ead;">let</span><span> conn = doido::model::connect().await?;   </span><span style="color:#65737e;">// lê config/&lt;env&gt;.yml → [database]
+</span><span>doido::model::pool::set_pool(conn).</span><span style="color:#96b5b4;">ok</span><span>();
+</span><span>
+</span><span style="color:#65737e;">// Em qualquer lugar depois:
+</span><span style="color:#b48ead;">let</span><span> db = doido::model::pool::pool();          </span><span style="color:#65737e;">// &amp;&#39;static DatabaseConnection
+</span></code></pre>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/development.yml
+</span><span style="color:#bf616a;">database</span><span>:
+</span><span>  </span><span style="color:#bf616a;">url</span><span>: </span><span style="color:#a3be8c;">sqlite://db/development.db
+</span><span>  </span><span style="color:#65737e;"># max_connections: 10
+</span><span>  </span><span style="color:#65737e;"># connect_timeout: 5
+</span></code></pre>
+<h2 id="migrations">Migrations</h2>
+<p>Helpers no estilo Rails envolvem o <code>SchemaManager</code> do sea-orm. Cada um é uma função livre
+que recebe o manager primeiro; <code>create_table</code>/<code>alter_table</code> recebem uma closure sobre um
+builder de colunas com helpers tipados (<code>string</code>, <code>text</code>, <code>integer</code>, <code>big_integer</code>,
+<code>float</code>, …, além de <code>not_null</code>, <code>unique_key</code>, <code>timestamps</code>). Chame-os direto do <code>up</code>/<code>down</code>
+de uma migration.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::migration::{create_table, alter_table, add_index, add_foreign_key, drop_table};
+</span><span>
+</span><span style="color:#96b5b4;">create_table</span><span>(manager, &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;, |</span><span style="color:#bf616a;">t</span><span>| {
+</span><span>    t.</span><span style="color:#96b5b4;">string</span><span>(&quot;</span><span style="color:#a3be8c;">email</span><span>&quot;).</span><span style="color:#96b5b4;">not_null</span><span>().</span><span style="color:#96b5b4;">unique_key</span><span>();
+</span><span>    t.</span><span style="color:#96b5b4;">string</span><span>(&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;);
+</span><span>    t.</span><span style="color:#96b5b4;">timestamps</span><span>();
+</span><span>})
+</span><span>.await?;
+</span><span>
+</span><span style="color:#96b5b4;">alter_table</span><span>(manager, &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;, |</span><span style="color:#bf616a;">t</span><span>| {
+</span><span>    t.</span><span style="color:#96b5b4;">add_column</span><span>(&quot;</span><span style="color:#a3be8c;">age</span><span>&quot;, |</span><span style="color:#bf616a;">c</span><span>| { c.</span><span style="color:#96b5b4;">integer</span><span>(); });
+</span><span>    t.</span><span style="color:#96b5b4;">rename_column</span><span>(&quot;</span><span style="color:#a3be8c;">name</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">full_name</span><span>&quot;);
+</span><span>})
+</span><span>.await?;
+</span><span>
+</span><span style="color:#96b5b4;">add_index</span><span>(manager, &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;, &amp;[&quot;</span><span style="color:#a3be8c;">email</span><span>&quot;]).await?;
+</span><span style="color:#96b5b4;">add_foreign_key</span><span>(manager, &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">user_id</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;).await?;
+</span><span style="color:#96b5b4;">drop_table</span><span>(manager, &quot;</span><span style="color:#a3be8c;">users</span><span>&quot;).await?;
+</span></code></pre>
+<h2 id="seeds">Seeds</h2>
+<p>Toda app criada com <code>doido new</code> inclui um módulo <code>db/seeds.rs</code> — uma
+<code>async fn run</code> (não são migrations versionadas) que insere dados de fixture
+usando os models SeaORM em <code>app/models/</code>. Edite <code>db/seeds.rs</code> e rode:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> doido db seed
+</span></code></pre>
+<p>O seeder roda <strong>no processo do binário da app</strong> (registrado via <code>.seeder</code> em
+<code>src/main.rs</code>) usando a conexão da app — sem subprocesso <code>cargo run</code> — então seus
+<code>INSERT</code>s são logados como qualquer outra instrução. Depois de
+<code>cargo doido generate model …</code>, o novo model já está disponível como
+<code>crate::models::…</code>.</p>
+<h2 id="validacoes">Validações</h2>
+<p>Implemente <code>Validate</code> para coletar erros em um acumulador <code>Errors</code> com helpers como
+<code>presence</code> e <code>length</code>; <code>is_valid()</code> e <code>full_messages()</code> vêm de graça.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::validation::{Validate, Errors};
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>Post { </span><span style="color:#bf616a;">title</span><span>: String, </span><span style="color:#bf616a;">body</span><span>: String }
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Validate </span><span style="color:#b48ead;">for </span><span>Post {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">validate</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; Errors {
+</span><span>        </span><span style="color:#b48ead;">let mut</span><span> e = Errors::new();
+</span><span>        e.</span><span style="color:#96b5b4;">presence</span><span>(&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;, &amp;</span><span style="color:#bf616a;">self</span><span>.title);
+</span><span>        e.</span><span style="color:#96b5b4;">length</span><span>(&quot;</span><span style="color:#a3be8c;">body</span><span>&quot;, &amp;</span><span style="color:#bf616a;">self</span><span>.body, Some(</span><span style="color:#d08770;">10</span><span>), None); </span><span style="color:#65737e;">// mínimo 10, sem máximo
+</span><span>        e
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> post = Post { title: &quot;&quot;.</span><span style="color:#96b5b4;">into</span><span>(), body: &quot;</span><span style="color:#a3be8c;">short</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>() };
+</span><span>assert!(!post.</span><span style="color:#96b5b4;">is_valid</span><span>());
+</span><span style="color:#b48ead;">let</span><span> messages = post.</span><span style="color:#96b5b4;">validate</span><span>().</span><span style="color:#96b5b4;">full_messages</span><span>();
+</span></code></pre>
+<h2 id="senhas-seguras">Senhas seguras</h2>
+<p>Hash bcrypt com um trait no estilo <code>has_secure_password</code>. <code>hash_password</code> usa o custo
+padrão; <code>verify_password</code> verifica um candidato; <code>generate_token</code> gera um token aleatório.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::password::{hash_password, verify_password, generate_token};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> digest = </span><span style="color:#96b5b4;">hash_password</span><span>(&quot;</span><span style="color:#a3be8c;">s3cret</span><span>&quot;)?;
+</span><span>assert!(</span><span style="color:#96b5b4;">verify_password</span><span>(&quot;</span><span style="color:#a3be8c;">s3cret</span><span>&quot;, &amp;digest));
+</span><span>assert!(!</span><span style="color:#96b5b4;">verify_password</span><span>(&quot;</span><span style="color:#a3be8c;">wrong</span><span>&quot;, &amp;digest));
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> reset_token = </span><span style="color:#96b5b4;">generate_token</span><span>();
+</span></code></pre>
+<h2 id="normalizacao">Normalização</h2>
+<p>Normalize valores de atributos antes de persistir com um <code>Normalizer</code> combinável
+(<code>strip</code>, <code>downcase</code>, <code>upcase</code>, <code>squish</code>, <code>custom</code>).</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::normalization::Normalizer;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> email = Normalizer::new().</span><span style="color:#96b5b4;">strip</span><span>().</span><span style="color:#96b5b4;">downcase</span><span>();
+</span><span>assert_eq!(email.</span><span style="color:#96b5b4;">apply</span><span>(&quot;</span><span style="color:#a3be8c;">  Foo@Bar.COM  </span><span>&quot;), &quot;</span><span style="color:#a3be8c;">foo@bar.com</span><span>&quot;);
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> squished = Normalizer::new().</span><span style="color:#96b5b4;">squish</span><span>();
+</span><span>assert_eq!(squished.</span><span style="color:#96b5b4;">apply</span><span>(&quot;</span><span style="color:#a3be8c;">  hello   world  </span><span>&quot;), &quot;</span><span style="color:#a3be8c;">hello world</span><span>&quot;);
+</span></code></pre>
+<h2 id="associacoes">Associações</h2>
+<p>Consulte relações nativamente pelo <code>Related</code>/<code>DeriveRelation</code> do sea-orm. <code>doido-model</code>
+também oferece descritores de associação (<code>belongs_to</code>, <code>has_one</code>, <code>has_many</code>,
+<code>has_and_belongs_to_many</code>, além de <code>PolymorphicAssociation</code> e a nomenclatura de
+<code>join_table</code>) usados pelos geradores e por attachments polimórficos.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::association::{Association, join_table};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> a = Association::has_many(&quot;</span><span style="color:#a3be8c;">Author</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;);
+</span><span style="color:#b48ead;">let</span><span> b = Association::belongs_to(&quot;</span><span style="color:#a3be8c;">author</span><span>&quot;);
+</span><span style="color:#b48ead;">let</span><span> name = </span><span style="color:#96b5b4;">join_table</span><span>(&quot;</span><span style="color:#a3be8c;">authors</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">books</span><span>&quot;); </span><span style="color:#65737e;">// &quot;authors_books&quot;
+</span></code></pre>
+<h2 id="serializacao">Serialização</h2>
+<p>Transforme qualquer model <code>Serialize</code> em JSON, opcionalmente mascarando ou selecionando
+colunas — útil para respostas de API.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::serialization::{as_json, as_json_only, as_json_except};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> full = </span><span style="color:#96b5b4;">as_json</span><span>(&amp;user);
+</span><span style="color:#b48ead;">let</span><span> public = </span><span style="color:#96b5b4;">as_json_only</span><span>(&amp;user, &amp;[&quot;</span><span style="color:#a3be8c;">id</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">name</span><span>&quot;]);       </span><span style="color:#65737e;">// apenas estas chaves
+</span><span style="color:#b48ead;">let</span><span> safe = </span><span style="color:#96b5b4;">as_json_except</span><span>(&amp;user, &amp;[&quot;</span><span style="color:#a3be8c;">password_digest</span><span>&quot;]);  </span><span style="color:#65737e;">// esconde chaves sensíveis
+</span></code></pre>
+<h2 id="factories">Factories</h2>
+<p>Construa registros de teste com valores de sequência únicos.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::factory::{sequence, Factory};
+</span><span>
+</span><span style="color:#b48ead;">impl </span><span>Factory </span><span style="color:#b48ead;">for </span><span>User {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">build</span><span>() -&gt; </span><span style="color:#b48ead;">Self </span><span>{
+</span><span>        </span><span style="color:#b48ead;">let</span><span> n = </span><span style="color:#96b5b4;">sequence</span><span>();
+</span><span>        User { email: format!(&quot;</span><span style="color:#a3be8c;">user</span><span style="color:#d08770;">{n}</span><span style="color:#a3be8c;">@example.com</span><span>&quot;), name: &quot;</span><span style="color:#a3be8c;">Test User</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>() }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> user = User::build();
+</span><span style="color:#b48ead;">let</span><span> three = User::build_list(</span><span style="color:#d08770;">3</span><span>); </span><span style="color:#65737e;">// registros distintos
+</span></code></pre>
+<h2 id="multiplos-bancos-de-dados">Múltiplos bancos de dados</h2>
+<p><code>Databases</code> mantém uma conexão de escrita e uma réplica de leitura opcional, selecionadas
+por <code>Role</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::databases::{Databases, Role};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> dbs = Databases::new(writing_conn).</span><span style="color:#96b5b4;">with_reading</span><span>(replica_conn);
+</span><span style="color:#b48ead;">let</span><span> read = dbs.</span><span style="color:#96b5b4;">connection</span><span>(Role::Reading); </span><span style="color:#65737e;">// usa a de escrita quando não há réplica
+</span></code></pre>
+<h2 id="banco-de-dados-de-teste">Banco de dados de teste</h2>
+<p><code>TestDb</code> sobe uma conexão SQLite em memória para testes rápidos e isolados.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::model::TestDb;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">tokio</span><span>::</span><span style="color:#bf616a;">test</span><span>]
+</span><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">creates_a_user</span><span>() {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> db = TestDb::new().await.</span><span style="color:#96b5b4;">unwrap</span><span>();
+</span><span>    </span><span style="color:#b48ead;">let</span><span> conn = db.</span><span style="color:#96b5b4;">conn</span><span>();
+</span><span>    </span><span style="color:#65737e;">// rode migrations, insira e verifique contra `conn`
+</span><span>}
+</span></code></pre>
+<h2 id="especificacao-vs-implementacao">Especificação vs. implementação</h2>
+<blockquote>
+<p>As queries usam o sea-orm nativamente — <strong>não</strong> existe atalho <code>Model::find_by_id(db, id)</code>;
+use <code>Entity::find_by_id(id).one(db)</code>. Callbacks, scopes, seeds, transações, enums e tasks
+têm cada um seu módulo (<code>doido::model::{callbacks, scope, seeds, transaction, enums, tasks}</code>) espelhando seus equivalentes no Active Record.</p>
+</blockquote>
+<h2 id="veja-tambem">Veja também</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/configuration/">Configuração</a> — a seção <code>database</code>.</li>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/controllers/">Controllers &amp; roteamento</a> — <code>ctx.db()</code> dentro das actions.</li>
+<li><a href="https://doido-rs.github.io/pt/docs/reference/generators/">Geradores &amp; CLI</a> — <code>cargo doido generate model</code>, <code>cargo doido db migrate</code> e <code>cargo doido db seed</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">← CLI &amp; geradores</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;pt&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; roteamento →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Especificações</a>
+      <a href="https://doido-rs.github.io/pt/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

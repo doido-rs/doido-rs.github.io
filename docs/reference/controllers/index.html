@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/docs/reference/controllers/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/controllers/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/controllers/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;">Documentation</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introduction</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Getting started</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Building a blog</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Installation</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; generators</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Modules</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;" class="active" aria-current="page">Controllers &amp; routing</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessions</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Architecture</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Architecture</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Design specifications</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Controllers &amp; routing</h1>
+    <blockquote>
+<p><strong>Design spec:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/01-router.md"><code>docs/01-router.md</code></a>
+and <a href="https://github.com/doido-rs/doido/blob/master/docs/02-controller.md"><code>docs/02-controller.md</code></a>.
+This guide documents the API as implemented in <code>doido-controller</code>.</p>
+</blockquote>
+<p><strong>Rails analogue: Action Dispatch + Action Controller.</strong> A <strong>router</strong> maps URLs to
+<strong>controller actions</strong>; each action is an <code>async fn</code> that takes a typed request <code>Context</code>
+and returns a <code>Response</code>. It is built on <code>axum::Router</code> under the hood, but you work
+through the <code>routes!</code> macro DSL and the <code>#[controller]</code> macro rather than raw axum.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::{controller, routes, Context, Response};
+</span></code></pre>
+<h2 id="the-routes-dsl">The <code>routes!</code> DSL</h2>
+<p>Declare routes in <code>config/routes.rs</code>. The DSL supports HTTP-verb routes, RESTful
+resources, singular resources, path/module grouping, a root route, redirects, and mounting
+sub-routers.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::{routes, axum};
+</span><span>
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">router</span><span>() -&gt; axum::Router {
+</span><span>    routes! {
+</span><span>        root!(PagesController::home);              </span><span style="color:#65737e;">// GET /
+</span><span>        get!(&quot;</span><span style="color:#a3be8c;">/about</span><span>&quot;, PagesController::about);
+</span><span>        post!(&quot;</span><span style="color:#a3be8c;">/login</span><span>&quot;, SessionsController::create);
+</span><span>
+</span><span>        resources!(posts, PostsController);        </span><span style="color:#65737e;">// all 7 REST routes
+</span><span>        resources!(comments, CommentsController, only: [index, show]);
+</span><span>        resources!(admin, AdminController, except: [destroy]);
+</span><span>        resources!(posts, PostsController, member: [publish], collection: [search]);
+</span><span>
+</span><span>        resource!(profile, ProfileController);     </span><span style="color:#65737e;">// singular (no :id)
+</span><span>
+</span><span>        namespace!(api, {                          </span><span style="color:#65737e;">// path AND module prefix
+</span><span>            resources!(users, Api::UsersController);
+</span><span>        });
+</span><span>        scope!(&quot;</span><span style="color:#a3be8c;">/v2</span><span>&quot;, {                            </span><span style="color:#65737e;">// path prefix only
+</span><span>            resources!(articles, </span><span style="color:#d08770;">V2</span><span>::ArticlesController);
+</span><span>        });
+</span><span>
+</span><span>        redirect!(&quot;</span><span style="color:#a3be8c;">/old</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">/new</span><span>&quot;);                 </span><span style="color:#65737e;">// permanent redirect
+</span><span>        mount!(&quot;</span><span style="color:#a3be8c;">/metrics</span><span>&quot;, </span><span style="color:#96b5b4;">metrics_router</span><span>());      </span><span style="color:#65737e;">// mount a sub-router
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Supported verb macros: <code>get!</code>, <code>post!</code>, <code>put!</code>, <code>patch!</code>, <code>delete!</code>.</p>
+<h3 id="the-7-rest-routes">The 7 REST routes</h3>
+<p><code>resources!(posts, PostsController)</code> generates all seven RESTful routes, each with a
+compile-time URL helper:</p>
+<table><thead><tr><th>Helper</th><th>Method</th><th>Path</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>posts_path()</code></td><td>GET</td><td><code>/posts</code></td><td>index</td></tr>
+<tr><td><code>new_post_path()</code></td><td>GET</td><td><code>/posts/new</code></td><td>new</td></tr>
+<tr><td><code>post_path(id)</code></td><td>GET</td><td><code>/posts/:id</code></td><td>show</td></tr>
+<tr><td><code>post_path(id)</code></td><td>POST</td><td><code>/posts</code></td><td>create</td></tr>
+<tr><td><code>edit_post_path(id)</code></td><td>GET</td><td><code>/posts/:id/edit</code></td><td>edit</td></tr>
+<tr><td><code>post_path(id)</code></td><td>PATCH</td><td><code>/posts/:id</code></td><td>update</td></tr>
+<tr><td><code>post_path(id)</code></td><td>DELETE</td><td><code>/posts/:id</code></td><td>destroy</td></tr>
+</tbody></table>
+<p><code>only:</code> / <code>except:</code> restrict the generated set; <code>member:</code> / <code>collection:</code> add extra
+routes (member routes take an <code>:id</code>, collection routes don’t).</p>
+<h2 id="controllers">Controllers</h2>
+<p>A controller is a struct annotated with <code>#[controller]</code>; actions are <code>async fn(ctx: Context) -&gt; Response</code>. The route dispatches to the action whose method name matches
+(convention over configuration).</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::controller::{controller, Context, Response};
+</span><span style="color:#b48ead;">use </span><span>serde_json::json;
+</span><span>
+</span><span style="color:#b48ead;">pub struct </span><span>PostsController;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>PostsController {
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>        </span><span style="color:#b48ead;">let</span><span> posts = post::Entity::find().</span><span style="color:#96b5b4;">all</span><span>(ctx.</span><span style="color:#96b5b4;">db</span><span>()).await.</span><span style="color:#96b5b4;">unwrap_or_default</span><span>();
+</span><span>        ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/index</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;: doido::model::serialization::as_json(&amp;posts) }))
+</span><span>    }
+</span><span>
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">show</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>        </span><span style="color:#b48ead;">match</span><span> ctx.</span><span style="color:#96b5b4;">param</span><span>(&quot;</span><span style="color:#a3be8c;">id</span><span>&quot;) {
+</span><span>            Some(id) =&gt; ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">id</span><span>&quot;: id })),
+</span><span>            None =&gt; ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">404</span><span>),
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h2 id="the-request-context">The request <code>Context</code></h2>
+<p>Everything an action needs is on <code>ctx</code>.</p>
+<p><strong>Reading input:</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ctx.</span><span style="color:#96b5b4;">param</span><span>(&quot;</span><span style="color:#a3be8c;">id</span><span>&quot;);                         </span><span style="color:#65737e;">// Option&lt;&amp;str&gt; — a path segment
+</span><span>ctx.params::&lt;Filters&gt;()?;                </span><span style="color:#65737e;">// typed query string (GET)
+</span><span>ctx.</span><span style="color:#96b5b4;">query_params</span><span>();                      </span><span style="color:#65737e;">// untyped query Params (for require/permit)
+</span><span>ctx.form::&lt;CreatePost&gt;().await?;         </span><span style="color:#65737e;">// URL-encoded form body
+</span><span>ctx.body_json::&lt;CreatePost&gt;().await?;    </span><span style="color:#65737e;">// JSON body
+</span><span>ctx.</span><span style="color:#96b5b4;">header</span><span>(&quot;</span><span style="color:#a3be8c;">authorization</span><span>&quot;);             </span><span style="color:#65737e;">// Option&lt;&amp;HeaderValue&gt;
+</span><span>ctx.</span><span style="color:#96b5b4;">db</span><span>();                                </span><span style="color:#65737e;">// &amp;&#39;static DatabaseConnection
+</span></code></pre>
+<p><strong>Producing a response:</strong></p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/show</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: post }));   </span><span style="color:#65737e;">// 200 HTML via doido-view
+</span><span>ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">ok</span><span>&quot;: </span><span style="color:#d08770;">true </span><span>}));                     </span><span style="color:#65737e;">// 200 JSON
+</span><span>ctx.</span><span style="color:#96b5b4;">redirect_to</span><span>(</span><span style="color:#96b5b4;">post_path</span><span>(post.id));                 </span><span style="color:#65737e;">// 302
+</span><span>ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">422</span><span>);                                     </span><span style="color:#65737e;">// status with empty body
+</span><span>ctx.</span><span style="color:#96b5b4;">send_data</span><span>(bytes, &quot;</span><span style="color:#a3be8c;">application/pdf</span><span>&quot;, Some(&quot;</span><span style="color:#a3be8c;">report.pdf</span><span>&quot;)); </span><span style="color:#65737e;">// download
+</span><span>ctx.</span><span style="color:#96b5b4;">send_file</span><span>(&quot;</span><span style="color:#a3be8c;">storage/report.pdf</span><span>&quot;, None).await;     </span><span style="color:#65737e;">// stream a file
+</span></code></pre>
+<h2 id="filters">Filters</h2>
+<p>Attribute-macro filters run around actions. A <code>before_action</code>/<code>after_action</code> has the
+signature <code>async fn(ctx: &amp;mut Context) -&gt; Result&lt;(), Response&gt;</code>; returning <code>Err(response)</code>
+halts the chain and returns early (the Rails <code>render</code>-and-return pattern). Scope with
+<code>only = [...]</code> / <code>except = [...]</code>, and cancel an inherited filter with
+<code>#[skip_before_action(...)]</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">require_auth</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: &amp;</span><span style="color:#b48ead;">mut</span><span> Context) -&gt; Result&lt;(), Response&gt; {
+</span><span>    </span><span style="color:#b48ead;">if</span><span> ctx.</span><span style="color:#96b5b4;">header</span><span>(&quot;</span><span style="color:#a3be8c;">x-auth-token</span><span>&quot;).</span><span style="color:#96b5b4;">is_none</span><span>() {
+</span><span>        </span><span style="color:#b48ead;">return </span><span>Err(ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">401</span><span>)); </span><span style="color:#65737e;">// halt
+</span><span>    }
+</span><span>    Ok(())
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>PostsController {
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_auth, except = [index, show])]
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">create</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response { ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">201</span><span>) }
+</span><span>
+</span><span>    #[</span><span style="color:#bf616a;">before_action</span><span>(require_auth)]
+</span><span>    #[</span><span style="color:#bf616a;">skip_before_action</span><span>(require_auth)] </span><span style="color:#65737e;">// opt this action back out
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response { ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">200</span><span>) }
+</span><span>}
+</span></code></pre>
+<p>An <code>around_action</code> brackets the action and owns the response:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">timed</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: &amp;</span><span style="color:#b48ead;">mut</span><span> Context, </span><span style="color:#bf616a;">run</span><span>: impl AsyncFnOnce(&amp;</span><span style="color:#bf616a;">mut Context</span><span>) -&gt; Response) -&gt; Response {
+</span><span>    </span><span style="color:#b48ead;">let mut</span><span> resp = </span><span style="color:#96b5b4;">run</span><span>(ctx).await;
+</span><span>    resp.</span><span style="color:#96b5b4;">headers_mut</span><span>().</span><span style="color:#96b5b4;">insert</span><span>(&quot;</span><span style="color:#a3be8c;">x-served-by</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">doido</span><span>&quot;.</span><span style="color:#96b5b4;">parse</span><span>().</span><span style="color:#96b5b4;">unwrap</span><span>());
+</span><span>    resp
+</span><span>}
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>PostsController {
+</span><span>    #[</span><span style="color:#bf616a;">around_action</span><span>(timed)]
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">show</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response { ctx.</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">200</span><span>) }
+</span><span>}
+</span></code></pre>
+<h2 id="strong-parameters">Strong parameters</h2>
+<p><code>query_params()</code> returns a <code>Params</code> you can <code>require</code> a key from and <code>permit</code> an allowlist
+of fields — the Rails mass-assignment guard.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> post_params = ctx.</span><span style="color:#96b5b4;">query_params</span><span>()
+</span><span>    .</span><span style="color:#96b5b4;">require</span><span>(&quot;</span><span style="color:#a3be8c;">post</span><span>&quot;)?          </span><span style="color:#65737e;">// must be present
+</span><span>    .</span><span style="color:#96b5b4;">permit</span><span>(&amp;[&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">body</span><span>&quot;]); </span><span style="color:#65737e;">// drop everything else
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> create: CreatePost = post_params.</span><span style="color:#96b5b4;">deserialize</span><span>()?;
+</span></code></pre>
+<h2 id="content-negotiation">Content negotiation</h2>
+<p><code>respond_to()</code> picks a branch based on the request’s <code>Accept</code> header; <code>negotiated_format()</code>
+returns the resolved <code>Format</code> (<code>Html</code>, <code>Json</code>, or <code>Any</code>).</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">show</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>    ctx.</span><span style="color:#96b5b4;">respond_to</span><span>()
+</span><span>        .</span><span style="color:#96b5b4;">html</span><span>(|| ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/show</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: post })))
+</span><span>        .</span><span style="color:#96b5b4;">json</span><span>(|| ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: post })))
+</span><span>        .</span><span style="color:#96b5b4;">finish</span><span>()
+</span><span>}
+</span></code></pre>
+<h2 id="conditional-get-etags">Conditional GET (ETags)</h2>
+<p><code>fresh_when()</code> returns a <code>304 Not Modified</code> early when the client’s validators still match;
+<code>etag_matches()</code> checks an <code>If-None-Match</code> value.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">show</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>    </span><span style="color:#b48ead;">if let </span><span>Some(not_modified) = ctx.</span><span style="color:#96b5b4;">fresh_when</span><span>(Some(&amp;post.etag), None) {
+</span><span>        </span><span style="color:#b48ead;">return</span><span> not_modified; </span><span style="color:#65737e;">// 304
+</span><span>    }
+</span><span>    ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;: post }))
+</span><span>}
+</span></code></pre>
+<h2 id="testing">Testing</h2>
+<p>Actions are plain async functions, so you can mount them on an <code>axum::Router</code> and drive
+them with a test client, or build a <code>Context</code> directly. Filters, params, and responses are
+all assertable without a live server.</p>
+<h2 id="controller-helpers">Controller helpers</h2>
+<p>Shared logic that does not belong in a single action lives in <code>app/helpers/</code> — import
+helpers explicitly in your controller files. Mark a struct with <code>#[helper]</code> and call its
+associated functions from actions:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use crate</span><span>::helpers::PostsHelper;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">controller</span><span>]
+</span><span style="color:#b48ead;">impl </span><span>PostsController {
+</span><span>    async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>        ctx.</span><span style="color:#96b5b4;">json</span><span>(json!({ &quot;</span><span style="color:#a3be8c;">title</span><span>&quot;: PostsHelper::format_title(&quot;</span><span style="color:#a3be8c;">hello</span><span>&quot;) }))
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>Generate a new helper with <code>cargo doido generate helper Posts</code>. See
+<a href="https://doido-rs.github.io/docs/reference/helpers/">Controller helpers</a> for the full guide (layout, generator,
+and how they differ from view helpers).</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li>
+<p><a href="https://doido-rs.github.io/docs/reference/helpers/">Controller helpers</a> — <code>app/helpers/</code>, <code>#[helper]</code>, and the generator.</p>
+</li>
+<li>
+<p><a href="https://doido-rs.github.io/docs/reference/middleware/">Middleware &amp; sessions</a> — the Tower stack, sessions, flash, CSRF, CORS.</p>
+</li>
+<li>
+<p><a href="https://doido-rs.github.io/docs/reference/views/">Views</a> — what <code>ctx.render(...)</code> delegates to.</p>
+</li>
+<li>
+<p><a href="https://doido-rs.github.io/docs/reference/models/">Models</a> — using <code>ctx.db()</code> inside actions.</p>
+</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">← Models</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;helpers&#x2F;">Controller helpers →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

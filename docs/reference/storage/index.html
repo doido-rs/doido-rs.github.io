@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/docs/reference/storage/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/storage/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/storage/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;">Documentation</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introduction</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Getting started</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Building a blog</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Installation</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; generators</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Modules</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; routing</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessions</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;" class="active" aria-current="page">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Architecture</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Architecture</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Design specifications</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Storage</h1>
+    <blockquote>
+<p><strong>Design spec:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/15-storage.md"><code>docs/15-storage.md</code></a>.
+This guide documents the API as implemented in <code>doido-storage</code>.</p>
+</blockquote>
+<p><strong>Rails analogue: Active Storage.</strong> Store file bytes in a pluggable service (disk, memory,
+S3/R2, Azure, GCS), track metadata (blobs, checksums, content types) in the database, attach
+files polymorphically to any record, and serve them through signed URLs. The <code>Storage</code>
+facade bundles a service, a database connection, and a signer.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::{Storage, DiskService, MemoryService, Signer, Blob, Disposition};
+</span></code></pre>
+<h2 id="services">Services</h2>
+<p><code>Service</code> is the pluggable backend trait. <code>DiskService</code> (local filesystem) is the default;
+<code>MemoryService</code> is for tests; <code>S3Service</code> (feature <code>storage-s3</code>, also Cloudflare R2),
+<code>AzureBlobService</code> (<code>storage-azure</code>), and <code>GcsService</code> (<code>storage-gcs</code>) cover the cloud. Pick
+the active service in the <code>storage</code> config; register custom ones with <code>register_adapter</code>.</p>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/production.yml
+</span><span style="color:#bf616a;">storage</span><span>:
+</span><span>  </span><span style="color:#bf616a;">service</span><span>: </span><span style="color:#a3be8c;">amazon
+</span><span>  </span><span style="color:#bf616a;">services</span><span>:
+</span><span>    </span><span style="color:#bf616a;">local</span><span>:  { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">disk</span><span>, </span><span style="color:#bf616a;">root</span><span>: </span><span style="color:#a3be8c;">storage </span><span>}
+</span><span>    </span><span style="color:#bf616a;">test</span><span>:   { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">memory </span><span>}
+</span><span>    </span><span style="color:#bf616a;">amazon</span><span>: { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">s3</span><span>, </span><span style="color:#bf616a;">bucket</span><span>: </span><span style="color:#a3be8c;">my-bucket</span><span>, </span><span style="color:#bf616a;">region</span><span>: </span><span style="color:#a3be8c;">us-east-1 </span><span>}
+</span><span>    </span><span style="color:#bf616a;">r2</span><span>:     { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">r2</span><span>, </span><span style="color:#bf616a;">bucket</span><span>: </span><span style="color:#a3be8c;">my-bucket</span><span>, </span><span style="color:#bf616a;">endpoint</span><span>: &quot;</span><span style="color:#a3be8c;">https://&lt;id&gt;.r2.cloudflarestorage.com</span><span>&quot; }
+</span><span>    </span><span style="color:#bf616a;">azure</span><span>:  { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">azure</span><span>, </span><span style="color:#bf616a;">container</span><span>: </span><span style="color:#a3be8c;">my-container</span><span>, </span><span style="color:#bf616a;">account</span><span>: </span><span style="color:#a3be8c;">my-account </span><span>}
+</span><span>    </span><span style="color:#bf616a;">google</span><span>: { </span><span style="color:#bf616a;">type</span><span>: </span><span style="color:#a3be8c;">gcs</span><span>, </span><span style="color:#bf616a;">bucket</span><span>: </span><span style="color:#a3be8c;">my-bucket </span><span>}
+</span></code></pre>
+<p>Custom adapter:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::register_adapter;
+</span><span>
+</span><span style="color:#96b5b4;">register_adapter</span><span>(&quot;</span><span style="color:#a3be8c;">dropbox</span><span>&quot;, my_dropbox_factory);
+</span></code></pre>
+<h2 id="the-storage-facade">The Storage facade</h2>
+<p>Build a <code>Storage</code> from a connection, a service, and a <code>Signer</code>, or from config with
+<code>from_config</code>. <code>ensure_tables</code> creates the <code>storage_blobs</code> / <code>storage_attachments</code> metadata
+tables if missing.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::{Storage, MemoryService, Signer};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> storage = Storage::new(conn, Arc::new(MemoryService::new(&quot;</span><span style="color:#a3be8c;">test</span><span>&quot;)), Signer::from_env());
+</span><span>storage.</span><span style="color:#96b5b4;">ensure_tables</span><span>().await?;
+</span><span>
+</span><span style="color:#65737e;">// …or straight from the storage config section:
+</span><span style="color:#b48ead;">let</span><span> storage = Storage::from_config(conn).await?;
+</span></code></pre>
+<h2 id="uploading-downloading">Uploading &amp; downloading</h2>
+<p><code>create_and_upload</code> detects the content type, computes an MD5 checksum, stores the bytes,
+and records a <code>Blob</code>. <code>download</code> reads them back; <code>purge</code> deletes the object, its attachment
+rows, and the blob metadata.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">let</span><span> blob = storage.</span><span style="color:#96b5b4;">create_and_upload</span><span>(&quot;</span><span style="color:#a3be8c;">hello.txt</span><span>&quot;, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">hi</span><span>&quot;.</span><span style="color:#96b5b4;">to_vec</span><span>(), None).await?;
+</span><span style="color:#b48ead;">let</span><span> bytes = storage.</span><span style="color:#96b5b4;">download</span><span>(&amp;blob.key).await?;   </span><span style="color:#65737e;">// b&quot;hi&quot;
+</span><span>storage.</span><span style="color:#96b5b4;">purge</span><span>(&amp;blob.key).await?;
+</span></code></pre>
+<p>A <code>Blob</code> records the <code>key</code>, <code>filename</code>, <code>content_type</code>, <code>byte_size</code>, <code>checksum</code>, and
+<code>service_name</code>.</p>
+<h2 id="attachments">Attachments</h2>
+<p>Attach blobs to any record polymorphically by <code>(record_type, record_id, name)</code> — the
+<code>has_one_attached</code> / <code>has_many_attached</code> analogue.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Upload and attach in one call:
+</span><span style="color:#b48ead;">let</span><span> blob = storage.</span><span style="color:#96b5b4;">attach_upload</span><span>(&quot;</span><span style="color:#a3be8c;">User</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">1</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">avatar</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">me.png</span><span>&quot;, png_bytes).await?;
+</span><span>
+</span><span style="color:#65737e;">// has_one: the attached blob, if any
+</span><span style="color:#b48ead;">let</span><span> avatar = storage.</span><span style="color:#96b5b4;">one</span><span>(&quot;</span><span style="color:#a3be8c;">User</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">1</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">avatar</span><span>&quot;).await?;      </span><span style="color:#65737e;">// Option&lt;Blob&gt;
+</span><span style="color:#65737e;">// has_many: all attached blobs
+</span><span style="color:#b48ead;">let</span><span> photos = storage.</span><span style="color:#96b5b4;">many</span><span>(&quot;</span><span style="color:#a3be8c;">Post</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">42</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">photos</span><span>&quot;).await?;    </span><span style="color:#65737e;">// Vec&lt;Blob&gt;
+</span><span>
+</span><span>storage.</span><span style="color:#96b5b4;">attach</span><span>(&quot;</span><span style="color:#a3be8c;">User</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">1</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">avatar</span><span>&quot;, &amp;existing_key).await?; </span><span style="color:#65737e;">// attach an existing blob
+</span><span>storage.</span><span style="color:#96b5b4;">purge_for_record</span><span>(&quot;</span><span style="color:#a3be8c;">User</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">1</span><span>&quot;).await?;                </span><span style="color:#65737e;">// detach + purge all
+</span></code></pre>
+<h2 id="signed-ids-urls">Signed IDs &amp; URLs</h2>
+<p>The <code>Signer</code> mints tamper-proof, optionally-expiring signed IDs (HMAC-SHA256). <code>url_for</code>
+returns a native presigned URL (S3/Azure/GCS) or a signed application route (disk/memory),
+with an inline or attachment <code>Disposition</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::Disposition;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> signed = storage.</span><span style="color:#96b5b4;">signed_id</span><span>(&amp;blob.key);           </span><span style="color:#65737e;">// opaque, verifiable id
+</span><span style="color:#b48ead;">let</span><span> key = storage.</span><span style="color:#96b5b4;">verify_signed_id</span><span>(&amp;signed)?;        </span><span style="color:#65737e;">// back to the key (errors if tampered)
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> url = storage.</span><span style="color:#96b5b4;">url_for</span><span>(&amp;avatar, Disposition::Inline).await?;      </span><span style="color:#65737e;">// view in browser
+</span><span style="color:#b48ead;">let</span><span> dl  = storage.</span><span style="color:#96b5b4;">url_for</span><span>(&amp;doc, Disposition::Attachment).await?;     </span><span style="color:#65737e;">// force download
+</span></code></pre>
+<h2 id="serving">Serving</h2>
+<p><code>doido-storage</code> provides axum routes for serving blobs — a redirect endpoint (302 to the
+service URL), a proxy endpoint (streams bytes through the app), and direct-upload endpoints
+(<code>create</code> a blob + return a presigned PUT URL) — so browsers can upload straight to the
+service.</p>
+<h2 id="background-jobs">Background jobs</h2>
+<p>With feature <code>storage-jobs</code>, <code>purge_later</code> enqueues cleanup onto <a href="https://doido-rs.github.io/docs/reference/jobs/">doido-jobs</a>
+instead of blocking the request.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::jobs::purge_later;
+</span><span>
+</span><span style="color:#96b5b4;">purge_later</span><span>(job_queue.</span><span style="color:#96b5b4;">as_ref</span><span>(), &amp;blob.key).await?;
+</span></code></pre>
+<h2 id="testing">Testing</h2>
+<p><code>MemoryService</code> keeps bytes in-process, so upload/attach/download round-trips are fast and
+isolated.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::storage::{DiskService, Service};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> service = DiskService::new(&quot;</span><span style="color:#a3be8c;">local</span><span>&quot;, std::env::temp_dir());
+</span><span>service.</span><span style="color:#96b5b4;">upload</span><span>(&quot;</span><span style="color:#a3be8c;">k</span><span>&quot;, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">bytes</span><span>&quot;.</span><span style="color:#96b5b4;">to_vec</span><span>(), Some(&quot;</span><span style="color:#a3be8c;">text/plain</span><span>&quot;)).await?;
+</span><span>assert_eq!(service.</span><span style="color:#96b5b4;">download</span><span>(&quot;</span><span style="color:#a3be8c;">k</span><span>&quot;).await?, </span><span style="color:#b48ead;">b</span><span>&quot;</span><span style="color:#a3be8c;">bytes</span><span>&quot;);
+</span></code></pre>
+<h2 id="spec-vs-implementation">Spec vs. implementation</h2>
+<blockquote>
+<p>Image <strong>variants</strong>, PDF/video <strong>previews</strong>, media <strong>analyzers</strong>, and the Mirror service
+are <strong>deferred</strong> — the <code>storage_variant_records</code> table is scaffolded but the variant
+machinery is not built. Core blobs, polymorphic attachments, signing, direct upload, and
+serving are all implemented.</p>
+</blockquote>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/docs/reference/models/">Models</a> — attachments reference your records; <code>ensure_tables</code>.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/jobs/">Jobs</a> — <code>purge_later</code> and background cleanup.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/generators/">Generators &amp; CLI</a> — <code>cargo doido generate storage:install</code> / <code>storage:adapter</code>.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">← Cable (WebSockets)</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

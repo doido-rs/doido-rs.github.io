@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/docs/reference/views/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/views/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/views/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;">Documentation</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introduction</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Getting started</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Building a blog</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Installation</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; generators</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Modules</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;core&#x2F;">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; routing</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessions</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;views&#x2F;" class="active" aria-current="page">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Architecture</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Architecture</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Design specifications</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Views</h1>
+    <blockquote>
+<p><strong>Design spec:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/04-view.md"><code>docs/04-view.md</code></a>.
+This guide documents the API as implemented in <code>doido-view</code>.</p>
+</blockquote>
+<p><strong>Rails analogue: Action View.</strong> Views render HTML from <a href="https://keats.github.io/tera/">Tera</a>
+templates by convention, wrapped in layouts. The engine is swappable behind the
+<code>TemplateEngine</code> trait, and the crate ships Rails-style view helpers, partials, <code>content_for</code>
+blocks, and fragment caching.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::{init, render, set_engine, TemplateEngine, TeraEngine, ViewResponse};
+</span><span style="color:#b48ead;">use </span><span>doido::view::{render_partial, render_collection};
+</span></code></pre>
+<h2 id="setup">Setup</h2>
+<p>Install the global engine once at boot, pointing at your templates directory.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>doido::view::init(&quot;</span><span style="color:#a3be8c;">app/views</span><span>&quot;)?; </span><span style="color:#65737e;">// load all *.html.tera under app/views
+</span></code></pre>
+<h2 id="rendering-from-controllers">Rendering from controllers</h2>
+<p>Actions render through <a href="https://doido-rs.github.io/docs/reference/controllers/"><code>ctx.render(...)</code></a>, which delegates to
+the global engine. The template name follows the convention
+<code>views/&lt;controller&gt;/&lt;action&gt;.html.tera</code>, and the JSON value you pass becomes the template
+context.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>async </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">index</span><span>(</span><span style="color:#bf616a;">ctx</span><span>: Context) -&gt; Response {
+</span><span>    ctx.</span><span style="color:#96b5b4;">render</span><span>(&quot;</span><span style="color:#a3be8c;">posts/index</span><span>&quot;, json!({ &quot;</span><span style="color:#a3be8c;">posts</span><span>&quot;: posts }))
+</span><span>}
+</span></code></pre>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/posts/index.html.tera #}
+</span><span>{% for post in posts %}
+</span><span>  &lt;</span><span style="color:#bf616a;">article</span><span>&gt;&lt;</span><span style="color:#bf616a;">h2</span><span>&gt;{{ post.title }}&lt;/</span><span style="color:#bf616a;">h2</span><span>&gt;&lt;</span><span style="color:#bf616a;">p</span><span>&gt;{{ post.body }}&lt;/</span><span style="color:#bf616a;">p</span><span>&gt;&lt;/</span><span style="color:#bf616a;">article</span><span>&gt;
+</span><span>{% endfor %}
+</span></code></pre>
+<h2 id="layouts">Layouts</h2>
+<p>Rendered content is wrapped in <code>layouts/application.html.tera</code> by default, which yields to
+the page with <code>{{ content_for_layout }}</code>. Override or skip the layout per render with
+<code>ViewResponse::layout(...)</code> / <code>no_layout()</code>.</p>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{# app/views/layouts/application.html.tera #}
+</span><span>&lt;!</span><span style="color:#b48ead;">DOCTYPE </span><span style="color:#d08770;">html</span><span>&gt;
+</span><span>&lt;</span><span style="color:#bf616a;">html</span><span>&gt;&lt;</span><span style="color:#bf616a;">body</span><span>&gt;{{ content_for_layout }}&lt;/</span><span style="color:#bf616a;">body</span><span>&gt;&lt;/</span><span style="color:#bf616a;">html</span><span>&gt;
+</span></code></pre>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::ViewResponse;
+</span><span>
+</span><span>ViewResponse::new(&quot;</span><span style="color:#a3be8c;">posts/index</span><span>&quot;, json!({}));               </span><span style="color:#65737e;">// default layout
+</span><span>ViewResponse::new(&quot;</span><span style="color:#a3be8c;">posts/index</span><span>&quot;, json!({})).</span><span style="color:#96b5b4;">layout</span><span>(&quot;</span><span style="color:#a3be8c;">admin</span><span>&quot;); </span><span style="color:#65737e;">// layouts/admin.html.tera
+</span><span>ViewResponse::new(&quot;</span><span style="color:#a3be8c;">email/welcome</span><span>&quot;, json!({})).</span><span style="color:#96b5b4;">no_layout</span><span>();   </span><span style="color:#65737e;">// raw content
+</span><span>ViewResponse::new(&quot;</span><span style="color:#a3be8c;">posts/new</span><span>&quot;, json!({})).</span><span style="color:#96b5b4;">status</span><span>(</span><span style="color:#d08770;">422</span><span>);       </span><span style="color:#65737e;">// set the status
+</span></code></pre>
+<h2 id="partials">Partials</h2>
+<p>Reuse fragments with Tera’s <code>{% include %}</code>, or render one directly. <code>render_collection</code>
+renders a partial once per item, binding each to a variable name.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::{render_partial, render_collection};
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> html = </span><span style="color:#96b5b4;">render_partial</span><span>(&quot;</span><span style="color:#a3be8c;">shared/_card</span><span>&quot;, &amp;json!({ &quot;</span><span style="color:#a3be8c;">title</span><span>&quot;: &quot;</span><span style="color:#a3be8c;">Hi</span><span>&quot; }))?;
+</span><span style="color:#b48ead;">let</span><span> list = </span><span style="color:#96b5b4;">render_collection</span><span>(&quot;</span><span style="color:#a3be8c;">posts/_post</span><span>&quot;, &amp;posts, &quot;</span><span style="color:#a3be8c;">post</span><span>&quot;)?; </span><span style="color:#65737e;">// one render per post
+</span></code></pre>
+<pre data-lang="html" style="background-color:#2b303b;color:#c0c5ce;" class="language-html "><code class="language-html" data-lang="html"><span>{% include &quot;shared/_header.html.tera&quot; %}
+</span></code></pre>
+<h2 id="content-for-blocks">content_for blocks</h2>
+<p>Capture named content in a template (e.g. a page title or extra <code>&lt;head&gt;</code> tags) and yield it
+elsewhere in the layout with <code>ContentFor</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::ContentFor;
+</span><span>
+</span><span style="color:#b48ead;">let mut</span><span> content = ContentFor::new();
+</span><span>content.</span><span style="color:#96b5b4;">set</span><span>(&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">Dashboard</span><span>&quot;);
+</span><span style="color:#b48ead;">let</span><span> title = content.</span><span style="color:#96b5b4;">get</span><span>(&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;); </span><span style="color:#65737e;">// &quot;Dashboard&quot;
+</span></code></pre>
+<h2 id="view-helpers">View helpers</h2>
+<p><code>doido::view::helpers</code> provides Rails-style HTML helpers that return escaped HTML strings.
+These are <strong>view</strong> helpers (for templates), distinct from
+<a href="https://doido-rs.github.io/docs/reference/helpers/">controller helpers</a> in <code>app/helpers/</code>, which hold shared
+logic imported by controllers.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::helpers::{link, form, asset, number, sanitize, tag, hotwire};
+</span><span>
+</span><span>link::link_to(&quot;</span><span style="color:#a3be8c;">Home</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">/</span><span>&quot;);                       </span><span style="color:#65737e;">// &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
+</span><span>link::button_to(&quot;</span><span style="color:#a3be8c;">Delete</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">/posts/1</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">delete</span><span>&quot;);  </span><span style="color:#65737e;">// form-wrapped button
+</span><span>form::text_field(&quot;</span><span style="color:#a3be8c;">title</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">Hello</span><span>&quot;);               </span><span style="color:#65737e;">// &lt;input …&gt;
+</span><span>form::submit(&quot;</span><span style="color:#a3be8c;">Save</span><span>&quot;);
+</span><span>asset::image_tag(&quot;</span><span style="color:#a3be8c;">logo.png</span><span>&quot;);
+</span><span>asset::stylesheet_link_tag(&quot;</span><span style="color:#a3be8c;">application</span><span>&quot;);
+</span><span>number::number_to_currency(</span><span style="color:#d08770;">1999.0</span><span>);               </span><span style="color:#65737e;">// &quot;$1,999.00&quot;
+</span><span>number::number_with_delimiter(</span><span style="color:#d08770;">1000000</span><span>);           </span><span style="color:#65737e;">// &quot;1,000,000&quot;
+</span><span>sanitize::strip_tags(&quot;</span><span style="color:#a3be8c;">&lt;b&gt;hi&lt;/b&gt;</span><span>&quot;);                </span><span style="color:#65737e;">// &quot;hi&quot;
+</span><span>tag::content_tag(&quot;</span><span style="color:#a3be8c;">span</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">hi</span><span>&quot;, &amp;[(&quot;</span><span style="color:#a3be8c;">class</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">muted</span><span>&quot;)]);
+</span><span>hotwire::turbo_frame(&quot;</span><span style="color:#a3be8c;">messages</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">…</span><span>&quot;);            </span><span style="color:#65737e;">// Turbo frame
+</span></code></pre>
+<h2 id="fragment-caching">Fragment caching</h2>
+<p><code>cache_fragment</code> returns cached HTML for a key, running the render closure only on a miss —
+backed by any <a href="https://doido-rs.github.io/docs/reference/cache/">cache store</a>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::fragment::cache_fragment;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> html = </span><span style="color:#96b5b4;">cache_fragment</span><span>(&amp;cache_store, &quot;</span><span style="color:#a3be8c;">posts/1</span><span>&quot;, || {
+</span><span>    </span><span style="color:#96b5b4;">render_partial</span><span>(&quot;</span><span style="color:#a3be8c;">posts/_post</span><span>&quot;, &amp;post).</span><span style="color:#96b5b4;">unwrap</span><span>()
+</span><span>}).await;
+</span></code></pre>
+<h2 id="swappable-engine">Swappable engine</h2>
+<p>Tera is the default, but any type implementing <code>TemplateEngine</code> (<code>render</code> + <code>reload</code>) can
+replace it via <code>set_engine</code>.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::view::{TemplateEngine, set_engine};
+</span><span style="color:#b48ead;">use </span><span>std::sync::Arc;
+</span><span>
+</span><span style="color:#b48ead;">struct </span><span>MyEngine;
+</span><span style="color:#b48ead;">impl </span><span>TemplateEngine </span><span style="color:#b48ead;">for </span><span>MyEngine {
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">render</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>, </span><span style="color:#bf616a;">template</span><span>: &amp;</span><span style="color:#b48ead;">str</span><span>, </span><span style="color:#bf616a;">ctx</span><span>: &amp;serde_json::Value) -&gt; doido::Result&lt;String&gt; {
+</span><span>        Ok(format!(&quot;</span><span style="color:#a3be8c;">rendered:</span><span style="color:#d08770;">{template}</span><span>&quot;))
+</span><span>    }
+</span><span>    </span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">reload</span><span>(&amp;</span><span style="color:#bf616a;">self</span><span>) -&gt; doido::Result&lt;()&gt; { Ok(()) }
+</span><span>}
+</span><span>
+</span><span style="color:#96b5b4;">set_engine</span><span>(Arc::new(MyEngine));
+</span></code></pre>
+<p><code>TeraEngine</code> reloads templates from disk on <code>reload()</code>, which the framework calls in
+development for hot reloading.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/docs/reference/controllers/">Controllers &amp; routing</a> — <code>ctx.render(...)</code> and content negotiation.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/cache/">Cache</a> — the store behind fragment caching.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/mailer/">Mailer</a> — reuses this engine for email templates.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">← Middleware &amp; sessions</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

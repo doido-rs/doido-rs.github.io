@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/blog/doido-auth/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/blog/doido-auth/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/blog/doido-auth/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+
+
+<article class="container post">
+  <header class="post-header">
+    <a class="muted back-link" href="https://doido-rs.github.io/blog">← Blog</a>
+    <h1>Introducing doido-auth</h1>
+    <div class="post-meta muted">
+      <time datetime="2026-08-03">August 03, 2026</time>
+      <span> · 1 min read</span>
+    </div>
+    
+      <div class="tags">
+        
+          <a class="tag" href="https://doido-rs.github.io/tags/release/">#release</a>
+        
+          <a class="tag" href="https://doido-rs.github.io/tags/auth/">#auth</a>
+        
+          <a class="tag" href="https://doido-rs.github.io/tags/docs/">#docs</a>
+        
+      </div>
+    
+  </header>
+
+  <div class="prose">
+    <p>Doido now ships <strong><code>doido-auth</code></strong>, the framework’s answer to Devise, OmniAuth, and
+JWT bearer tokens — all in one crate that composes with the existing controller
+session stack.</p>
+<h2 id="what-you-get">What you get</h2>
+<ul>
+<li><strong><code>AuthUser</code> trait</strong> — bind authentication to any SeaORM model; no hard-coded User
+struct in the framework.</li>
+<li><strong>Pluggable strategies</strong> — cookie session (default), JWT bearer, and custom
+backends via <code>AuthStrategy</code>.</li>
+<li><strong>Axum extractors</strong> — <code>CurrentUser</code>, <code>MaybeUser</code>, <code>RequireAuth</code>, and <code>AuthToken</code>
+work in handlers and <code>#[controller]</code> actions.</li>
+<li><strong>OAuth providers</strong> — configure any identity provider under <code>auth.oauth</code> via the
+<code>OAuthProvider</code> trait; OAuth 2.0 entries load from YAML at boot.</li>
+<li><strong>Optional 2FA</strong> — TOTP enrollment and verification behind the <code>auth-2fa</code> feature.</li>
+<li><strong>Generators</strong> — <code>auth:install</code>, <code>auth:controller</code>, and <code>auth:scaffold</code> appear in
+<code>cargo doido generate</code> when <code>doido-auth</code> is a project dependency.</li>
+</ul>
+<h2 id="one-command-to-start">One command to start</h2>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">doido</span><span> new myapp</span><span style="color:#bf616a;"> --database</span><span>=sqlite</span><span style="color:#bf616a;"> --auth
+</span><span style="color:#96b5b4;">cd</span><span> myapp
+</span><span style="color:#bf616a;">cargo</span><span> doido db create &amp;&amp; </span><span style="color:#bf616a;">cargo</span><span> doido db migrate
+</span><span style="color:#bf616a;">cargo</span><span> doido server
+</span></code></pre>
+<p>That scaffolds a User model, sign-in/sign-up/password/OAuth routes, HTML views, and
+an <code>auth:</code> config block — the same workflow as <code>rails generate devise:install</code>.</p>
+<p>For an existing app, add the dependency and run the install generator:</p>
+<pre data-lang="bash" style="background-color:#2b303b;color:#c0c5ce;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#bf616a;">cargo</span><span> add doido</span><span style="color:#bf616a;"> --features</span><span> auth
+</span><span style="color:#bf616a;">cargo</span><span> doido generate auth:install
+</span></code></pre>
+<h2 id="read-the-full-guide">Read the full guide</h2>
+<p>The <a href="/docs/reference/auth/">Auth reference</a> covers configuration, boot sequence,
+extractors, custom strategies, and testing helpers. The design spec lives in
+<a href="https://github.com/doido-rs/doido/blob/master/docs/16-auth.md"><code>docs/16-auth.md</code></a>.</p>
+
+  </div>
+
+  <nav class="page-nav">
+    <span>
+      
+    </span>
+    <span>
+      
+    </span>
+  </nav>
+</article>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>

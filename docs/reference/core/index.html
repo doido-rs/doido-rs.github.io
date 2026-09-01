@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-default="light">
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doido</title>
+<meta name="description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+
+
+<link rel="icon" href="https://doido-rs.github.io/favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="https://doido-rs.github.io/img/logo-favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="https://doido-rs.github.io/img/logo-apple-touch.png" sizes="180x180">
+<link rel="manifest" href="https://doido-rs.github.io/site.webmanifest">
+<meta name="theme-color" content="#0ca84d">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doido">
+<meta property="og:title" content="Doido">
+<meta property="og:description" content="A Rails-inspired web framework for Rust — batteries included, async-native.">
+<meta property="og:image" content="https://doido-rs.github.io/img/logo-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://doido-rs.github.io/img/logo-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://doido-rs.github.io/main.css">
+
+<link rel="alternate" type="application/atom+xml" title="Doido" href="https://doido-rs.github.io/atom.xml">
+
+
+<style>
+  :root {
+    --accent: #0ca84d;
+    --accent2: #f9f60a;
+    --font-sans: &#x27;Inter&#x27;, system-ui, -apple-system, &#x27;Segoe UI&#x27;, sans-serif;
+    --font-serif: &#x27;Newsreader&#x27;, &#x27;Georgia&#x27;, &#x27;Times New Roman&#x27;, serif;
+    --font-mono: &#x27;IBM Plex Mono&#x27;, ui-monospace, &#x27;SFMono-Regular&#x27;, Menlo, Consolas, monospace;
+  }
+  [data-theme="dark"] {
+    --accent: #12d65a;
+    --accent2: #fbf338;
+  }
+</style>
+
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      if (saved !== "light" && saved !== "dark") {
+        var def = "light";
+        saved = (def === "light" || def === "dark")
+          ? def
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
+      document.documentElement.dataset.theme = saved;
+    } catch (e) {
+      document.documentElement.dataset.theme = "light";
+    }
+  })();
+</script>
+
+  
+</head>
+<body>
+  
+
+
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="https://doido-rs.github.io" aria-label="Doido">
+      <img
+        class="brand-logo brand-logo--desktop"
+        src="https://doido-rs.github.io/img/logo-header.png"
+        srcset="https://doido-rs.github.io/img/logo-header.png 1x, https://doido-rs.github.io/img/logo-header@2x.png 2x"
+        width="36"
+        height="36"
+        alt=""
+        decoding="async"
+      >
+      <img
+        class="brand-logo brand-logo--mobile"
+        src="https://doido-rs.github.io/img/logo-icon.png"
+        srcset="https://doido-rs.github.io/img/logo-icon.png 1x, https://doido-rs.github.io/img/logo-icon@2x.png 2x"
+        width="32"
+        height="32"
+        alt=""
+        decoding="async"
+      >
+      <span class="brand-text">Doido</span>
+    </a>
+    <nav class="nav">
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/docs">Docs</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https://doido-rs.github.io/blog">Blog</a>
+        
+      
+        
+        
+          <a class="nav-link" href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+        
+      
+
+      <div class="lang-switcher" role="group" aria-label="Language">
+        
+          
+            
+          
+          
+          <a class="lang-link active" href="https://doido-rs.github.io/docs/reference/core/" hreflang="en" aria-current="true">EN</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/pt/docs/reference/core/" hreflang="pt">PT</a>
+        
+          
+            
+          
+          
+          <a class="lang-link" href="https://doido-rs.github.io/es/docs/reference/core/" hreflang="es">ES</a>
+        
+      </div>
+
+      <div class="theme-switcher" role="group" aria-label="Theme">
+        <button class="theme-option" type="button" data-theme-value="light" title="Light" aria-label="Light"><span aria-hidden="true">☀</span></button>
+        <button class="theme-option" type="button" data-theme-value="dark" title="Dark" aria-label="Dark"><span aria-hidden="true">☾</span></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <main class="main">
+    
+<div class="container docs-layout">
+  
+
+
+
+
+<aside class="sidebar">
+  <nav class="sidebar-nav" aria-label="Documentation">
+    <a class="sidebar-title" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;">Documentation</a>
+
+    
+    
+      
+        
+        <section class="sidebar-block sidebar-block--introduction">
+          <h2 class="sidebar-block-heading">Introduction</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;getting-started&#x2F;">Getting started</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;tutorials&#x2F;building-a-blog&#x2F;">Building a blog</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;setup&#x2F;installation&#x2F;">Installation</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">CLI &amp; generators</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+      
+        
+          
+          <section class="sidebar-block sidebar-block--modules">
+            <h2 class="sidebar-block-heading">Modules</h2>
+            <ul class="sidebar-block-list">
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;core&#x2F;" class="active" aria-current="page">Core</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;models&#x2F;">Models</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;controllers&#x2F;">Controllers &amp; routing</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;middleware&#x2F;">Middleware &amp; sessions</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;auth&#x2F;">Auth</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;views&#x2F;">Views</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;generators&#x2F;">Generators &amp; CLI</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;jobs&#x2F;">Jobs</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;mailer&#x2F;">Mailer</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cache&#x2F;">Cache</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cable&#x2F;">Cable (WebSockets)</a>
+                
+                
+              </li>
+      
+    
+      
+        
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;storage&#x2F;">Storage</a>
+                
+                
+              </li>
+      
+    
+      
+        
+            </ul>
+          </section>
+          
+        
+        <section class="sidebar-block sidebar-block--architecture">
+          <h2 class="sidebar-block-heading">Architecture</h2>
+          <ul class="sidebar-block-list">
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;explanation&#x2F;architecture&#x2F;">Architecture</a>
+              </li>
+            
+              
+              
+              
+              
+              <li>
+                <a href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;resources&#x2F;specs&#x2F;">Design specifications</a>
+              </li>
+            
+          </ul>
+        </section>
+      
+    
+    
+  </nav>
+</aside>
+
+  <article class="doc-content prose">
+    <h1>Core</h1>
+    <blockquote>
+<p><strong>Design spec:</strong> <a href="https://github.com/doido-rs/doido/blob/master/docs/11-core.md"><code>docs/11-core.md</code></a>.
+This guide documents the API as implemented in <code>doido-core</code>.</p>
+</blockquote>
+<p><strong>Rails analogue: Active Support.</strong> <code>doido-core</code> is the foundation every other Doido
+crate depends on — and it depends on none of them. It provides the string inflector,
+the application error model, logging setup, environment detection, and a handful of
+ergonomic extensions (string/time helpers, notifications, a test clock). It also
+re-exports the ecosystem crates the whole framework shares so downstream crates can
+depend on <code>doido-core</code> alone.</p>
+<h2 id="at-a-glance">At a glance</h2>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::Result;
+</span><span style="color:#b48ead;">use </span><span>doido::core::{Inflector, Environment, init_logger, load_inflections};
+</span><span>
+</span><span style="color:#65737e;">// Re-exported for downstream crates (depend on doido-core, not these directly):
+</span><span style="color:#b48ead;">use </span><span>doido::core::{anyhow, async_trait, serde, thiserror, tracing};
+</span></code></pre>
+<h2 id="string-inflection">String inflection</h2>
+<p><code>Inflector</code> is a static facade offering every Rails-style transformation. It powers the
+generators (table names, class names, route helpers) and is available anywhere in your
+app.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::Inflector;
+</span><span>
+</span><span>Inflector::pluralize(&quot;</span><span style="color:#a3be8c;">post</span><span>&quot;);        </span><span style="color:#65737e;">// &quot;posts&quot;
+</span><span>Inflector::singularize(&quot;</span><span style="color:#a3be8c;">comments</span><span>&quot;);  </span><span style="color:#65737e;">// &quot;comment&quot;
+</span><span>Inflector::camelize(&quot;</span><span style="color:#a3be8c;">blog_post</span><span>&quot;);    </span><span style="color:#65737e;">// &quot;BlogPost&quot;
+</span><span>Inflector::camelize_lower(&quot;</span><span style="color:#a3be8c;">blog_post</span><span>&quot;); </span><span style="color:#65737e;">// &quot;blogPost&quot;
+</span><span>Inflector::underscore(&quot;</span><span style="color:#a3be8c;">BlogPost</span><span>&quot;);   </span><span style="color:#65737e;">// &quot;blog_post&quot;
+</span><span>Inflector::dasherize(&quot;</span><span style="color:#a3be8c;">blog_post</span><span>&quot;);   </span><span style="color:#65737e;">// &quot;blog-post&quot;
+</span><span>Inflector::humanize(&quot;</span><span style="color:#a3be8c;">author_id</span><span>&quot;);    </span><span style="color:#65737e;">// &quot;Author&quot;
+</span><span>Inflector::tableize(&quot;</span><span style="color:#a3be8c;">BlogPost</span><span>&quot;);     </span><span style="color:#65737e;">// &quot;blog_posts&quot;
+</span><span>Inflector::classify(&quot;</span><span style="color:#a3be8c;">blog_posts</span><span>&quot;);   </span><span style="color:#65737e;">// &quot;BlogPost&quot;
+</span><span>Inflector::foreign_key(&quot;</span><span style="color:#a3be8c;">Author</span><span>&quot;);    </span><span style="color:#65737e;">// &quot;author_id&quot;
+</span><span>Inflector::constantize(&quot;</span><span style="color:#a3be8c;">blog_post</span><span>&quot;); </span><span style="color:#65737e;">// &quot;BlogPost&quot;
+</span></code></pre>
+<h2 id="custom-inflection-rules">Custom inflection rules</h2>
+<p>Defaults cover standard English. Override or extend them for irregular plurals,
+uncountable nouns, and acronyms — either from a YAML file or programmatically. This is
+the same mechanism the generators honour, so <code>config/inflection.yaml</code> keeps generated
+names consistent with your domain language.</p>
+<p>Load rules from <code>config/inflection.yaml</code> at boot (returns <code>Ok(false)</code> when the file is
+absent, so it is safe to call unconditionally):</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Loads config/inflection.yaml if present; Ok(true) when applied, Ok(false) when missing.
+</span><span>doido::core::load_inflections(&quot;</span><span style="color:#a3be8c;">config/inflection.yaml</span><span>&quot;)?;
+</span></code></pre>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/inflection.yaml
+</span><span style="color:#bf616a;">irregular</span><span>:
+</span><span>  - [</span><span style="color:#a3be8c;">person</span><span>, </span><span style="color:#a3be8c;">people</span><span>]
+</span><span>  - [</span><span style="color:#a3be8c;">mouse</span><span>, </span><span style="color:#a3be8c;">mice</span><span>]
+</span><span style="color:#bf616a;">uncountable</span><span>:
+</span><span>  - </span><span style="color:#a3be8c;">equipment
+</span><span>  - </span><span style="color:#a3be8c;">information
+</span><span style="color:#bf616a;">acronym</span><span>:
+</span><span>  - </span><span style="color:#a3be8c;">API
+</span><span>  - </span><span style="color:#a3be8c;">HTTP
+</span></code></pre>
+<p>Or configure rules in code with <code>init_inflections</code>, using the <code>Inflections</code> builder
+(<code>irregular</code>, <code>uncountable</code>, <code>acronym</code>, <code>plural</code>, <code>singular</code>):</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span>doido::core::init_inflections(|</span><span style="color:#bf616a;">i</span><span>| {
+</span><span>    i.</span><span style="color:#96b5b4;">irregular</span><span>(&quot;</span><span style="color:#a3be8c;">person</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">people</span><span>&quot;);
+</span><span>    i.</span><span style="color:#96b5b4;">uncountable</span><span>(&quot;</span><span style="color:#a3be8c;">equipment</span><span>&quot;);
+</span><span>    i.</span><span style="color:#96b5b4;">acronym</span><span>(&quot;</span><span style="color:#a3be8c;">API</span><span>&quot;);
+</span><span>});
+</span></code></pre>
+<h2 id="the-error-model">The error model</h2>
+<p>Application code uses a single <code>Result&lt;T&gt;</code> alias built on <code>anyhow</code>; individual crates
+define their own typed errors with <code>thiserror</code>. <code>anyhow</code>, <code>bail</code>, and the <code>Context</code>
+trait (<code>AnyhowContext</code>) are re-exported so <code>?</code> and error context work out of the box.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::Result;
+</span><span style="color:#b48ead;">use </span><span>doido::core::anyhow::Context;
+</span><span>
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">load_settings</span><span>() -&gt; Result&lt;Settings&gt; {
+</span><span>    </span><span style="color:#b48ead;">let</span><span> raw = std::fs::read_to_string(&quot;</span><span style="color:#a3be8c;">config/settings.toml</span><span>&quot;)
+</span><span>        .</span><span style="color:#96b5b4;">context</span><span>(&quot;</span><span style="color:#a3be8c;">settings file is missing</span><span>&quot;)?;      </span><span style="color:#65737e;">// add context to any error
+</span><span>    </span><span style="color:#b48ead;">let</span><span> settings = toml::from_str(&amp;raw)?;            </span><span style="color:#65737e;">// ? converts into anyhow::Error
+</span><span>    Ok(settings)
+</span><span>}
+</span></code></pre>
+<p>For a library crate, define a typed error with the re-exported <code>thiserror</code>:</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::thiserror;
+</span><span>
+</span><span>#[</span><span style="color:#bf616a;">derive</span><span>(Debug, thiserror::Error)]
+</span><span style="color:#b48ead;">pub enum </span><span>StoreError {
+</span><span>    #[</span><span style="color:#bf616a;">error</span><span>(&quot;</span><span style="color:#a3be8c;">key not found: {0}</span><span>&quot;)]
+</span><span>    NotFound(String),
+</span><span>    #[</span><span style="color:#bf616a;">error</span><span>(transparent)]
+</span><span>    Io(#[</span><span style="color:#bf616a;">from</span><span>] std::io::Error),
+</span><span>}
+</span></code></pre>
+<h2 id="logging">Logging</h2>
+<p>A single call installs the global <code>tracing</code> subscriber. Levels, output format, filter
+directives, and file redirection come from the <code>logger</code> section of <code>config/&lt;env&gt;.yml</code>
+via <code>LoggerConfig</code>; <code>init_logger()</code> uses <code>RUST_LOG</code> (or sane defaults) and is idempotent.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Simplest form — honours RUST_LOG, falls back to sensible defaults.
+</span><span>doido::core::init_logger();
+</span><span>
+</span><span style="color:#65737e;">// Or drive it from config (config/&lt;env&gt;.yml → [logger]):
+</span><span style="color:#b48ead;">use </span><span>doido::core::LoggerConfig;
+</span><span style="color:#b48ead;">let</span><span> cfg = LoggerConfig { level: &quot;</span><span style="color:#a3be8c;">debug</span><span>&quot;.</span><span style="color:#96b5b4;">into</span><span>(), ..Default::default() };
+</span><span>doido::core::logger::init_with_config(&amp;cfg);
+</span></code></pre>
+<pre data-lang="yaml" style="background-color:#2b303b;color:#c0c5ce;" class="language-yaml "><code class="language-yaml" data-lang="yaml"><span style="color:#65737e;"># config/development.yml
+</span><span style="color:#bf616a;">logger</span><span>:
+</span><span>  </span><span style="color:#bf616a;">level</span><span>: </span><span style="color:#a3be8c;">debug          </span><span style="color:#65737e;"># trace | debug | info | warn | error
+</span><span>  </span><span style="color:#bf616a;">format</span><span>: </span><span style="color:#a3be8c;">verbose       </span><span style="color:#65737e;"># compact (default) | verbose | json_response
+</span><span>  </span><span style="color:#bf616a;">sql</span><span>: </span><span style="color:#d08770;">true             </span><span style="color:#65737e;"># log each SQL statement
+</span><span>  </span><span style="color:#65737e;"># file: log/development.log   # redirect output (ANSI disabled)
+</span><span>  </span><span style="color:#65737e;"># directives: &quot;info,my_app=debug,sqlx=warn&quot;  # full EnvFilter override
+</span></code></pre>
+<p><code>LogFormat</code> selects the renderer: <code>Compact</code> (single-line, default), <code>Verbose</code>
+(multi-line with every field and source location), and <code>JsonResponse</code> (one JSON object
+per HTTP response — access logs and latency metrics).</p>
+<h2 id="environment">Environment</h2>
+<p><code>Environment</code> distinguishes <code>Development</code>, <code>Test</code>, and <code>Production</code>, resolved from the
+process environment.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::Environment;
+</span><span>
+</span><span style="color:#b48ead;">match </span><span>Environment::get_env() {
+</span><span>    Environment::Development =&gt; { </span><span style="color:#65737e;">/* verbose errors, hot reload */ </span><span>}
+</span><span>    Environment::Test =&gt; { </span><span style="color:#65737e;">/* in-memory backends */ </span><span>}
+</span><span>    Environment::Production =&gt; { </span><span style="color:#65737e;">/* strict, cached */ </span><span>}
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> name = Environment::get_env().</span><span style="color:#96b5b4;">as_str</span><span>(); </span><span style="color:#65737e;">// &quot;development&quot; | &quot;test&quot; | &quot;production&quot;
+</span></code></pre>
+<h2 id="string-time-helpers">String &amp; time helpers</h2>
+<p><code>core_ext</code> adds ergonomic extension traits (<code>Blank</code> for emptiness checks, <code>StringExt</code>
+for common transforms), and <code>time_ext</code> offers Rails-like relative-time helpers.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::core_ext::Blank;
+</span><span style="color:#b48ead;">use </span><span>doido::core::time_ext::{days_ago, beginning_of_day};
+</span><span>
+</span><span>&quot;&quot;.</span><span style="color:#96b5b4;">is_blank</span><span>();                 </span><span style="color:#65737e;">// true
+</span><span>&quot;  &quot;.</span><span style="color:#96b5b4;">is_blank</span><span>();               </span><span style="color:#65737e;">// true (whitespace-only)
+</span><span style="color:#b48ead;">let</span><span> since = </span><span style="color:#96b5b4;">days_ago</span><span>(</span><span style="color:#d08770;">7</span><span>);       </span><span style="color:#65737e;">// DateTime&lt;Utc&gt; seven days ago
+</span><span style="color:#b48ead;">let</span><span> start = </span><span style="color:#96b5b4;">beginning_of_day</span><span>(chrono::Utc::now());
+</span></code></pre>
+<h2 id="instrumentation-notifications">Instrumentation &amp; notifications</h2>
+<p><code>trace</code> provides thin, consistent structured-event helpers used across the framework
+(requests, jobs, queries, mail), and <code>notifications</code> offers a lightweight pub/sub for
+in-process instrumentation.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::notifications::Notifications;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> notifications = Notifications::new();
+</span><span>notifications.</span><span style="color:#96b5b4;">subscribe</span><span>(&quot;</span><span style="color:#a3be8c;">post.created</span><span>&quot;, |</span><span style="color:#bf616a;">payload</span><span>| {
+</span><span>    tracing::info!(%payload, &quot;</span><span style="color:#a3be8c;">a post was created</span><span>&quot;);
+</span><span>});
+</span><span>notifications.</span><span style="color:#96b5b4;">instrument</span><span>(&quot;</span><span style="color:#a3be8c;">post.created</span><span>&quot;, &quot;</span><span style="color:#a3be8c;">{</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">id</span><span style="color:#96b5b4;">\&quot;</span><span style="color:#a3be8c;">:1}</span><span>&quot;);
+</span></code></pre>
+<h2 id="test-clock">Test clock</h2>
+<p><code>TestClock</code> freezes and advances time in tests, so time-dependent logic is
+deterministic.</p>
+<pre data-lang="rust" style="background-color:#2b303b;color:#c0c5ce;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#b48ead;">use </span><span>doido::core::test_time::TestClock;
+</span><span>
+</span><span style="color:#b48ead;">let</span><span> clock = TestClock::new(chrono::Utc::now());
+</span><span>clock.</span><span style="color:#96b5b4;">travel</span><span>(chrono::Duration::hours(</span><span style="color:#d08770;">2</span><span>)); </span><span style="color:#65737e;">// jump forward
+</span><span style="color:#b48ead;">let</span><span> later = clock.</span><span style="color:#96b5b4;">now</span><span>();
+</span></code></pre>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="https://doido-rs.github.io/docs/reference/configuration/">Configuration</a> — where <code>logger</code> and other settings come from.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/models/">Models</a> — <code>sql</code> logging flows into sea-orm query logs.</li>
+<li><a href="https://doido-rs.github.io/docs/reference/generators/">Generators &amp; CLI</a> — consumers of the inflector.</li>
+</ul>
+
+
+    <nav class="page-nav">
+      <span>
+        <a class="prev" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;cli&#x2F;">← CLI &amp; generators</a>
+      </span>
+      <span>
+        <a class="next" href="https:&#x2F;&#x2F;doido-rs.github.io&#x2F;docs&#x2F;reference&#x2F;configuration&#x2F;">Configuration →</a>
+      </span>
+    </nav>
+  </article>
+</div>
+
+  </main>
+  
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <nav class="footer-links">
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido" rel="noopener" target="_blank">GitHub</a>
+      <a href="https:&#x2F;&#x2F;github.com&#x2F;doido-rs&#x2F;doido&#x2F;tree&#x2F;master&#x2F;docs" rel="noopener" target="_blank">Specs</a>
+      <a href="https://doido-rs.github.io/atom.xml">RSS</a>
+    </nav>
+    <p class="muted">Doido — a Rails-inspired web framework for Rust. MIT licensed.</p>
+  </div>
+</footer>
+
+  <script src="https://doido-rs.github.io/js/theme.js" defer></script>
+</body>
+</html>
